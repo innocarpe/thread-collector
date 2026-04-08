@@ -5,15 +5,13 @@ import { useReader } from "./reader-context";
 type Props = { pk: string };
 
 export function PostActions({ pk }: Props) {
-  const { getStatus, markRead, toggleRead, toggleStar, toggleHide, toggleLabel, createLabel, allLabels } = useReader();
-  const [mounted, setMounted] = useState(false);
+  const { hydrated, getStatus, markRead, toggleRead, toggleStar, toggleHide, toggleLabel, createLabel, allLabels } = useReader();
   const [showLabelMenu, setShowLabelMenu] = useState(false);
   const [newLabel, setNewLabel] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-    // Auto-mark as read
+    // Auto-mark as read (fire-and-forget, no need to wait for hydration)
     markRead(pk);
   }, [pk, markRead]);
 
@@ -27,7 +25,7 @@ export function PostActions({ pk }: Props) {
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
-  if (!mounted) return null;
+  if (!hydrated) return null;
 
   const status = getStatus(pk);
 

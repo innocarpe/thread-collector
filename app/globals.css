@@ -88,6 +88,7 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -98,6 +99,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Safe area padding for notch/home-indicator */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 a { color: inherit; text-decoration: none; }
@@ -129,6 +132,9 @@ ul, ol { padding-left: 20px; }
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-4) var(--space-6);
+  padding-top: max(var(--space-4), env(safe-area-inset-top));
+  padding-left: max(var(--space-6), env(safe-area-inset-left));
+  padding-right: max(var(--space-6), env(safe-area-inset-right));
   border-bottom: 1px solid var(--color-border);
   background: color-mix(in srgb, var(--color-surface) 95%, transparent);
   backdrop-filter: blur(8px);
@@ -684,6 +690,7 @@ ul, ol { padding-left: 20px; }
   max-width: var(--content-width);
   margin: 0 auto;
   padding: var(--space-6) var(--space-5) var(--space-10);
+  overflow-x: hidden;
 }
 
 .post-back {
@@ -903,7 +910,9 @@ ul, ol { padding-left: 20px; }
   }
 
   .app-header {
-    padding: var(--space-3) var(--space-4);
+    padding: max(var(--space-3), env(safe-area-inset-top)) var(--space-4) var(--space-3);
+    padding-left: max(var(--space-4), env(safe-area-inset-left));
+    padding-right: max(var(--space-4), env(safe-area-inset-right));
   }
 
   .app-header-sub {
@@ -912,31 +921,45 @@ ul, ol { padding-left: 20px; }
 
   .page-shell,
   .post-page {
-    padding-left: var(--space-3);
-    padding-right: var(--space-3);
+    padding-left: max(var(--space-3), env(safe-area-inset-left));
+    padding-right: max(var(--space-3), env(safe-area-inset-right));
     padding-top: var(--space-4);
   }
 
-  /* Sidebar → compact horizontal scroll on mobile */
+  /* Sidebar → horizontal scrolling carousel per group */
   .surface.sidebar {
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-3) 0;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sidebar-group {
+    padding: 0 var(--space-4);
   }
 
   .sidebar-group + .sidebar-group {
     margin-top: var(--space-3);
     padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
   }
 
   .filter-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
+    flex-wrap: nowrap;
+    gap: var(--space-2);
     margin-top: var(--space-2);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: var(--space-1);
   }
+  .filter-list::-webkit-scrollbar { display: none; }
 
   .filter-item {
-    padding: 6px var(--space-3);
+    padding: 5px var(--space-3);
     font-size: var(--text-xs);
+    flex-shrink: 0;
   }
 
   /* Post card compact */
@@ -948,33 +971,56 @@ ul, ol { padding-left: 20px; }
     font-size: var(--text-sm);
   }
 
-  /* Post detail rail → horizontal strip on mobile */
+  /* Post detail rail → horizontal scroll strip */
   .post-rail {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3) var(--space-5);
+    flex-wrap: nowrap;
+    gap: var(--space-4);
     padding: var(--space-3) var(--space-4);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--color-border);
   }
+  .post-rail::-webkit-scrollbar { display: none; }
 
   .post-rail-block {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-2);
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: var(--space-1);
   }
 
   .post-rail-label {
-    font-size: var(--text-xs);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 
+  /* Article content overflow fix */
   .post-article {
     padding: var(--space-4) !important;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .post-title {
-    font-size: 1.3rem !important;
+    font-size: 1.25rem !important;
+    word-break: keep-all;
   }
 
   .surface.detail {
     padding: var(--space-4);
+  }
+
+  /* Markdown content overflow */
+  .prose pre,
+  .prose table {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  .prose img {
+    max-width: 100%;
+    height: auto;
   }
 }
