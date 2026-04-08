@@ -6,6 +6,7 @@ import type { PostMeta } from "@/types/post";
 import { useReader } from "./reader-context";
 import { PostCard } from "@/components/ui/post-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { useCallback } from "react";
 
 type Props = {
   posts: PostMeta[];
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
-  const { getStatus } = useReader();
+  const { getStatus, toggleHide } = useReader();
   const searchParams = useSearchParams();
   const statusFilter = searchParams.get("status") ?? "";
   const labelFilter = searchParams.get("label") ?? "";
@@ -54,12 +55,37 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
         <div className="card-list">
           {filtered.length > 0 ? (
             filtered.map((post) => (
-              <PostCard
-                key={post.pk}
-                post={post}
-                showAuthor={!userFilter}
-                status={mounted ? getStatus(post.pk) : {}}
-              />
+              <div key={post.pk} style={{ position: "relative" }}>
+                <PostCard
+                  post={post}
+                  showAuthor={!userFilter}
+                  status={mounted ? getStatus(post.pk) : {}}
+                />
+                {mounted && (
+                  <button
+                    onClick={(e) => { e.preventDefault(); toggleHide(post.pk); }}
+                    title="목록에서 숨기기"
+                    style={{
+                      position: "absolute",
+                      top: "10px",
+                      right: "10px",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      opacity: 0.35,
+                      fontSize: "16px",
+                      lineHeight: 1,
+                      padding: "4px",
+                      borderRadius: "4px",
+                      color: "var(--color-text-soft)",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.35")}
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
             ))
           ) : (
             <p className="muted" style={{ fontSize: "var(--text-sm)", padding: "var(--space-4) 0" }}>
