@@ -24,10 +24,7 @@ export function PostCard({ post, showAuthor = true, status = {}, actions }: Post
       </div>
       <h3 className="post-card-title">{post.title}</h3>
       <p className="post-card-excerpt">{post.excerpt}</p>
-      <div className="post-card-footer">
-        <div className="post-card-actions">{actions}</div>
-        <span>{status.read && <span className="post-card-read-mark">읽음&nbsp;</span>}읽기 →</span>
-      </div>
+      {actions && <div className="post-card-footer">{actions}</div>}
     </Link>
   );
 }

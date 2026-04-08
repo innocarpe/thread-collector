@@ -10,6 +10,7 @@ import {
 import { getStore, saveStore, type PostStatus } from "@/lib/reader-store";
 
 type ReaderCtx = {
+  hydrated: boolean;
   getStatus: (pk: string) => PostStatus;
   markRead: (pk: string) => void;
   toggleRead: (pk: string) => void;
@@ -20,6 +21,7 @@ type ReaderCtx = {
   deleteLabel: (label: string) => void;
   allLabels: string[];
 };
+
 
 const Ctx = createContext<ReaderCtx | null>(null);
 
@@ -39,12 +41,14 @@ async function syncToGitHub(pk: string, update: Partial<PostStatus>) {
 export function ReaderProvider({ children }: { children: ReactNode }) {
   const [store, setStore] = useState<Record<string, PostStatus>>({});
   const [extraLabels, setExtraLabels] = useState<string[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     setStore(getStore());
     try {
       setExtraLabels(JSON.parse(localStorage.getItem("tc-labels") || "[]"));
     } catch {}
+    setHydrated(true);
   }, []);
 
   const mutate = useCallback(
@@ -53,7 +57,9 @@ export function ReaderProvider({ children }: { children: ReactNode }) {
         const updated = fn(prev[pk] ?? {});
         const next = { ...prev, [pk]: updated };
         saveStore(next);
-        syncToGitHub(pk, updated);
+        // Strip read — too noisy (900+ posts). Only sync starred/hidden/labels to GitHub.
+        const { read: _read, ...syncable } = updated;
+        if (Object.keys(syncable).length > 0) syncToGitHub(pk, syncable);
         return next;
       });
     },
@@ -67,7 +73,6 @@ export function ReaderProvider({ children }: { children: ReactNode }) {
         const updated = { ...prev[pk], read: true };
         const next = { ...prev, [pk]: updated };
         saveStore(next);
-        syncToGitHub(pk, updated);
         return next;
       });
     },
@@ -145,6 +150,7 @@ export function ReaderProvider({ children }: { children: ReactNode }) {
   return (
     <Ctx.Provider
       value={{
+        hydrated,
         getStatus,
         markRead,
         toggleRead,

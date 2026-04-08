@@ -397,10 +397,8 @@ ul, ol { padding-left: 20px; }
 .post-card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-2);
-  color: var(--color-text-soft);
-  font-size: var(--text-xs);
+  margin-top: var(--space-1);
 }
 
 .post-card-actions {
@@ -415,20 +413,28 @@ ul, ol { padding-left: 20px; }
 }
 
 .post-card-quick-btn {
-  background: none;
-  border: none;
-  padding: 0;
+  background: var(--color-surface-raised, rgba(0,0,0,0.06));
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 3px 8px;
   cursor: pointer;
   font-size: var(--text-xs);
   color: var(--color-text-soft);
-  opacity: 0.45;
-  transition: opacity 0.15s;
-  line-height: 1;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
-.post-card-quick-btn:hover,
+.post-card-quick-btn:hover {
+  background: var(--color-surface-hover, rgba(0,0,0,0.1));
+  color: var(--color-text);
+  border-color: var(--color-border, rgba(0,0,0,0.12));
+}
+
 .post-card-quick-btn.is-starred {
-  opacity: 1;
+  background: rgba(250, 200, 50, 0.18);
+  color: #b8860b;
+  border-color: rgba(250, 200, 50, 0.4);
 }
 
 .post-card.is-read {

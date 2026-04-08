@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { PostMeta } from "@/types/post";
@@ -14,15 +13,13 @@ type Props = {
 };
 
 export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
-  const { getStatus, toggleHide, toggleStar } = useReader();
+  const { hydrated, getStatus, toggleHide, toggleStar } = useReader();
   const searchParams = useSearchParams();
   const statusFilter = searchParams.get("status") ?? "";
   const labelFilter = searchParams.get("label") ?? "";
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
 
   const filtered = posts.filter((p) => {
-    if (!mounted) return true; // SSR: show all (hidden via CSS until mounted)
+    if (!hydrated) return true; // localStorage 로드 전: 전부 표시 (visibility:hidden으로 가림)
     const s = getStatus(p.pk);
     if (statusFilter === "hidden") return !!s.hidden;
     if (s.hidden) return false;
@@ -35,7 +32,7 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
   const isFiltered = !!(userFilter || categoryFilter || statusFilter || labelFilter);
 
   return (
-    <div style={!mounted ? { visibility: "hidden" } : undefined}>
+    <div style={!hydrated ? { visibility: "hidden" } : undefined}>
       <section className="surface section">
         <div className="toolbar">
           <SectionHeading>Posts</SectionHeading>
@@ -54,14 +51,14 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
         <div className="card-list">
           {filtered.length > 0 ? (
             filtered.map((post) => {
-              const s = mounted ? getStatus(post.pk) : {};
+              const s = hydrated ? getStatus(post.pk) : {};
               return (
                 <PostCard
                   key={post.pk}
                   post={post}
                   showAuthor={!userFilter}
                   status={s}
-                  actions={mounted ? (
+                  actions={hydrated ? (
                     <div className="post-card-quick-actions">
                       <button
                         className={`post-card-quick-btn${s.starred ? " is-starred" : ""}`}
