@@ -103,7 +103,7 @@ export default async function PostPage({ params }: Props) {
               </a>
             </div>
 
-            <div style={{ marginTop: "var(--space-3)" }}>
+            <div className="post-rail-cat-link">
               <Link
                 href={`/?user=${post.usernameSlug}&category=${post.categorySlug}`}
                 className="button secondary"

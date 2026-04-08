@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useReader } from "./reader-context";
 
 type Props = { pk: string };
 
 export function PostActions({ pk }: Props) {
+  const router = useRouter();
   const { hydrated, getStatus, markRead, toggleRead, toggleStar, toggleHide, toggleLabel, createLabel, allLabels } = useReader();
   const [showLabelMenu, setShowLabelMenu] = useState(false);
   const [newLabel, setNewLabel] = useState("");
@@ -61,7 +63,10 @@ export function PostActions({ pk }: Props) {
       {/* Hide toggle */}
       <button
         className={`post-action-btn ${status.hidden ? "active-hide" : ""}`}
-        onClick={() => toggleHide(pk)}
+        onClick={() => {
+          toggleHide(pk);
+          if (!status.hidden) router.push("/"); // hiding → go back to list
+        }}
         title={status.hidden ? "숨기기 취소" : "목록에서 숨기기"}
       >
         {status.hidden ? "숨김 해제" : "숨기기"}
