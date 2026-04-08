@@ -20,6 +20,7 @@ export type PostMeta = {
   title: string;        // first sentence of the post
   excerpt: string;      // first 150 chars of body
   chainPks?: string[];  // pks of continuation posts merged into this one
+  labels?: string[];    // AI-assigned topic labels from frontmatter
 };
 
 export type PostMetaWithPath = PostMeta & {

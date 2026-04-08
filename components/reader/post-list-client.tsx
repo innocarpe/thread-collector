@@ -25,7 +25,10 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
     if (s.hidden) return false;
     if (statusFilter === "unread") return !s.read;
     if (statusFilter === "starred") return !!s.starred;
-    if (labelFilter) return s.labels?.includes(labelFilter) ?? false;
+    if (labelFilter) {
+      // AI labels (from frontmatter) OR user-assigned labels (from localStorage)
+      return (p.labels?.includes(labelFilter) ?? false) || (s.labels?.includes(labelFilter) ?? false);
+    }
     return true;
   });
 

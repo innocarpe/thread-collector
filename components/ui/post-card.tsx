@@ -18,6 +18,9 @@ export function PostCard({ post, showAuthor = true, status = {}, actions }: Post
         <CatBadge categorySlug={post.categorySlug} label={post.category} />
         {showAuthor && <span className="post-card-author">{post.username}</span>}
         <span className="post-card-date">{post.date}</span>
+        {post.labels?.map((lbl) => (
+          <span key={lbl} className="post-auto-label-chip">{lbl}</span>
+        ))}
         {status.labels?.map((lbl) => (
           <span key={lbl} className="post-label-chip">{lbl}</span>
         ))}

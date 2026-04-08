@@ -39,6 +39,17 @@ export default async function HomePage({ searchParams }: PageProps) {
     return true;
   });
 
+  // Compute AI label counts for the filtered set (descending order, min count 1)
+  const labelCountMap = new Map<string, number>();
+  for (const p of filtered) {
+    for (const lbl of p.labels ?? []) {
+      labelCountMap.set(lbl, (labelCountMap.get(lbl) ?? 0) + 1);
+    }
+  }
+  const autoLabelCounts = Array.from(labelCountMap.entries())
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+
   return (
     <>
       <header className="app-header">
@@ -111,6 +122,7 @@ export default async function HomePage({ searchParams }: PageProps) {
                   posts={filtered}
                   userFilter={userFilter}
                   categoryFilter={categoryFilter}
+                  autoLabelCounts={autoLabelCounts}
                 />
               </Suspense>
             </section>

@@ -6,13 +6,16 @@ import { useReader } from "./reader-context";
 import { FilterItem } from "@/components/ui/filter-item";
 import { SectionHeading } from "@/components/ui/section-heading";
 
+type AutoLabelCount = { label: string; count: number };
+
 type Props = {
   posts: PostMeta[];
   userFilter?: string;
   categoryFilter?: string;
+  autoLabelCounts?: AutoLabelCount[];
 };
 
-export function SidebarReaderFilters({ posts, userFilter, categoryFilter }: Props) {
+export function SidebarReaderFilters({ posts, userFilter, categoryFilter, autoLabelCounts }: Props) {
   const { getStatus, allLabels } = useReader();
   const searchParams = useSearchParams();
   const statusFilter = searchParams.get("status") ?? "";
@@ -70,9 +73,26 @@ export function SidebarReaderFilters({ posts, userFilter, categoryFilter }: Prop
         </div>
       </div>
 
+      {(autoLabelCounts?.length ?? 0) > 0 && (
+        <div className="sidebar-group">
+          <SectionHeading kind="sidebar">토픽</SectionHeading>
+          <div className="filter-list">
+            {autoLabelCounts!.map(({ label, count }) => (
+              <FilterItem
+                key={label}
+                href={buildHref({ label })}
+                active={labelFilter === label}
+                label={label}
+                count={count}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {allLabels.length > 0 && (
         <div className="sidebar-group">
-          <SectionHeading kind="sidebar">Labels</SectionHeading>
+          <SectionHeading kind="sidebar">내 태그</SectionHeading>
           <div className="filter-list">
             {allLabels.map((lbl) => {
               const cnt = mounted

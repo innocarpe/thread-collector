@@ -60,6 +60,18 @@ function buildCache(): Map<string, Post> {
           ? String(chainPksRaw).replace(/[\[\]]/g, "").split(",").map((s: string) => s.trim()).filter(Boolean)
           : undefined;
 
+        // Parse AI-assigned labels from frontmatter (array or inline [a, b] string)
+        let labels: string[] | undefined;
+        if (data.labels) {
+          if (Array.isArray(data.labels)) {
+            labels = data.labels.map(String).filter(Boolean);
+          } else {
+            const raw = String(data.labels).replace(/[\[\]]/g, "");
+            labels = raw.split(",").map((s) => s.trim().replace(/^"|"$/g, "")).filter(Boolean);
+          }
+          if (labels.length === 0) labels = undefined;
+        }
+
         _cache.set(pk, {
           pk,
           filePath,
@@ -75,6 +87,7 @@ function buildCache(): Map<string, Post> {
           title,
           excerpt,
           chainPks,
+          labels,
           content,
           rawFrontmatter,
         });

@@ -462,8 +462,23 @@ ul, ol { padding-left: 20px; }
   line-height: 1;
 }
 
-/* ── Label chip ───────────────────────────── */
+/* ── Label chips ──────────────────────────── */
 
+/* AI auto-labels (from frontmatter) */
+.post-auto-label-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--color-surface-strong);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid var(--color-border);
+}
+
+/* User-assigned labels (from localStorage) */
 .post-label-chip {
   display: inline-flex;
   align-items: center;
