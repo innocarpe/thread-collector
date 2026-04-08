@@ -7,6 +7,9 @@
 .next/
 out/
 
+# TypeScript 빌드 캐시
+*.tsbuildinfo
+
 # 의존성
 node_modules/
 
