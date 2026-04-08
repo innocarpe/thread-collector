@@ -5,7 +5,8 @@ pk: 3637256515306125635
 taken_at: 1747814786
 date: 2025-05-21
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["스타트업", "개발도구", "개발자커리어"]---
 
 # 실리콘밸리에 Founding Engineer라는 용어가 있더라
 

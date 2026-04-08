@@ -5,7 +5,8 @@ pk: 3748700717520674366
 taken_at: 1761099971
 date: 2025-10-22
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "창업철학", "개발자커리어"]---
 
 # 내가 ChatGPT Atlas같은 llm도메인 회사의 브라우저 제품 절대로 안쓰는 이유
 

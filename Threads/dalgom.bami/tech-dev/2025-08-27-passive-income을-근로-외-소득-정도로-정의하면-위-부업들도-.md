@@ -5,7 +5,8 @@ pk: 3708206123059563141
 taken_at: 1756272639
 date: 2025-08-27
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "웹/SaaS", "마케팅"]---
 
 # passive income을 근로 외 소득 정도로 정의하면 위 부업들도 포함될 수 있지만 보통 게임에서 pa
 

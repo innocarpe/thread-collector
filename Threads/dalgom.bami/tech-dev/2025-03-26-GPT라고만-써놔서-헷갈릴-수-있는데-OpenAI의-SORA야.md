@@ -5,7 +5,8 @@ pk: 3596648515751265965
 taken_at: 1742973936
 date: 2025-03-26
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM"]---
 
 # GPT라고만 써놔서 헷갈릴 수 있는데 OpenAI의 SORA야
 

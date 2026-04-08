@@ -5,7 +5,8 @@ pk: 3664898138223410060
 taken_at: 1751109925
 date: 2025-06-28
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "마케팅", "수익화"]---
 
 # 이번에 웹투앱 마케팅에 관심이 생겨서 revenuecat에서 지원하는 web to app feature를 보
 

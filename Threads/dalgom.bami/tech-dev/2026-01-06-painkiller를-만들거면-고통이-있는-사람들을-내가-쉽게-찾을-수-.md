@@ -5,7 +5,8 @@ pk: 3803905579564569978
 taken_at: 1767680903
 date: 2026-01-06
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["바이럴/SNS", "AI/LLM", "수익화"]---
 
 # painkiller를 만들거면 고통이 있는 사람들을 내가 쉽게 찾을 수 있고 데려올 수 있어야합니다
 

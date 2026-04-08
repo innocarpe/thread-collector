@@ -5,7 +5,8 @@ category: "프로덕트/비즈니스"
 taken_at: 1775290485
 date: "2026-04-04"
 source: "https://www.threads.net/@vibeceo.log"
----
+
+labels: ["스타트업", "AI/LLM", "마케팅"]---
 
 # AI 트랙터 스타트업 Monarch
 

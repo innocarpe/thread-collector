@@ -5,7 +5,8 @@ pk: 3717877759395147843
 taken_at: 1757425588
 date: 2025-09-09
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "제품전략", "AI/LLM"]---
 
 # 그리고 RLS의 단점은 이걸 migration 코드로 db에 쿼리를 날려서 적용해야된다는 것임
 

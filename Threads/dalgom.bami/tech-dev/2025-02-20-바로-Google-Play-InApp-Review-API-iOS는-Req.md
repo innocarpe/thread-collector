@@ -5,7 +5,8 @@ pk: 3571848163176893559
 taken_at: 1740017503
 date: 2025-02-20
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "웹/SaaS", "개발도구"]---
 
 # 바로 Google Play In-App Review API, iOS는 RequestReviewAction 를
 

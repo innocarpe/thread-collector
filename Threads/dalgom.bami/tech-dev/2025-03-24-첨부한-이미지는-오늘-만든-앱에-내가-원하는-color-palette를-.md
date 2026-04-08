@@ -5,7 +5,8 @@ pk: 3595206624992284068
 taken_at: 1742802049
 date: 2025-03-24
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "AI/LLM", "MVP/런칭"]---
 
 # 첨부한 이미지는 오늘 만든 앱에 내가 원하는 color palette를 적용시킨거고 아직 컨셉단계라 어떤 앱
 

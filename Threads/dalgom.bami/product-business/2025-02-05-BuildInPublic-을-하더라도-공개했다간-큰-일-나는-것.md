@@ -5,7 +5,8 @@ pk: 3561138921689955880
 taken_at: 1738740862
 date: 2025-02-05
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "수익화", "인디해킹"]---
 
 # BuildInPublic 을 하더라도 공개했다간 큰 일 나는 것
 

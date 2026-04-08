@@ -5,7 +5,8 @@ pk: 3770691745173662681
 taken_at: 1763721505
 date: 2025-11-21
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "제품전략", "AI/LLM"]---
 
 # Antigravity의 가장 차별화된 장점 중 하나는 검증 계획을 스스로 세우고 진짜 자동으로 검증을 반복 
 

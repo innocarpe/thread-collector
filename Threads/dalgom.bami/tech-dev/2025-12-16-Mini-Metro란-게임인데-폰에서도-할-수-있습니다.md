@@ -5,7 +5,8 @@ pk: 3788579669470766032
 taken_at: 1765853912
 date: 2025-12-16
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["PMF", "개발자커리어", "회고/인사이트"]---
 
 # Mini Metro란 게임인데 폰에서도 할 수 있습니다
 

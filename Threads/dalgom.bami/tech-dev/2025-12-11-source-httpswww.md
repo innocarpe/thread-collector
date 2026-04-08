@@ -5,7 +5,8 @@ pk: 3785026859747691607
 taken_at: 1765430384
 date: 2025-12-11
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "AI/LLM", "마케팅"]---
 
 # source: https://www
 

@@ -5,7 +5,8 @@ pk: 3813940456171131712
 taken_at: 1768877153
 date: 2026-01-20
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["PMF", "개발도구", "마케팅"]---
 
 # 즉 아이디어 빌딩부터, 초기 Go to market 전략, 고객 인터뷰, 피드백&제품 개선 사이클, 피보팅,
 

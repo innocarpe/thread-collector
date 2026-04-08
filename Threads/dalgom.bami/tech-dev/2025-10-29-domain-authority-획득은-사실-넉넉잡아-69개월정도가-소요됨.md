@@ -5,7 +5,8 @@ pk: 3753767847433756018
 taken_at: 1761704019
 date: 2025-10-29
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "성장전략"]---
 
 # domain authority 획득은 사실 넉넉잡아 6~9개월정도가 소요됨
 

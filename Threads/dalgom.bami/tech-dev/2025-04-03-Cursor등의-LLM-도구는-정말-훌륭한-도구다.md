@@ -5,7 +5,8 @@ pk: 3602330894184663066
 taken_at: 1743651328
 date: 2025-04-03
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발자커리어", "AI/LLM", "개발도구"]---
 
 # Cursor등의 LLM 도구는 정말 훌륭한 도구다
 

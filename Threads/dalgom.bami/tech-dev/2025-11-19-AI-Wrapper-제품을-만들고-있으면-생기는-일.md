@@ -5,7 +5,8 @@ pk: 3769283610080844287
 taken_at: 1763553643
 date: 2025-11-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "앱개발"]---
 
 # AI Wrapper 제품을 만들고 있으면 생기는 일
 

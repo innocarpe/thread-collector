@@ -5,7 +5,8 @@ pk: 3708206093573557092
 taken_at: 1756272635
 date: 2025-08-27
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발자커리어", "학습/스킬", "앱개발"]---
 
 # passive income에 가장 가까운 부업이 앱 개발인 것 같다고 생각하는 이유
 

@@ -5,7 +5,8 @@ pk: 3750293868194722048
 taken_at: 1761289889
 date: 2025-10-24
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "인디해킹", "개발자커리어"]---
 
 # Claude code 쓰는 개발자분들에게 궁금한게 있어요
 

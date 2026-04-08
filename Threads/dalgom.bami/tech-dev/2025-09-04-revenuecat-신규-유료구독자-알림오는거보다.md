@@ -5,7 +5,8 @@ pk: 3714186938892295667
 taken_at: 1756985607
 date: 2025-09-04
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["수익화", "앱개발", "웹/SaaS"]---
 
 # revenuecat 신규 유료구독자 알림오는거보다
 

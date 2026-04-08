@@ -5,7 +5,8 @@ pk: 3717877650913628266
 taken_at: 1757425575
 date: 2025-09-09
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS"]---
 
 # 폭탄 1번: RLS(Row Level Security)
 

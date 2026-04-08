@@ -5,7 +5,8 @@ pk: 3584843855591721297
 taken_at: 1741566710
 date: 2025-03-10
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["마케팅", "성장전략", "회고/인사이트"]---
 
 # Mixpanel이나 amplitude 같은 pa툴을 써야해
 

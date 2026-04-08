@@ -5,7 +5,8 @@ pk: 3769772947373452939
 taken_at: 1763611976
 date: 2025-11-20
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["회고/인사이트", "개발도구"]---
 
 # 구체적인 사례로 보는 클코와 antigravity의 차이
 

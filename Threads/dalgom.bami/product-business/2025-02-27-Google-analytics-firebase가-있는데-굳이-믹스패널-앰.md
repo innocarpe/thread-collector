@@ -5,7 +5,8 @@ pk: 3576904498553597394
 taken_at: 1740620265
 date: 2025-02-27
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "마케팅", "제품전략"]---
 
 # Google analytics, firebase가 있는데 굳이 믹스패널, 앰플리튜드를 써야하나요
 

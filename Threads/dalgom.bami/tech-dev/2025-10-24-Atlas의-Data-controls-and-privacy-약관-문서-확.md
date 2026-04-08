@@ -5,7 +5,8 @@ pk: 3750220829952220231
 taken_at: 1761281182
 date: 2025-10-24
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "개발도구"]---
 
 # Atlas의 Data controls and privacy 약관 문서 확인 시 This toggle is o
 

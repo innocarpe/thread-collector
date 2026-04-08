@@ -5,7 +5,8 @@ pk: 3663951050505210009
 taken_at: 1750997023
 date: 2025-06-27
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "웹/SaaS", "앱개발"]---
 
 # SNS의 AI 다끝났다 이거안하면 뒤쳐진다 같은 FOMO에 영향받을 필요 없는 이유
 

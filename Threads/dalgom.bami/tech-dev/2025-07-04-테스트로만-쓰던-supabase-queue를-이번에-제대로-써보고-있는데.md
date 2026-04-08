@@ -5,7 +5,8 @@ pk: 3669051717829789854
 taken_at: 1751605070
 date: 2025-07-04
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "개발도구"]---
 
 # 테스트로만 쓰던 supabase queue를 이번에 제대로 써보고 있는데 진짜 괜찮은 것 같아
 

@@ -5,7 +5,8 @@ pk: 3819709953544981917
 taken_at: 1769564931
 date: 2026-01-28
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "개발도구", "MVP/런칭"]---
 
 # Moltbot(구 clawdbot) 관련 몇가지
 

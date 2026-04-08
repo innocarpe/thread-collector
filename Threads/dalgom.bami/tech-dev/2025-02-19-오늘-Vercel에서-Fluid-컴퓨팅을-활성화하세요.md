@@ -5,7 +5,8 @@ pk: 3571417425218453652
 taken_at: 1739966155
 date: 2025-02-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "웹/SaaS", "제품전략"]---
 
 # 오늘 Vercel에서 Fluid 컴퓨팅을 활성화하세요
 

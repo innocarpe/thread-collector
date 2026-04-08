@@ -5,7 +5,8 @@ pk: 3758796622215174546
 taken_at: 1762303496
 date: 2025-11-05
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["제품전략", "앱개발", "AI/LLM"]---
 
 # 예를들어 나는 business english ai로 잡았고 이걸 서포트할 몇가지를 더 넣음
 

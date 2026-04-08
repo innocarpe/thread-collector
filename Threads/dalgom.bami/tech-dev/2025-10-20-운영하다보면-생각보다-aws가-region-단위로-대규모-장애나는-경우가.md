@@ -5,7 +5,8 @@ pk: 3747456087856671681
 taken_at: 1760951599
 date: 2025-10-20
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS"]---
 
 # 운영하다보면 생각보다 aws가 region 단위로 대규모 장애나는 경우가 종종 있었는데 us-east-1이 
 

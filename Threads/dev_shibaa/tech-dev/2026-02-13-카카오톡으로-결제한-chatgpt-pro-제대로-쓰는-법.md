@@ -5,7 +5,8 @@ category: "기술/개발"
 taken_at: 1770978742
 date: "2026-02-13"
 source: "https://www.threads.net/@dev_shibaa"
----
+
+labels: ["AI/LLM", "개발도구", "바이럴/SNS"]---
 
 # 카카오톡으로 결제한 ChatGPT Pro 제대로 쓰는 법
 

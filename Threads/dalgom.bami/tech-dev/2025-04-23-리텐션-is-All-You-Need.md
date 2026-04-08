@@ -5,7 +5,8 @@ pk: 3616755959498746052
 taken_at: 1745370930
 date: 2025-04-23
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "PMF", "앱개발"]---
 
 # 리텐션 is All You Need
 

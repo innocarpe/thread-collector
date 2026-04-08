@@ -5,7 +5,8 @@ pk: 3794552938397286466
 taken_at: 1766565981
 date: 2025-12-24
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["제품전략", "MVP/런칭", "앱개발"]---
 
 # 몇 주 전 테스터로 참여해서 testflight로 쓰기 시작한 타이머 앱인데 이번에 프로덕트 헌트에 런칭하셨
 

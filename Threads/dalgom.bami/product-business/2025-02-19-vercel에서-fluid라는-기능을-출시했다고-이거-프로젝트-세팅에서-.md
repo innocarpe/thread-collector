@@ -5,7 +5,8 @@ pk: 3571416685527918900
 taken_at: 1739966067
 date: 2025-02-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["제품전략", "웹/SaaS", "개발도구"]---
 
 # vercel에서 fluid라는 기능을 출시했다고 이거 프로젝트 세팅에서 딸깍 켜면 컴퓨팅 비용을 85%까지 
 

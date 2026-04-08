@@ -5,7 +5,8 @@ pk: 3780788988849356741
 taken_at: 1764925191
 date: 2025-12-05
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "AI/LLM", "개발도구"]---
 
 # cloudflare가 터져서 supabase쪽도 또 같이 장애가 난듯합니다
 

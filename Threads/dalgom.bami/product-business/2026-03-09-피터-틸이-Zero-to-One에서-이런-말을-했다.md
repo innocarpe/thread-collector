@@ -5,7 +5,8 @@ pk: 3848930500258481544
 taken_at: 1773048292
 date: 2026-03-09
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["회고/인사이트", "스타트업", "학습/스킬"]---
 
 # 피터 틸이 Zero to One에서 이런 말을 했다
 

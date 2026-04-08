@@ -5,7 +5,8 @@ pk: 3671287949771286276
 taken_at: 1751871649
 date: 2025-07-07
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "웹/SaaS", "AI/LLM"]---
 
 # mcp없이도 Supabase 테이블 구조 AI가 다 파악하고 코딩하게 하기
 

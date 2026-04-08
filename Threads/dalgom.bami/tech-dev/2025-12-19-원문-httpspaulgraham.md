@@ -5,7 +5,8 @@ pk: 3790901406929692239
 taken_at: 1766130685
 date: 2025-12-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략"]---
 
 # 원문 https://paulgraham
 

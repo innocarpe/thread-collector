@@ -4,7 +4,8 @@ category: 기술/개발
 source: https://www.threads.net/@brxce.ai
 collected_at: 2026-04-08
 post_count: 55
----
+
+labels: ["AI/LLM", "개발도구", "앱개발"]---
 
 # 기술/개발 — @brxce.ai
 

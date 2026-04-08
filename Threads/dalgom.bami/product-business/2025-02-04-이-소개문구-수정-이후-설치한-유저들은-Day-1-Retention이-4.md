@@ -5,7 +5,8 @@ pk: 3560330847618075564
 taken_at: 1738644532
 date: 2025-02-04
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "앱개발", "마케팅"]---
 
 # 이 소개문구 수정 이후 설치한 유저들은 Day 1 Retention이 40%로 무려 4배가 되었어
 

@@ -5,7 +5,8 @@ pk: 3769226357562806862
 taken_at: 1763546817
 date: 2025-11-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "개발자커리어", "개발도구"]---
 
 # Antigravity 9시간 사용 후기
 

@@ -5,7 +5,8 @@ pk: 3560563124837499599
 taken_at: 1738672222
 date: 2025-02-04
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "PMF", "개발도구"]---
 
 # PMF(Product market fit)을 찾은건지 어떻게 확인할 수 있냐는 질문을 많이 듣게되는데 측정하
 

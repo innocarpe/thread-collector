@@ -5,7 +5,8 @@ pk: 3585580675803874670
 taken_at: 1741654546
 date: 2025-03-11
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "앱개발", "MVP/런칭"]---
 
 # React native vs Flutter 1인개발기준 뭐가 좋을까
 

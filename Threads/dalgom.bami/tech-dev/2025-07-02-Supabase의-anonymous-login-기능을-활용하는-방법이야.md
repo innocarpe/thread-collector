@@ -5,7 +5,8 @@ pk: 3667540634912732430
 taken_at: 1751424935
 date: 2025-07-02
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "웹/SaaS", "AI/LLM"]---
 
 # Supabase의 anonymous login 기능을 활용하는 방법이야
 

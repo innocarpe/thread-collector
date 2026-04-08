@@ -5,7 +5,8 @@ pk: 3754465403415438824
 taken_at: 1761787175
 date: 2025-10-30
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "웹/SaaS", "수익화"]---
 
 # AI Wrapper 서비스에 대한 비아냥이 꽤 자주 보인다
 

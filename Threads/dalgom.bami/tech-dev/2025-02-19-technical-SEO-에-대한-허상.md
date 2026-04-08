@@ -5,7 +5,8 @@ pk: 3571198607296686881
 taken_at: 1739940070
 date: 2025-02-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["ASO/검색", "개발도구", "PMF"]---
 
 # technical SEO 에 대한 허상
 

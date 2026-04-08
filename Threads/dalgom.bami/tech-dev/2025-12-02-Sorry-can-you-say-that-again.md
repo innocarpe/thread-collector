@@ -5,7 +5,8 @@ pk: 3778383722246105152
 taken_at: 1764639366
 date: 2025-12-02
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "AI/LLM", "개발도구"]---
 
 # "Sorry, can you say that again
 

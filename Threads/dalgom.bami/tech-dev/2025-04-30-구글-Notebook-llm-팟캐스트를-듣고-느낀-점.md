@@ -5,7 +5,8 @@ pk: 3621854501814365460
 taken_at: 1745978723
 date: 2025-04-30
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "바이럴/SNS", "회고/인사이트"]---
 
 # 구글 Notebook llm 팟캐스트를 듣고 느낀 점
 

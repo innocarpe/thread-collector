@@ -5,7 +5,8 @@ pk: 3620525250640931949
 taken_at: 1745820264
 date: 2025-04-28
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "마케팅", "MVP/런칭"]---
 
 # 아 그리고 쓰는걸 깜박했는데, FE엔지니어링에서도 웹, 앱(ios, android) 모두를 다룰 줄 아는 것
 

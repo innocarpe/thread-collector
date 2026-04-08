@@ -4,7 +4,8 @@ category: 프로덕트/비즈니스
 source: https://www.threads.net/@brxce.ai
 collected_at: 2026-04-08
 post_count: 8
----
+
+labels: ["바이럴/SNS", "MVP/런칭", "스타트업"]---
 
 # 프로덕트/비즈니스 — @brxce.ai
 

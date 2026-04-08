@@ -5,7 +5,8 @@ pk: 3666170129102387848
 taken_at: 1751261558
 date: 2025-06-30
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "앱개발", "AI/LLM"]---
 
 # supabase 써서 ai wrapper만들 때 주의할 점
 

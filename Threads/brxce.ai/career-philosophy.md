@@ -4,7 +4,8 @@ category: 커리어/철학
 source: https://www.threads.net/@brxce.ai
 collected_at: 2026-04-08
 post_count: 10
----
+
+labels: ["창업철학", "생산성", "바이럴/SNS"]---
 
 # 커리어/철학 — @brxce.ai
 

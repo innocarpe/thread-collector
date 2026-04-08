@@ -5,7 +5,8 @@ pk: 3768967476488109976
 taken_at: 1763515956
 date: 2025-11-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "PMF", "회고/인사이트"]---
 
 # Antigravity 테스트중인데 구글이 진짜 이악물고 만들었다는게 느껴짐
 

@@ -5,7 +5,8 @@ pk: 3601508471214210035
 taken_at: 1743553287
 date: 2025-04-02
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "회고/인사이트", "앱개발"]---
 
 # 우선 mixpanel기준으로 설명할게 amplitude도 정확히 같은분석이 가능하고 sdk구조도 거의 같아
 

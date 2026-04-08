@@ -5,7 +5,8 @@ pk: 3592258952152992316
 taken_at: 1742450659
 date: 2025-03-20
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["개발도구", "제품전략"]---
 
 # javascript로 만든 ui도 봇이 가져가는 크롤링은 분명 기술적으로는 가능하다
 

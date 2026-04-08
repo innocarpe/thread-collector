@@ -5,7 +5,8 @@ pk: 3739436804555859132
 taken_at: 1759995626
 date: 2025-10-09
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["앱개발", "웹/SaaS", "AI/LLM"]---
 
 # 특히 LLM wrapper 서비스는 사용자당 api비용 컨트롤의 난이도가 상당히 높다
 

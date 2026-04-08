@@ -5,7 +5,8 @@ pk: 3708231471109302619
 taken_at: 1756275660
 date: 2025-08-27
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "AI/LLM"]---
 
 # 거실 사진 찍어서 nano banana ai에게 집 인테리어좀 해달라고 했는데 꽤 마음에 드는 인테리어 사진
 

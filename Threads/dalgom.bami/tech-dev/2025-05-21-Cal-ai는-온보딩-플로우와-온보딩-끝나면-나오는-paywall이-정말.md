@@ -5,7 +5,8 @@ pk: 3637356107443981213
 taken_at: 1747826659
 date: 2025-05-21
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "앱개발", "마케팅"]---
 
 # Cal ai는 온보딩 플로우와 온보딩 끝나면 나오는 paywall이 정말 예술로 설계되어있어
 

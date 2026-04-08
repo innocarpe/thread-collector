@@ -5,7 +5,8 @@ pk: 3723282402518398825
 taken_at: 1758069871
 date: 2025-09-17
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["마케팅", "웹/SaaS", "앱개발"]---
 
 # ROAS는 Return on ad spend의 약자로 paid마케팅을 진행해본 1인개발자는 그래도 한번쯤은 
 

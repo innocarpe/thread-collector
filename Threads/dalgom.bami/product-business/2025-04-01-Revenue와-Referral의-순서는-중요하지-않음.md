@@ -5,7 +5,8 @@ pk: 3601170277989891721
 taken_at: 1743512972
 date: 2025-04-01
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["성장전략", "PMF", "수익화"]---
 
 # Revenue와 Referral의 순서는 중요하지 않음
 

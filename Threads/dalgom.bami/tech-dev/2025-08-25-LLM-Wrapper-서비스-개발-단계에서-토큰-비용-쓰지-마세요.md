@@ -5,7 +5,8 @@ pk: 3706782030141647898
 taken_at: 1756102874
 date: 2025-08-25
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "앱개발", "웹/SaaS"]---
 
 # LLM Wrapper 서비스 개발 단계에서 토큰 비용 쓰지 마세요
 

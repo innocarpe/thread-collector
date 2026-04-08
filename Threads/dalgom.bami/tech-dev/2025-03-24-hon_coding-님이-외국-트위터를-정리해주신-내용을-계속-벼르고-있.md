@@ -5,7 +5,8 @@ pk: 3595205898740067118
 taken_at: 1742801962
 date: 2025-03-24
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["AI/LLM", "제품전략", "회고/인사이트"]---
 
 # @hon_coding 님이 외국 트위터를 정리해주신 내용을 계속 벼르고 있다가 오늘 개발할 앱 디자인 만드는
 

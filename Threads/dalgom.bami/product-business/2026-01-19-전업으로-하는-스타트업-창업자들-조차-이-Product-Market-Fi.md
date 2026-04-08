@@ -5,7 +5,8 @@ pk: 3813241326713078667
 taken_at: 1768793811
 date: 2026-01-19
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["회고/인사이트", "개발도구", "PMF"]---
 
 # 전업으로 하는 스타트업 창업자들 조차 이 Product Market Fit을 찾기위해 수년을 시간과 자본을 
 

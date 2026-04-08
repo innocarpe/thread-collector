@@ -5,7 +5,8 @@ pk: 3717877690474360480
 taken_at: 1757425579
 date: 2025-09-09
 source: https://www.threads.net/@dalgom.bami
----
+
+labels: ["웹/SaaS", "AI/LLM", "바이럴/SNS"]---
 
 # 예를들어 user_id =3 이 작성한 글에 user_id=4가 좋아요를 눌러서 좋아요를 +1 해야되는 상황
 
