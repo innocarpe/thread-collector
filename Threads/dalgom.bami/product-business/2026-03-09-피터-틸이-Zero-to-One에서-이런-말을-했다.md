@@ -1,10 +1,11 @@
 ---
-username: dalgom.bami
-category: 프로덕트/비즈니스
-pk: 3848930500258481544
+pk: "3848930500258481544"
+username: "@dalgom.bami"
+category: "프로덕트/비즈니스"
 taken_at: 1773048292
-date: 2026-03-09
-source: https://www.threads.net/@dalgom.bami
+date: "2026-03-09"
+source: "https://www.threads.net/@dalgom.bami"
+chain_pks: ["3848930500258481544", "3848930500359145185", "3848930501692916570", "3848930502632426274"]
 
 labels: ["회고/인사이트", "스타트업", "학습/스킬"]---
 

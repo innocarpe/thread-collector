@@ -1,10 +1,10 @@
 ---
-username: dalgom.bami
-category: 기술/개발
-pk: 3820600553391692542
+pk: "3820600553391692542"
+username: "@dalgom.bami"
+category: "기술/개발"
 taken_at: 1769671099
-date: 2026-01-29
-source: https://www.threads.net/@dalgom.bami
+date: "2026-01-29"
+source: "https://www.threads.net/@dalgom.bami"
 
 labels: ["웹/SaaS", "ASO/검색", "수익화"]---
 
