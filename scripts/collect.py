@@ -518,23 +518,14 @@ def save_post(post: dict, username: str, category: str, output_root: Path) -> Pa
 
     filepath.write_text("\n".join(content_lines), encoding="utf-8")
 
-    # Auto-label if ANTHROPIC_API_KEY is available
+    # Auto-label immediately after saving
     try:
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            env_path = Path(__file__).parent.parent / ".env.local"
-            if env_path.exists():
-                for line in env_path.read_text().splitlines():
-                    if line.startswith("ANTHROPIC_API_KEY="):
-                        api_key = line.split("=", 1)[1].strip().strip('"')
-                        break
-        if api_key:
-            from label import label_single_file
-            labels = label_single_file(filepath)
-            if labels:
-                print(f"    → 레이블: {', '.join(labels)}")
+        from label import label_file
+        labels = label_file(filepath)
+        if labels:
+            print(f"    → 레이블: {', '.join(labels)}")
     except Exception:
-        pass  # labeling is best-effort, never block saving
+        pass  # labeling is best-effort, never blocks saving
 
     return filepath
 
