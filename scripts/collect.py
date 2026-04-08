@@ -56,22 +56,36 @@ CAREER_KEYWORDS = [
 # ── JavaScript templates ───────────────────────────────────────────────────────
 
 JS_GET_USERID = r"""
-(function() {
+(function(targetUsername) {
   const scripts = Array.from(document.querySelectorAll("script"));
   let userId = null;
+
+  // Pass 1: find pk in the same script block as the target username
   for (const s of scripts) {
     const t = s.textContent;
-    const m1 = t.match(/"userID"\s*:\s*"(\d{10,})"/);
-    const m2 = t.match(/"pk"\s*:\s*"(\d{10,})"/);
-    const m3 = t.match(/"user_id"\s*:\s*"(\d{10,})"/);
-    if (m1) { userId = m1[1]; break; }
-    if (m2) { userId = m2[1]; break; }
-    if (m3) { userId = m3[1]; break; }
+    const idx = t.indexOf('"' + targetUsername + '"');
+    if (idx >= 0) {
+      const snippet = t.slice(Math.max(0, idx - 300), idx + 300);
+      const m = snippet.match(/"pk"\s*:\s*"(\d{10,})"/);
+      if (m) { userId = m[1]; break; }
+      const m2 = snippet.match(/"user_id"\s*:\s*"(\d{10,})"/);
+      if (m2) { userId = m2[1]; break; }
+    }
   }
+
+  // Pass 2: fallback — first "userID" in any script
+  if (!userId) {
+    for (const s of scripts) {
+      const t = s.textContent;
+      const m = t.match(/"userID"\s*:\s*"(\d{10,})"/);
+      if (m) { userId = m[1]; break; }
+    }
+  }
+
   let lsdOk = false;
   try { require("LSD").token; lsdOk = true; } catch(e) {}
   return JSON.stringify({ userId, lsdOk, url: window.location.href });
-})()
+})("USERNAME_PLACEHOLDER")
 """
 
 JS_GET_USERID_API = r"""
@@ -197,6 +211,56 @@ JS_COLLECT = r"""
 
 # ── Browse helpers ─────────────────────────────────────────────────────────────
 
+# Chrome profile paths to search (in priority order)
+CHROME_PROFILE_PATHS = [
+    "~/Library/Application Support/Google/Chrome/Profile 7/Cookies",
+    "~/Library/Application Support/Google/Chrome/Default/Cookies",
+    "~/Library/Application Support/Chromium/Default/Cookies",
+    "~/.config/google-chrome/Default/Cookies",
+]
+
+THREADS_COOKIE_URL = "https://threads.com"
+
+
+def inject_chrome_cookies() -> None:
+    """
+    Extract Threads session cookies from the user's Chrome profile and inject
+    them into the browse session via `$B cookie n=v`. Best-effort: silently
+    skips if pycookiecheat is not installed or no Chrome profile is found.
+    """
+    try:
+        import pycookiecheat  # type: ignore
+    except ImportError:
+        return  # Optional dependency; skip silently
+
+    cookie_file = None
+    for raw_path in CHROME_PROFILE_PATHS:
+        p = os.path.expanduser(raw_path)
+        if os.path.isfile(p):
+            cookie_file = p
+            break
+
+    if not cookie_file:
+        return
+
+    try:
+        cookies: dict = pycookiecheat.chrome_cookies(
+            THREADS_COOKIE_URL, cookie_file=cookie_file
+        )
+    except Exception:
+        return
+
+    if not cookies:
+        return
+
+    print(f"[0/4] Injecting {len(cookies)} Chrome session cookies ...")
+    for name, value in cookies.items():
+        subprocess.run(
+            [BROWSE_BIN, "cookie", f"{name}={value}"],
+            capture_output=True, timeout=10,
+        )
+
+
 def browse_goto(url: str) -> None:
     """Navigate the browse browser to a URL (fire-and-forget, no long wait)."""
     subprocess.run([BROWSE_BIN, "goto", url], capture_output=True, timeout=30)
@@ -232,9 +296,10 @@ def get_user_id(username: str) -> str:
     print(f"[1/4] Navigating to {profile_url} ...")
     browse_goto(profile_url)
 
-    # Primary: extract from page scripts
+    # Primary: extract from page scripts (username-aware)
     print("[1/4] Extracting userID from page scripts ...")
-    out = browse_eval(JS_GET_USERID, f"/tmp/_tc_userid_{username}.js")
+    js_userid = JS_GET_USERID.replace("USERNAME_PLACEHOLDER", username)
+    out = browse_eval(js_userid, f"/tmp/_tc_userid_{username}.js")
     data = parse_json_output(out)
 
     if data and data.get("userId"):
@@ -245,7 +310,7 @@ def get_user_id(username: str) -> str:
     if data and not data.get("lsdOk"):
         print("[1/4] LSD not ready, retrying goto ...")
         browse_goto(profile_url)
-        out = browse_eval(JS_GET_USERID, f"/tmp/_tc_userid_{username}.js")
+        out = browse_eval(js_userid, f"/tmp/_tc_userid_{username}.js")
         data = parse_json_output(out)
         if data and data.get("userId"):
             print(f"[1/4] userID = {data['userId']}")
@@ -533,6 +598,9 @@ def main() -> None:
             f"ERROR: browse binary not found or not executable at:\n  {BROWSE_BIN}\n"
             "Please install gstack browse first."
         )
+
+    # ── 0b. Inject Chrome session cookies (best-effort) ───────────────────────
+    inject_chrome_cookies()
 
     # ── 1. Get userID ─────────────────────────────────────────────────────────
     user_id = args.user_id or get_user_id(username)
