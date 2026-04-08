@@ -44,11 +44,30 @@ export function ReaderProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setStore(getStore());
+    const local = getStore();
+    setStore(local);
     try {
       setExtraLabels(JSON.parse(localStorage.getItem("tc-labels") || "[]"));
     } catch {}
     setHydrated(true);
+
+    // Background: merge remote reader-status.json into local store
+    // Remote is the source of truth for starred/hidden/labels across re-collections.
+    // Local overrides remote (most recent action wins).
+    fetch("/api/reader-status")
+      .then((r) => r.ok ? r.json() : {})
+      .then((remote: Record<string, PostStatus>) => {
+        setStore((prev) => {
+          // Merge: for each pk, remote fills in what local doesn't have
+          const merged: Record<string, PostStatus> = { ...remote };
+          for (const pk of Object.keys(prev)) {
+            merged[pk] = { ...remote[pk], ...prev[pk] };
+          }
+          saveStore(merged);
+          return merged;
+        });
+      })
+      .catch(() => {});
   }, []);
 
   const mutate = useCallback(
