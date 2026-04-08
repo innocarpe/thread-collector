@@ -178,14 +178,26 @@ JS_COLLECT = r"""
       const pi = data.data && data.data.mediaData && data.data.mediaData.page_info;
       const posts = [];
       edges.forEach(function(edge) {
-        (edge.node && edge.node.thread_items || []).forEach(function(item) {
+        // Each edge is one Thread (chain). Collect ALL posts by the target user
+        // within this edge — including is_reply:true continuations.
+        const items = (edge.node && edge.node.thread_items) || [];
+        const chainPosts = [];
+        items.forEach(function(item) {
           const p = item.post;
-          if (!p || p.is_reply || !p.user || p.user.username !== "USERNAME_PLACEHOLDER") return;
+          if (!p || !p.user || p.user.username !== "USERNAME_PLACEHOLDER") return;
           const frags = p.text_post_app_info && p.text_post_app_info.text_fragments && p.text_post_app_info.text_fragments.fragments;
           if (!frags) return;
           const txt = frags.map(function(f){return f.plaintext||"";}).join("").trim();
-          if (txt.length >= 20) posts.push({pk: p.pk, text: txt, taken_at: p.taken_at});
+          if (txt.length > 0) chainPosts.push({pk: p.pk, text: txt, taken_at: p.taken_at});
         });
+        if (chainPosts.length === 0) return;
+        // Sort chronologically by pk (ascending = oldest first)
+        chainPosts.sort(function(a, b){ return parseInt(a.pk) - parseInt(b.pk); });
+        const mergedText = chainPosts.map(function(p){ return p.text; }).join("\n\n");
+        if (mergedText.trim().length < 20) return;
+        const entry = {pk: chainPosts[0].pk, text: mergedText, taken_at: chainPosts[0].taken_at};
+        if (chainPosts.length > 1) entry.chain_pks = chainPosts.map(function(p){ return p.pk; });
+        posts.push(entry);
       });
       return {posts: posts, hasNext: pi ? pi.has_next_page : false, endCursor: pi ? pi.end_cursor : null};
     } catch(e) { return {posts: [], hasNext: false, endCursor: null, error: e.message}; }
@@ -408,36 +420,10 @@ def collect_posts(username: str, user_id: str, limit: int) -> list[dict]:
 
 def merge_chains(posts: list[dict]) -> list[dict]:
     """
-    Posts that share the same taken_at timestamp belong to the same chain.
-    Merge them: concatenate texts (sorted by pk asc), record chain_pks.
-    Posts without a chain partner are left as-is (chain_pks omitted).
+    Chain merging is now handled in JS (parsePage groups thread_items by edge).
+    This function is kept only to sort by taken_at descending.
     """
-    from collections import defaultdict
-
-    # Group by taken_at
-    by_time: dict[int, list[dict]] = defaultdict(list)
-    for p in posts:
-        by_time[p.get("taken_at", 0)].append(p)
-
-    merged: list[dict] = []
-    for taken_at, group in by_time.items():
-        if len(group) == 1:
-            merged.append(group[0])
-        else:
-            # Sort by pk ascending so text reads in order
-            group.sort(key=lambda p: int(p["pk"]))
-            combined_text = "\n\n".join(p["text"] for p in group)
-            chain_pks = [p["pk"] for p in group]
-            merged.append({
-                "pk": group[0]["pk"],          # canonical pk = earliest in chain
-                "text": combined_text,
-                "taken_at": taken_at,
-                "chain_pks": chain_pks,
-            })
-
-    # Re-sort by taken_at descending (newest first)
-    merged.sort(key=lambda p: p.get("taken_at", 0), reverse=True)
-    return merged
+    return sorted(posts, key=lambda p: p.get("taken_at", 0), reverse=True)
 
 # ── Step: classification ───────────────────────────────────────────────────────
 
