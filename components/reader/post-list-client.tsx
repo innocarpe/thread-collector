@@ -21,22 +21,21 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
-  const filtered = mounted
-    ? posts.filter((p) => {
-        const s = getStatus(p.pk);
-        if (statusFilter === "hidden") return !!s.hidden;
-        if (s.hidden) return false; // hide by default
-        if (statusFilter === "unread") return !s.read;
-        if (statusFilter === "starred") return !!s.starred;
-        if (labelFilter) return s.labels?.includes(labelFilter) ?? false;
-        return true;
-      })
-    : posts;
+  const filtered = posts.filter((p) => {
+    if (!mounted) return true; // SSR: show all (hidden via CSS until mounted)
+    const s = getStatus(p.pk);
+    if (statusFilter === "hidden") return !!s.hidden;
+    if (s.hidden) return false;
+    if (statusFilter === "unread") return !s.read;
+    if (statusFilter === "starred") return !!s.starred;
+    if (labelFilter) return s.labels?.includes(labelFilter) ?? false;
+    return true;
+  });
 
   const isFiltered = !!(userFilter || categoryFilter || statusFilter || labelFilter);
 
   return (
-    <div>
+    <div style={!mounted ? { visibility: "hidden" } : undefined}>
       <section className="surface section">
         <div className="toolbar">
           <SectionHeading>Posts</SectionHeading>
