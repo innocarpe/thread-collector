@@ -6,7 +6,8 @@ taken_at: 1770002986
 date: "2026-02-02"
 source: "https://www.threads.net/@brxce.ai"
 
-labels: ["AI/LLM", "창업철학"]---
+labels: ["AI/LLM", "창업철학"]
+---
 
 # 다들 OpenClaw Bot에게 어떤 이름을 주셨나요
 

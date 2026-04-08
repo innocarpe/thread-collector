@@ -7,7 +7,8 @@ date: "2026-01-28"
 source: "https://www.threads.net/@dalgom.bami"
 chain_pks: ["3819709953544981917", "3819709984138215235"]
 
-labels: ["AI/LLM", "개발도구", "MVP/런칭"]---
+labels: ["AI/LLM", "개발도구", "MVP/런칭"]
+---
 
 # Moltbot(구 clawdbot) 관련 몇가지
 

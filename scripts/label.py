@@ -177,7 +177,7 @@ def write_labels_to_file(path: Path, labels: list[str]) -> None:
     labels_yaml = "labels: [" + ", ".join(f'"{l}"' for l in labels) + "]"
     fm_lines.append(labels_yaml)
 
-    path.write_text("---" + "\n".join(fm_lines) + "---" + body, encoding="utf-8")
+    path.write_text("---" + "\n".join(fm_lines) + "\n---" + body, encoding="utf-8")
 
 
 def already_labeled(path: Path) -> bool:

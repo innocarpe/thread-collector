@@ -6,7 +6,8 @@ taken_at: 1758249181
 date: "2025-09-19"
 source: "https://www.threads.net/@brxce.ai"
 
-labels: ["AI/LLM", "개발도구"]---
+labels: ["AI/LLM", "개발도구"]
+---
 
 # iPhone 15 Pro ->> Air
 

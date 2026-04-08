@@ -7,7 +7,8 @@ date: "2026-01-13"
 source: "https://www.threads.net/@brxce.ai"
 chain_pks: ["3808868821432989402", "3808874918617187834", "3808875874046079242"]
 
-labels: ["AI/LLM", "성장전략", "인디해킹"]---
+labels: ["AI/LLM", "성장전략", "인디해킹"]
+---
 
 # Claude Code 다 좋은데
 

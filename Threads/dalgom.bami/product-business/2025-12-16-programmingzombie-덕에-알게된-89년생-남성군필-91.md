@@ -6,7 +6,8 @@ taken_at: 1765870832
 date: "2025-12-16"
 source: "https://www.threads.net/@dalgom.bami"
 
-labels: ["개발도구", "수익화", "창업철학"]---
+labels: ["개발도구", "수익화", "창업철학"]
+---
 
 # @programmingzombie 덕에 알게된 89년생(남성군필), 91년생(여성) 올해창업해야 하는 이유
 

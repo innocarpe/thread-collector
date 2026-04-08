@@ -6,7 +6,8 @@ taken_at: 1771410247
 date: "2026-02-18"
 source: "https://www.threads.net/@dalgom.bami"
 
-labels: ["AI/LLM", "개발도구"]---
+labels: ["AI/LLM", "개발도구"]
+---
 
 # openclaw는 딱 이 pc정도 보안이라고 생각하면 됩니다
 

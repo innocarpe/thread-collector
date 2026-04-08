@@ -7,7 +7,8 @@ date: "2026-04-04"
 source: "https://www.threads.net/@vibeceo.log"
 chain_pks: ["3867739340412232667", "3867739440840669601"]
 
-labels: ["수익화", "스타트업", "창업철학"]---
+labels: ["수익화", "스타트업", "창업철학"]
+---
 
 # AI 트랙터 스타트업 Monarch
 

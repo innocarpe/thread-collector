@@ -7,7 +7,8 @@ date: "2026-02-06"
 source: "https://www.threads.net/@brxce.ai"
 chain_pks: ["3826208924488600150", "3826208929605649206"]
 
-labels: ["AI/LLM", "개발도구", "바이럴/SNS"]---
+labels: ["AI/LLM", "개발도구", "바이럴/SNS"]
+---
 
 # 🔗 https://gist
 

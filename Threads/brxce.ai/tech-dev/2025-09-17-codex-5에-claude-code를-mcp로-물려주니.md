@@ -7,7 +7,8 @@ date: "2025-09-17"
 source: "https://www.threads.net/@brxce.ai"
 chain_pks: ["3723289548790328110", "3723302759816132007", "3723312257314202393"]
 
-labels: ["AI/LLM", "바이럴/SNS"]---
+labels: ["AI/LLM", "바이럴/SNS"]
+---
 
 # Codex-5에 Claude Code를 MCP로 물려주니
 
