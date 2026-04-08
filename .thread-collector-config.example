@@ -1,0 +1,7 @@
+# ThreadCollector 설정 예시
+# 이 파일을 .thread-collector-config 로 복사하고 값을 채우세요
+# .gitignore에 등록되어 있어서 실수로 커밋될 일 없음
+
+# Meta Threads API Access Token
+# 발급: https://developers.facebook.com/apps/ → Threads API 앱 생성
+ACCESS_TOKEN=your_access_token_here
