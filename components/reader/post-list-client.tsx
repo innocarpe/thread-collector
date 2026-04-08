@@ -53,62 +53,35 @@ export function PostListClient({ posts, userFilter, categoryFilter }: Props) {
 
         <div className="card-list">
           {filtered.length > 0 ? (
-            filtered.map((post) => (
-              <div key={post.pk} style={{ position: "relative" }}>
+            filtered.map((post) => {
+              const s = mounted ? getStatus(post.pk) : {};
+              return (
                 <PostCard
+                  key={post.pk}
                   post={post}
                   showAuthor={!userFilter}
-                  status={mounted ? getStatus(post.pk) : {}}
+                  status={s}
+                  actions={mounted ? (
+                    <div className="post-card-quick-actions">
+                      <button
+                        className={`post-card-quick-btn${s.starred ? " is-starred" : ""}`}
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleStar(post.pk); }}
+                        title={s.starred ? "중요 해제" : "중요 표시"}
+                      >
+                        {s.starred ? "⭐" : "☆"} 중요
+                      </button>
+                      <button
+                        className="post-card-quick-btn"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleHide(post.pk); }}
+                        title="목록에서 숨기기"
+                      >
+                        숨기기
+                      </button>
+                    </div>
+                  ) : null}
                 />
-                {mounted && (
-                  <div style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    display: "flex",
-                    gap: "2px",
-                  }}>
-                    <button
-                      onClick={(e) => { e.preventDefault(); toggleStar(post.pk); }}
-                      title={getStatus(post.pk).starred ? "중요 해제" : "중요 표시"}
-                      style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        opacity: getStatus(post.pk).starred ? 1 : 0.3,
-                        fontSize: "15px",
-                        lineHeight: 1,
-                        padding: "4px",
-                        borderRadius: "4px",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                      onMouseLeave={(e) => (e.currentTarget.style.opacity = getStatus(post.pk).starred ? "1" : "0.3")}
-                    >
-                      ⭐
-                    </button>
-                    <button
-                      onClick={(e) => { e.preventDefault(); toggleHide(post.pk); }}
-                      title="목록에서 숨기기"
-                      style={{
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        opacity: 0.3,
-                        fontSize: "15px",
-                        lineHeight: 1,
-                        padding: "4px",
-                        borderRadius: "4px",
-                        color: "var(--color-text-soft)",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                      onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.3")}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))
+              );
+            })
           ) : (
             <p className="muted" style={{ fontSize: "var(--text-sm)", padding: "var(--space-4) 0" }}>
               조건에 맞는 포스트가 없습니다.
