@@ -306,6 +306,8 @@ def inject_chrome_cookies() -> None:
         return
 
     print(f"[0/4] Injecting {len(cookies)} Chrome session cookies ...")
+    # Navigate to threads.net first so browse has a page context for cookie domain
+    subprocess.run([BROWSE_BIN, "goto", "https://www.threads.net"], capture_output=True, timeout=30)
     for name, value in cookies.items():
         _browse_run(
             ["cookie", f"{name}={value}"],
