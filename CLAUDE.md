@@ -25,6 +25,7 @@ Key routing rules:
 - "/collect", "collect @username", "수집해", "게시글 모아줘", "threads 분석" → invoke `collect` skill
 - 특정 유저 인사이트 요청, "@username 글 뽑아줘" → invoke `collect` skill
 - "/run-blog", "블로그 켜줘", "로컬 실행", "dev 서버" → invoke `run-blog` skill
+- "/setup-thread-cookies", "쿠키 셋업", "threads 로그인 설정", "새 맥 셋업" → invoke `setup-thread-cookies` skill
 
 ## 인사이트 카테고리
 

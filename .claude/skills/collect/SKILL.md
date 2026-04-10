@@ -18,7 +18,22 @@ Threads.net 유저의 게시글을 수집해 `Threads/{username}/` 에 카테고
 
 ---
 
-## Step 0: 인수 파싱
+## Step 0: 사전 조건 확인
+
+처음 실행하는 맥이거나 `pycookiecheat` 설치 여부가 불확실하면:
+
+```bash
+python3 -c "import pycookiecheat" 2>&1
+```
+
+실패 시 사용자에게 안내:
+> `/setup-thread-cookies` 를 먼저 실행해 주세요. (pycookiecheat + Chrome 쿠키 셋업)
+
+그 외에는 바로 진행.
+
+---
+
+## Step 1: 인수 파싱
 
 args에서 username 추출. `@` prefix 있어도 OK.
 `--types tech,product,career` 형태로 카테고리 제한 가능.
