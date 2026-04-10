@@ -20,6 +20,8 @@ from pathlib import Path
 # ── Constants ─────────────────────────────────────────────────────────────────
 
 BROWSE_BIN = os.path.expanduser("~/.claude/skills/gstack/browse/dist/browse")
+BROWSE_SRC = os.path.expanduser("~/.claude/skills/gstack/browse/src/cli.ts")
+BROWSE_CMD: list[str] = []  # resolved at startup
 
 CATEGORY_LABELS = {
     "tech-dev": "기술/개발",
@@ -234,6 +236,44 @@ CHROME_PROFILE_PATHS = [
 THREADS_COOKIE_URL = "https://threads.com"
 
 
+def _resolve_browse_cmd() -> list[str]:
+    """Determine how to invoke the browse CLI.
+
+    1. Try the compiled binary — run a quick ``--help`` to verify macOS
+       doesn't SIGKILL it (exit 137 = unsigned binary on Apple Silicon).
+    2. If that fails and ``bun`` + the source .ts file exist, fall back to
+       ``bun run <cli.ts>``.
+    3. Otherwise return the binary path anyway (will fail later with a clear
+       error).
+    """
+    if os.path.isfile(BROWSE_BIN) and os.access(BROWSE_BIN, os.X_OK):
+        try:
+            r = subprocess.run(
+                [BROWSE_BIN, "--help"],
+                capture_output=True, timeout=5,
+            )
+            if r.returncode not in (137, -9):  # not killed by macOS
+                return [BROWSE_BIN]
+        except Exception:
+            pass
+
+    # Fallback: bun run <source>
+    bun = os.path.expanduser("~/.bun/bin/bun")
+    if not os.path.isfile(bun):
+        import shutil
+        bun = shutil.which("bun") or bun
+    if os.path.isfile(bun) and os.path.isfile(BROWSE_SRC):
+        print("[browse] compiled binary unavailable — using bun runtime fallback")
+        return [bun, "run", BROWSE_SRC]
+
+    return [BROWSE_BIN]
+
+
+def _browse_run(args: list[str], **kwargs) -> subprocess.CompletedProcess:
+    """Run a browse sub-command using the resolved BROWSE_CMD."""
+    return subprocess.run(BROWSE_CMD + args, **kwargs)
+
+
 def inject_chrome_cookies() -> None:
     """
     Extract Threads session cookies from the user's Chrome profile and inject
@@ -267,23 +307,23 @@ def inject_chrome_cookies() -> None:
 
     print(f"[0/4] Injecting {len(cookies)} Chrome session cookies ...")
     for name, value in cookies.items():
-        subprocess.run(
-            [BROWSE_BIN, "cookie", f"{name}={value}"],
+        _browse_run(
+            ["cookie", f"{name}={value}"],
             capture_output=True, timeout=10,
         )
 
 
 def browse_goto(url: str) -> None:
     """Navigate the browse browser to a URL (fire-and-forget, no long wait)."""
-    subprocess.run([BROWSE_BIN, "goto", url], capture_output=True, timeout=30)
+    _browse_run(["goto", url], capture_output=True, timeout=30)
 
 
 def browse_eval(js: str, tmp_path: str = "/tmp/_tc_eval.js") -> str:
     """Write js to a temp file and eval it via browse, returning stdout+stderr."""
     with open(tmp_path, "w") as fh:
         fh.write(js)
-    result = subprocess.run(
-        [BROWSE_BIN, "eval", tmp_path],
+    result = _browse_run(
+        ["eval", tmp_path],
         capture_output=True, text=True, timeout=120,
     )
     return (result.stdout + result.stderr).strip()
@@ -588,11 +628,14 @@ def main() -> None:
     print(f"  Output dir : {output_root}")
     print()
 
-    # ── 0. Check browse binary ────────────────────────────────────────────────
-    if not os.path.isfile(BROWSE_BIN) or not os.access(BROWSE_BIN, os.X_OK):
+    # ── 0. Resolve browse command ────────────────────────────────────────────
+    global BROWSE_CMD
+    BROWSE_CMD = _resolve_browse_cmd()
+    # Quick sanity: the first element must exist
+    if not os.path.isfile(BROWSE_CMD[0]):
         sys.exit(
-            f"ERROR: browse binary not found or not executable at:\n  {BROWSE_BIN}\n"
-            "Please install gstack browse first."
+            f"ERROR: browse binary not found at:\n  {BROWSE_CMD[0]}\n"
+            "Please install gstack browse first (or ensure bun is installed)."
         )
 
     # ── 0b. Inject Chrome session cookies (best-effort) ───────────────────────
