@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/WooseongKim/.claude/memory-arch/hooks/memory-hook-submit.sh"
+          }
+        ],
+        "statusMessage": "Searching memory..."
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/WooseongKim/.claude/memory-arch/hooks/memory-hook-stop.sh"
+          }
+        ],
+        "statusMessage": "Updating memory index..."
+      }
+    ]
+  }
+}
