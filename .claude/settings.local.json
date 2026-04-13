@@ -5,7 +5,9 @@
       "Bash(mkdir -p ~/.claude/memory-arch/vaults/thread-collector)",
       "Bash(mkdir -p ~/.claude/memory-arch/.cache/thread-collector)",
       "Bash(mkdir -p /Users/WooseongKim/Projects/Temperstone/thread-collector/.claude/memory/.cache)",
-      "Bash(ln -sf ~/.claude/memory-arch/scripts /Users/WooseongKim/Projects/Temperstone/thread-collector/.claude/memory/scripts)"
+      "Bash(ln -sf ~/.claude/memory-arch/scripts /Users/WooseongKim/Projects/Temperstone/thread-collector/.claude/memory/scripts)",
+      "Bash(mkdir -p /Users/WooseongKim/Projects/Temperstone/thread-collector/.claude/skills/classify)",
+      "Bash(mkdir -p /Users/WooseongKim/Projects/Temperstone/thread-collector/.claude/skills/insights)"
     ]
   }
 }

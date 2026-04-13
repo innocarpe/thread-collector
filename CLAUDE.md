@@ -6,14 +6,20 @@ Threads.net 유저의 게시글을 수집해서 인사이트를 카테고리별 
 
 ```
 ThreadCollector/
-├── .claude/skills/collect/SKILL.md   # /collect 스킬
-├── scripts/fetch_threads.py          # Threads API 기반 수집기 (선택)
-├── Threads/                          # 수집 결과 저장 디렉토리
+├── .claude/skills/collect/SKILL.md        # /collect 스킬
+├── .claude/skills/classify/SKILL.md       # /classify 스킬
+├── .claude/skills/insights/SKILL.md       # /insights 스킬
+├── scripts/collect.py                     # 수집 + 키워드 분류
+├── scripts/classify.py                    # AI 재분류 (codex exec)
+├── scripts/insights.py                    # 인사이트 생성 (codex exec)
+├── Threads/                               # 수집 결과 저장 디렉토리
 │   └── {username}/
-│       ├── tech-dev.md
-│       ├── product-business.md
-│       └── career-philosophy.md
-└── .thread-collector-config          # API 키 (gitignore됨)
+│       ├── tech-dev/
+│       ├── product-business/
+│       ├── career-philosophy/
+│       ├── uncategorized/                 # /classify 대기 중
+│       └── insights/                      # /insights 결과
+└── .thread-collector-config               # API 키 (gitignore됨)
 ```
 
 ## Skill routing
@@ -24,6 +30,8 @@ tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
 Key routing rules:
 - "/collect", "collect @username", "수집해", "게시글 모아줘", "threads 분석" → invoke `collect` skill
 - 특정 유저 인사이트 요청, "@username 글 뽑아줘" → invoke `collect` skill
+- "/classify", "분류해", "미분류 정리", "uncategorized 처리" → invoke `classify` skill
+- "/insights", "인사이트 뽑아줘", "분석해줘", "overview 만들어" → invoke `insights` skill
 - "/run-blog", "블로그 켜줘", "로컬 실행", "dev 서버" → invoke `run-blog` skill
 - "/setup-thread-cookies", "쿠키 셋업", "threads 로그인 설정", "새 맥 셋업" → invoke `setup-thread-cookies` skill
 
@@ -37,12 +45,19 @@ Key routing rules:
 | `product-business.md` | 프로덕트/비즈니스: PMF, 스타트업, 성장 전략 |
 | `career-philosophy.md` | 커리어/철학: 일하는 방식, 마인드셋, 인생관 |
 
-## 사용법
+## 워크플로우
 
 ```
-/collect @username                          # 기본 (전체 카테고리)
+# 1. 수집 (키워드 분류, 미분류는 uncategorized/ 보존)
+/collect @username
 /collect @username --types tech,product     # 특정 카테고리만
-/collect @username --limit 30               # 스크롤 횟수 제한
+/collect @username --limit 30               # 배치 수 제한
+
+# 2. AI 재분류 (uncategorized/ → 올바른 카테고리 or 삭제)
+/classify @username
+
+# 3. 인사이트 생성 (overview, patterns, key-posts)
+/insights @username
 ```
 
 ## API 설정 (선택사항)
