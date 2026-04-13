@@ -27,6 +27,7 @@ CATEGORY_LABELS = {
     "tech-dev": "기술/개발",
     "product-business": "프로덕트/비즈니스",
     "career-philosophy": "커리어/철학",
+    "uncategorized": "미분류",
 }
 
 TECH_KEYWORDS = [
@@ -305,7 +306,7 @@ def inject_chrome_cookies() -> None:
     if not cookies:
         return
 
-    print(f"[0/4] Injecting {len(cookies)} Chrome session cookies ...")
+    print(f"[0/5] Injecting {len(cookies)} Chrome session cookies ...")
     # Navigate to threads.net first so browse has a page context for cookie domain
     _browse_run(["goto", "https://www.threads.net"], capture_output=True, timeout=30)
     for name, value in cookies.items():
@@ -347,36 +348,36 @@ def parse_json_output(output: str) -> dict | None:
 def get_user_id(username: str) -> str:
     profile_url = f"https://www.threads.net/@{username}"
 
-    print(f"[1/4] Navigating to {profile_url} ...")
+    print(f"[1/5] Navigating to {profile_url} ...")
     browse_goto(profile_url)
 
     # Primary: extract from page scripts (username-aware)
-    print("[1/4] Extracting userID from page scripts ...")
+    print("[1/5] Extracting userID from page scripts ...")
     js_userid = JS_GET_USERID.replace("USERNAME_PLACEHOLDER", username)
     out = browse_eval(js_userid, f"/tmp/_tc_userid_{username}.js")
     data = parse_json_output(out)
 
     if data and data.get("userId"):
-        print(f"[1/4] userID = {data['userId']}")
+        print(f"[1/5] userID = {data['userId']}")
         return data["userId"]
 
     # If lsdOk is False, try reloading once
     if data and not data.get("lsdOk"):
-        print("[1/4] LSD not ready, retrying goto ...")
+        print("[1/5] LSD not ready, retrying goto ...")
         browse_goto(profile_url)
         out = browse_eval(js_userid, f"/tmp/_tc_userid_{username}.js")
         data = parse_json_output(out)
         if data and data.get("userId"):
-            print(f"[1/4] userID = {data['userId']}")
+            print(f"[1/5] userID = {data['userId']}")
             return data["userId"]
 
     # Fallback: search API
-    print("[1/4] Falling back to search API for userID ...")
+    print("[1/5] Falling back to search API for userID ...")
     js_api = JS_GET_USERID_API.replace("USERNAME_PLACEHOLDER", username)
     out = browse_eval(js_api, f"/tmp/_tc_userid_api_{username}.js")
     data = parse_json_output(out)
     if data and data.get("userId"):
-        print(f"[1/4] userID (from API) = {data['userId']}")
+        print(f"[1/5] userID (from API) = {data['userId']}")
         return data["userId"]
 
     sys.exit(
@@ -427,7 +428,7 @@ def collect_posts(username: str, user_id: str, limit: int) -> list[dict]:
     cursor: str | None = None
     fails = 0
 
-    print(f"[2/4] Starting collection (max {limit} batches) ...")
+    print(f"[2/5] Starting collection (max {limit} batches) ...")
     browse_goto(profile_url)
 
     for batch_idx in range(limit):
@@ -455,7 +456,7 @@ def collect_posts(username: str, user_id: str, limit: int) -> list[dict]:
 
         time.sleep(0.3)
 
-    print(f"[2/4] Collection done: {len(all_posts)} posts")
+    print(f"[2/5] Collection done: {len(all_posts)} posts")
     return all_posts
 
 # ── Step: chain merging ────────────────────────────────────────────────────────
@@ -653,7 +654,7 @@ def main() -> None:
         print(f"WARNING: Only {len(raw_posts)} posts collected. The session may need refreshing.")
 
     # ── 3. Merge chains (same taken_at → same chain) ──────────────────────────
-    print(f"[3/4] Merging chains ...")
+    print(f"[3/5] Merging chains ...")
     posts = merge_chains(raw_posts)
     chains_count = sum(1 for p in posts if p.get("chain_pks"))
     print(f"  {len(raw_posts)} raw posts → {len(posts)} after chain merge ({chains_count} chains)")
@@ -662,28 +663,33 @@ def main() -> None:
     print(f"[4/4] Classifying and saving ...")
 
     stats: dict[str, int] = {cat: 0 for cat in CATEGORY_LABELS}
-    skipped = 0
 
     for post in posts:
         cat = categorize(post)
         if cat is None:
-            skipped += 1
-            continue
-        if cat not in requested_cats:
+            cat = "uncategorized"
+        if cat != "uncategorized" and cat not in requested_cats:
             continue
         save_post(post, username, cat, output_root)
         stats[cat] += 1
 
     # ── Final report ──────────────────────────────────────────────────────────
-    total_saved = sum(stats.values())
+    total_saved = sum(v for k, v in stats.items() if k != "uncategorized")
+    uncat_count = stats["uncategorized"]
     print()
     print(f"ThreadCollector complete — @{username}")
     print(f"  Collected  : {len(raw_posts)} posts")
     print(f"  After merge: {len(posts)} posts ({chains_count} chains merged)")
-    print(f"  Categorized: {total_saved} insights saved  ({skipped} uncategorized)")
+    print(f"  Categorized: {total_saved} saved, {uncat_count} uncategorized")
+    if uncat_count:
+        print(f"  → Run /classify @{username} to AI-classify the uncategorized posts")
     print()
     for cat, label in CATEGORY_LABELS.items():
-        if cat in requested_cats:
+        if cat == "uncategorized":
+            if uncat_count:
+                cat_dir = output_root / username / cat
+                print(f"  {cat_dir}/  ({uncat_count} files — pending /classify)")
+        elif cat in requested_cats:
             cat_dir = output_root / username / cat
             print(f"  {cat_dir}/  ({stats[cat]} files)")
 
