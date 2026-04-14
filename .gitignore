@@ -30,3 +30,7 @@ venv/
 .DS_Store
 .gstack/
 .vercel
+
+# Memory Architecture
+.claude/memory/.cache/
+.claude/memory/vault/

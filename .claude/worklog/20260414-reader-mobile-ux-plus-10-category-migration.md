@@ -58,16 +58,59 @@
 - `npx tsc --noEmit` 모두 통과
 - 사용자가 PC/모바일 브라우저에서 수동 확인 완료
 
+## 후속 작업 — dev-tools ↔ ai-llm 경계 재분류 (같은 세션 저녁)
+
+오후 분류 결과를 스팟체크한 결과 `dev-tools` (104개) 에 Claude Code / Cursor / openclaw / Google AI Studio 같은 **AI 코딩 어시스턴트 리뷰** 가 상당수 섞여 있음을 발견 — classifier 가 "AI 도구" 를 "dev 도구" 로 일관되게 해석하는 편향.
+
+### 수정
+
+| 커밋 | 내용 |
+|------|------|
+| `12aa9e5` | **classify.py 치명 버그 수정**: codex 가 결과를 안 주면(rate limit, timeout, parse fail) `cat = None` 이 되어 "skip" 과 똑같이 `unlink()` 해버리는 문제. 오늘 codex 크레딧 소진 재분류 시 104개 파일이 전부 삭제되기 직전에 발견. `cat is None` 과 `cat == "skip"` 분리, None 이면 uncategorized 에 남겨 재시도 가능하게. 배치 시작 시 tmp_output 선제 삭제, 실패 시 codex stderr tail 출력. 같은 커밋에 프롬프트 튜닝 ("AI 도구·LLM 제품 리뷰는 ai-llm, dev-tools 는 비-AI 도구에 한정") 포함. |
+| `d461c67` | **Haiku 서브에이전트로 104 → 재분류**: codex 대신 Claude Haiku 에이전트 호출. 매니페스트 JSON (74KB) 생성 → Agent 호출 → `/tmp/dev_tools_out.json` → python 적용 스크립트로 파일 이동 + frontmatter 갱신. |
+
+### 재분류 결과 (dev-tools 104개 → 재분산)
+
+| 대상 | 개수 |
+|------|------|
+| ai-llm | +53 |
+| learning-retro | +22 |
+| viral-sns | +11 |
+| web-app | +5 |
+| productivity | +3 |
+| product-strategy | +3 |
+| monetization | +1 |
+| career-growth | +1 |
+| dev-tools (유지) | 5 |
+
+최종 분포는 ai-llm 380 → 433, dev-tools 104 → 5. 남은 5 는 진짜 비-AI 개발 도구 (블로그 자동화, 터미널 워크플로우, supabase CLI, Google Workspace 자동화 등).
+
+### apply 스크립트 버그
+
+`/tmp/apply_dt_reclass.py` 가 `src == target` (dev-tools → dev-tools) 인 경우에 `write_text()` 로 덮어쓴 다음 `unlink()` 해서 방금 쓴 파일을 지움. 5개 survivor 는 `git checkout HEAD --` 로 즉시 복구. 스크립트는 /tmp 에 있는 일회성이라 수정 안 함.
+
+## 후속 작업 — Memory Architecture 부트스트랩
+
+이 프로젝트는 이미 `.claude/memory/` scaffold (scripts/vault symlink) 와 `.claude/settings.json` 의 memory hook 이 canonical 상태였지만, auto-memory 경로 `~/.claude/projects/-Users-WooseongKim-Projects-Temperstone-thread-collector/memory/MEMORY.md` 가 아예 없어서 `/debrief` 가 worklog-only fallback 으로 빠지고 있었음. 추가로 `.gitignore` 에 memory block 도 누락.
+
+### 수정
+
+- `~/.claude/projects/…/memory/MEMORY.md` 실파일 생성 (symlink 아님)
+- `.gitignore` 에 `# Memory Architecture` + `.claude/memory/.cache/` + `.claude/memory/vault/` 추가
+
+`vaults/thread-collector` 는 sibling 들과 달리 iCloud symlink 가 아닌 **실제 디렉토리**로 존재. 기존 선택을 존중해 변환하지 않음.
+
 ## PR
 
 PR 없음, 로컬 main 에 직접 커밋 (이 리포는 solo 운영).
 
 ## 다음 단계
 
-1. **분류 품질 튜닝**: dev-tools vs ai-llm 경계 케이스 ("구글 AI 스튜디오", "openclaw") 가 섞임. 필요시 프롬프트에 "AI 도구 리뷰는 ai-llm" 룰 추가
-2. **product-strategy / career-growth / web-app** 가 1.7~2.9% 로 낮음. 실제로 글이 적은 건지, 아니면 classify 가 해당 카테고리를 덜 선택하는지 분포 모니터링 필요
-3. **collect.py 의 `categorize()` 를 지웠으므로**, 신규 수집 글은 전부 `uncategorized/` 로 들어감. `/collect → /classify` 파이프라인을 항상 쌍으로 돌리는 게 필수가 됨 (기존 CLAUDE.md 워크플로우 그대로 OK)
+1. ~~**dev-tools vs ai-llm 경계 재분류**~~ — 완료 (`12aa9e5`, `d461c67`)
+2. **product-strategy / career-growth / web-app** 는 스팟체크 결과 모두 정상 분포로 판정, 튜닝 불필요
+3. **collect.py 의 `categorize()` 를 지웠으므로**, 신규 수집 글은 전부 `uncategorized/` 로 들어감. `/collect → /classify` 파이프라인을 항상 쌍으로 돌리는 게 필수가 됨
 4. **모바일 바텀시트 UX**: 트리거 4개가 grid 2열로 배치돼 2+2 로 쌓임. 트리거 개수가 바뀌면 (예: 토픽 조건부 숨김) 레이아웃이 어색해질 수 있음 — flex wrap 고려
+5. **apply 스크립트 패턴 개선**: src==target 케이스 방어 (파일 이동 스크립트 작성 시 항상 체크할 것)
 
 ## 핵심 교훈
 
@@ -80,3 +123,9 @@ PR 없음, 로컬 main 에 직접 커밋 (이 리포는 solo 운영).
 4. **데스크톱/모바일 한 번에 커버하는 패턴: `display: contents`.** 같은 JSX 트리에서 모바일은 `position: fixed` 오버레이, 데스크톱은 inline 레이아웃으로 쓸 때, 컨테이너를 `display: contents` 로 두면 자식이 부모에 직접 flow 된다. 중복 렌더나 React portal 없이 해결됨. 단 `all: unset` 을 먼저 넣어 기존 클래스 스타일을 리셋해야 충돌 안 남.
 
 5. **globals.css 처럼 여러 에이전트가 만지는 파일은 diff stat 으로 항상 확인.** 이번에 다른 에이전트가 marked 라이브러리 도입 커밋 (aac3835) 을 만들면서 내 filter-sheet CSS 블록을 함께 absorb 해버려서, 내 commit 1 에서는 TSX 만 올리면 되는 상황이었음. git status 를 먼저 안 봤으면 "어? CSS 가 안 보이네" 하고 헤맸을 수 있음.
+
+6. **codex exec 같은 외부 CLI 호출 스크립트는 `stdout == ""` 을 "skip" 과 엄격히 구분해야 한다.** classify.py 가 codex의 rate-limit 실패를 조용히 "junk → unlink" 로 변환해서 104개 파일을 지울 뻔했다. 일반화: **외부 도구가 실패했을 때의 기본값은 `destructive action` 이 아니라 `no-op + retry` 여야 한다**. write/delete 를 수행하는 스크립트는 "결과 없음 == 실패" 분기를 먼저 그려라.
+
+7. **codex 크레딧 소진 시 대안: Claude Haiku via Agent 도구.** 104개 분류는 Haiku 에이전트 한 번 호출로 30초 내외에 끝남. codex 가 실패해도 매니페스트만 JSON 으로 빌드하면 교체 가능. 앞으로 codex 의존 스크립트는 이 fallback 경로를 염두에 두는 게 좋음.
+
+8. **파일 이동 스크립트는 `src == target` 방어 필수.** apply_dt_reclass.py 가 write→unlink 순서로 동작해서 동일 경로 이동 시 파일을 지웠다. 항상 `if src.resolve() != target.resolve()` 체크 후 이동.
