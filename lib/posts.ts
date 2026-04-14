@@ -1,17 +1,19 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import type { Post, PostMeta, CategorySlug } from "@/types/post";
+import type { InsightsContent, Post, PostMeta, CategorySlug } from "@/types/post";
 import { CATEGORIES } from "@/types/post";
 
 const THREADS_DIR = path.join(process.cwd(), "Threads");
 
 // Module-level cache — built once per process (build time or serverless cold start)
 let _cache: Map<string, Post> | null = null;
+let _insights: Map<string, InsightsContent> | null = null;
 
 function buildCache(): Map<string, Post> {
   if (_cache) return _cache;
   _cache = new Map();
+  _insights = new Map();
 
   if (!fs.existsSync(THREADS_DIR)) return _cache;
 
@@ -48,7 +50,14 @@ function buildCache(): Map<string, Post> {
           .join(" ")
           .replace(/\s+/g, " ")
           .trim();
-        const excerpt = bodyText.slice(0, 150) + (bodyText.length > 150 ? "…" : "");
+        // Slice by code points (not UTF-16 code units) so we never split
+        // a surrogate pair / ZWJ emoji sequence mid-character, which would
+        // otherwise cause a React hydration mismatch.
+        const codePoints = Array.from(bodyText);
+        const excerpt =
+          codePoints.length > 150
+            ? codePoints.slice(0, 150).join("") + "…"
+            : bodyText;
 
         // Preserve raw frontmatter for GitHub API updates
         const rawFrontmatter = raw.startsWith("---")
@@ -93,6 +102,22 @@ function buildCache(): Map<string, Post> {
         });
       }
     }
+
+    const insightsDir = path.join(THREADS_DIR, usernameSlug, "insights");
+    if (fs.existsSync(insightsDir)) {
+      const insightFiles = ["overview.md", "patterns.md", "key-posts.md"];
+      const insights: InsightsContent = {};
+      for (const fileName of insightFiles) {
+        const key = fileName === "key-posts.md" ? "keyPosts" : fileName.replace(/\.md$/, "");
+        const filePath = path.join(insightsDir, fileName);
+        if (fs.existsSync(filePath)) {
+          insights[key as keyof InsightsContent] = fs.readFileSync(filePath, "utf-8");
+        }
+      }
+      if (Object.keys(insights).length) {
+        _insights?.set(usernameSlug, insights);
+      }
+    }
   }
 
   return _cache;
@@ -115,4 +140,9 @@ export function getAllPks(): string[] {
 
 export function getUsers(): string[] {
   return [...new Set(getAllPostMetas().map((p) => p.usernameSlug))].sort();
+}
+
+export function getInsightsForUser(usernameSlug: string): InsightsContent | undefined {
+  buildCache();
+  return _insights?.get(usernameSlug);
 }
