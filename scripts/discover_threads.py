@@ -533,10 +533,84 @@ def discover_corpus(config: DiscoverConfig) -> dict:
     return candidates
 
 
+# ── Source: search ────────────────────────────────────────────────────────────
+
+def discover_search(config: DiscoverConfig) -> dict:
+    """
+    /api/v1/users/search/ 비공식 REST 를 통해 키워드 → 유저 목록을 반환한다.
+    config.queries 의 각 키워드마다 한 번씩 호출하고 결과를 합산한다.
+    실패(401/403/빈 응답) 시 stderr 경고 후 빈 결과 반환 (graceful degradation).
+    """
+    if not config.queries:
+        return {}
+
+    # LSD 토큰 확보를 위해 threads.net 를 먼저 방문
+    print("[search] threads.net 방문해 LSD 토큰 확보 중 ...", file=sys.stderr)
+    _dt_browse_goto("https://www.threads.net")
+    time.sleep(1.5)
+
+    candidates: dict = {}
+
+    for query in config.queries:
+        print(f"[search] 검색 중: {query!r}", file=sys.stderr)
+        js = (JS_SEARCH_USERS
+              .replace("QUERY_PLACEHOLDER", query.replace('"', '\\"'))
+              .replace("COUNT_PLACEHOLDER", "20"))
+        try:
+            out = _dt_browse_eval(js, "/tmp/_dt_search.js")
+            data = _dt_parse_json(out)
+        except Exception as e:
+            print(f"[search] eval 실패: {e}", file=sys.stderr)
+            continue
+
+        if not data:
+            print(f"[search] JSON 파싱 실패 (query={query!r})", file=sys.stderr)
+            continue
+
+        if "error" in data:
+            print(f"[search] 엔드포인트 오류 (query={query!r}): {data['error']} (status={data.get('status')})",
+                  file=sys.stderr)
+            continue
+
+        status = data.get("status", 0)
+        if status in (401, 403):
+            print(f"[search] 인증 오류 {status} (query={query!r}). 세션 쿠키를 확인하세요.", file=sys.stderr)
+            continue
+
+        users = data.get("users", [])
+        print(f"[search] {len(users)}명 발견 (query={query!r})", file=sys.stderr)
+
+        for u in users:
+            handle = (u.get("username") or "").lower().strip(".")
+            if not handle or not _is_valid_handle(handle):
+                continue
+            if handle in config.existing or handle in NOISE_HANDLES:
+                continue
+
+            if handle not in candidates:
+                candidates[handle] = Candidate(handle=handle)
+            cand = candidates[handle]
+            cand.discovered_via.add("search")
+            if query not in cand.search_queries:
+                cand.search_queries.append(query)
+            # enrichment 필드 미리 채우기 (search API 가 반환한 경우)
+            if cand.full_name is None and u.get("full_name"):
+                cand.full_name = u["full_name"]
+            if cand.is_private is None:
+                cand.is_private = u.get("is_private", False)
+            if cand.is_verified is None:
+                cand.is_verified = u.get("is_verified", False)
+
+        time.sleep(random.uniform(1.0, 2.0))
+
+    return candidates
+
+
 # ── Source registry ───────────────────────────────────────────────────────────
 
 DISCOVERY_SOURCES: dict = {
     "corpus": discover_corpus,
+    "search": discover_search,
 }
 
 
@@ -894,6 +968,8 @@ def main() -> None:
     # Phase 3 신규 인자 (멀티소스)
     ap.add_argument("--sources", default="corpus",
                     help="Comma-separated discovery sources: corpus,search,hashtag,explore (default: corpus)")
+    ap.add_argument("--query", action="append", default=[],
+                    help="Search keyword (repeatable: --query 'AI 수익화' --query '바이브코딩')")
     ap.add_argument("--weights", default=None,
                     help="Score weights, e.g. 'corpus:3,search:1,hashtag:1' (default: corpus:3,search:1,hashtag:1,explore:2)")
     args = ap.parse_args()
@@ -920,7 +996,7 @@ def main() -> None:
         interests=interests,
         existing=existing,
         enrich=args.enrich,
-        queries=[],
+        queries=args.query or [],
         hashtags=[],
         min_mentions=args.min_mentions,
         limit=args.limit,
