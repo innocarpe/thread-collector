@@ -51,7 +51,10 @@ When the user's request matches an available skill, ALWAYS invoke it using the S
 tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
 
 Key routing rules:
-- "/discover-threads", "discover", "트렌드 유저 찾아줘", "핫한 유저 추천해줘", "새로 누구 수집할지 골라줘", "멘션된 유저 정리", "해시태그로 유저 찾아줘", "키워드로 유저 찾아줘", "프로필까지 풍부하게", "bio 같이", "discover 검색", "discover hashtag" → invoke `discover-threads` skill. 절대 바로 `/collect` 으로 넘어가지 말 것 — 사용자가 리포트 보고 직접 고르는 흐름이 이 스킬의 핵심.
+- "/discover-search", "키워드로 유저 찾아줘", "키워드 검색으로 발굴", "검색으로 새 유저 찾아줘", "'키워드' 로 유저 발굴", "search threads users" → invoke `discover-search` skill. 절대 바로 `/collect` 으로 넘어가지 말 것.
+- "/discover-hashtag", "해시태그로 유저 찾아줘", "해시태그 검색으로 발굴", "#태그 유저 발굴", "hashtag search" → invoke `discover-hashtag` skill. 절대 바로 `/collect` 으로 넘어가지 말 것.
+- "/discover-full", "풀 파이프라인으로 유저 발굴", "모든 소스로 유저 찾아줘", "완전 탐색 모드", "멀티소스로 발굴해줘", "discover all", "corpus + 검색 + 해시태그 다 써서 찾아줘" → invoke `discover-full` skill. 절대 바로 `/collect` 으로 넘어가지 말 것.
+- "/discover-threads", "discover", "트렌드 유저 찾아줘", "핫한 유저 추천해줘", "새로 누구 수집할지 골라줘", "멘션된 유저 정리", "유저 발굴해줘", "프로필까지 풍부하게", "bio 같이", "discover 검색", "discover hashtag" → invoke `discover-threads` skill (범용 fallback). 절대 바로 `/collect` 으로 넘어가지 말 것 — 사용자가 리포트 보고 직접 고르는 흐름이 이 스킬의 핵심.
 - "/collect", "collect @username", "수집해", "게시글 모아줘", "threads 분석" → invoke `collect` skill and run the full pipeline (`collect → classify → insights`) unless the user explicitly requests a narrower scope
 - 특정 유저 인사이트 요청, "@username 글 뽑아줘" → invoke `collect` skill and run the full pipeline (`collect → classify → insights`) unless the user explicitly requests a narrower scope
 - "/collect-naver", "카페 수집", "네이버 수집", "vibemoney 수집" → invoke `collect-naver` skill
