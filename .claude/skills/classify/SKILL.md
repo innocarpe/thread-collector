@@ -31,12 +31,19 @@ python3 scripts/classify.py @{USERNAME}
 
 ## Step 3: 완료 확인
 
-성공 시 출력:
+성공 시 출력 (10개 카테고리 중 해당되는 것만):
 ```
 ClassifyCollector done — @{USERNAME}
-  → tech-dev/  +N
-  → product-business/  +N
-  → career-philosophy/  +N
+  → ai-llm/             +N
+  → viral-sns/          +N
+  → monetization/       +N
+  → dev-tools/          +N
+  → product-strategy/   +N
+  → startup-philosophy/ +N
+  → career-growth/      +N
+  → learning-retro/     +N
+  → productivity/       +N
+  → web-app/            +N
   Skipped (junk/irrelevant): N
 ```
 

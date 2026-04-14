@@ -1,12 +1,40 @@
-export type CategorySlug = "tech-dev" | "product-business" | "career-philosophy";
+export type CategorySlug =
+  | "ai-llm"
+  | "viral-sns"
+  | "monetization"
+  | "dev-tools"
+  | "product-strategy"
+  | "startup-philosophy"
+  | "career-growth"
+  | "learning-retro"
+  | "productivity"
+  | "web-app";
 
 export const CATEGORY_LABELS: Record<CategorySlug, string> = {
-  "tech-dev": "기술/개발",
-  "product-business": "프로덕트/비즈니스",
-  "career-philosophy": "커리어/철학",
+  "ai-llm": "AI/LLM",
+  "viral-sns": "바이럴/SNS/마케팅",
+  "monetization": "수익화/부수입",
+  "dev-tools": "개발도구/스택",
+  "product-strategy": "제품전략/PMF",
+  "startup-philosophy": "창업철학/인디해킹",
+  "career-growth": "커리어/성장",
+  "learning-retro": "학습/회고",
+  "productivity": "생산성/워크플로우",
+  "web-app": "웹/앱 개발",
 };
 
-export const CATEGORIES: CategorySlug[] = ["tech-dev", "product-business", "career-philosophy"];
+export const CATEGORIES: CategorySlug[] = [
+  "ai-llm",
+  "viral-sns",
+  "monetization",
+  "dev-tools",
+  "product-strategy",
+  "startup-philosophy",
+  "career-growth",
+  "learning-retro",
+  "productivity",
+  "web-app",
+];
 
 export type InsightsContent = {
   overview?: string;

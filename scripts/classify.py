@@ -18,9 +18,29 @@ import sys
 from pathlib import Path
 
 CATEGORY_LABELS = {
-    "tech-dev": "기술/개발",
-    "product-business": "프로덕트/비즈니스",
-    "career-philosophy": "커리어/철학",
+    "ai-llm": "AI/LLM",
+    "viral-sns": "바이럴/SNS/마케팅",
+    "monetization": "수익화/부수입",
+    "dev-tools": "개발도구/스택",
+    "product-strategy": "제품전략/PMF",
+    "startup-philosophy": "창업철학/인디해킹",
+    "career-growth": "커리어/성장",
+    "learning-retro": "학습/회고",
+    "productivity": "생산성/워크플로우",
+    "web-app": "웹/앱 개발",
+}
+
+CATEGORY_DESCRIPTIONS = {
+    "ai-llm": "LLM/생성형 AI 활용, 프롬프트 엔지니어링, AI 제품/도구 리뷰, 바이브코딩",
+    "viral-sns": "SNS 콘텐츠 전략, 바이럴 기법, 쇼츠·릴스·스레드 운영, 알고리즘, ASO/검색, 퍼널 마케팅",
+    "monetization": "수익화 실험, 부수입, 광고수익, 가격 실험, 캐시플로우·매출 인증",
+    "dev-tools": "개발 도구·에디터·CLI·스택 선택·빌드 파이프라인·워크플로우 최적화",
+    "product-strategy": "제품 전략, PMF 탐색, MVP 기획, 피봇, 유저 리서치, 기능 우선순위",
+    "startup-philosophy": "창업 마인드셋, 인디해킹 철학, 실패·번아웃 후기, 스타트업 인사이트",
+    "career-growth": "커리어 전환, 이직·취업, 개발자·창업자 성장, 연봉·포트폴리오",
+    "learning-retro": "학습법, 스킬 향상, 공부 후기, 회고, 일·프로젝트 인사이트 요약",
+    "productivity": "생산성, 루틴, 타임박싱, 셀프 매니지먼트, 집중력, 업무 효율",
+    "web-app": "웹/SaaS 개발, 앱 개발, 프론트/백엔드 구체 기술, 배포·인프라",
 }
 
 CLASSIFY_BATCH_SIZE = 60
@@ -110,15 +130,21 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
                 f, ensure_ascii=False,
             )
 
+        cat_lines = "\n".join(
+            f'- "{slug}": {CATEGORY_DESCRIPTIONS[slug]}'
+            for slug in CATEGORY_LABELS
+        )
         prompt = (
             f"Read {tmp_input} — JSON array of Threads.net posts (pk + text, Korean).\n\n"
-            "Classify each post into exactly one category:\n"
-            '- "tech-dev": coding, AI/LLM, dev tools, app development, architecture\n'
-            '- "product-business": monetization, SaaS, indie hacking, marketing, '
-            "viral/SNS tactics, growth, startup, PMF\n"
-            '- "career-philosophy": mindset, retrospectives, learning, productivity, '
-            "life philosophy\n"
+            "Classify each post into exactly ONE of these 10 categories:\n"
+            f"{cat_lines}\n"
             '- "skip": junk — under 20 chars, only emojis, zero insight, pure reaction\n\n'
+            "Rules:\n"
+            "- Pick the single BEST fit. If a post could fit multiple, choose the one matching "
+            "the post's primary topic (what the author is mainly talking about).\n"
+            "- AI/LLM 이야기라도 주제가 '수익화 실험'이면 monetization, '앱 만드는 기술'이면 web-app 등으로 "
+            "구체 의도에 맞춰 배정할 것.\n"
+            "- 'viral-sns'는 SNS 플랫폼 운영·그로스 전술에 한정. 단순 바이럴된 글 공유는 해당 주제로.\n\n"
             f"Write ONLY a JSON file to {tmp_output}:\n"
             '[{"pk": "...", "category": "..."}]\n'
             "No explanation. Only write the JSON file."

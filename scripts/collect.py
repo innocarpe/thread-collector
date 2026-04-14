@@ -24,9 +24,16 @@ BROWSE_SRC = os.path.expanduser("~/.claude/skills/gstack/browse/src/cli.ts")
 BROWSE_CMD: list[str] = []  # resolved at startup
 
 CATEGORY_LABELS = {
-    "tech-dev": "기술/개발",
-    "product-business": "프로덕트/비즈니스",
-    "career-philosophy": "커리어/철학",
+    "ai-llm": "AI/LLM",
+    "viral-sns": "바이럴/SNS/마케팅",
+    "monetization": "수익화/부수입",
+    "dev-tools": "개발도구/스택",
+    "product-strategy": "제품전략/PMF",
+    "startup-philosophy": "창업철학/인디해킹",
+    "career-growth": "커리어/성장",
+    "learning-retro": "학습/회고",
+    "productivity": "생산성/워크플로우",
+    "web-app": "웹/앱 개발",
     "uncategorized": "미분류",
 }
 
@@ -476,18 +483,12 @@ def keyword_score(text: str, keywords: list[str]) -> int:
 
 
 def categorize(post: dict) -> str | None:
-    text = post["text"]
-    ts = keyword_score(text, TECH_KEYWORDS)
-    ps = keyword_score(text, PRODUCT_KEYWORDS)
-    cs = keyword_score(text, CAREER_KEYWORDS)
-    mx = max(ts, ps, cs)
-    if mx == 0:
-        return None
-    if ts == mx:
-        return "tech-dev"
-    if ps == mx:
-        return "product-business"
-    return "career-philosophy"
+    """
+    Initial collect step always returns None so every post is saved under
+    uncategorized/. Final 10-category assignment is performed by scripts/classify.py
+    via codex — the 10-category space is too fine-grained for keyword heuristics.
+    """
+    return None
 
 # ── Step: save as individual markdown files ────────────────────────────────────
 
@@ -595,13 +596,7 @@ def parse_args() -> argparse.Namespace:
 
 
 TYPE_ALIASES = {
-    "tech": "tech-dev",
-    "product": "product-business",
-    "career": "career-philosophy",
-    # also accept full names
-    "tech-dev": "tech-dev",
-    "product-business": "product-business",
-    "career-philosophy": "career-philosophy",
+    slug: slug for slug in CATEGORY_LABELS if slug != "uncategorized"
 }
 
 
