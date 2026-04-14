@@ -63,6 +63,9 @@ export default async function HomePage({ searchParams }: PageProps) {
             <Chip>{allPosts.length} posts</Chip>
             <Chip>{users.length} users</Chip>
           </div>
+          <Link href="/naver/vibemoney" className="app-header-nav-link">
+            NaverCafe
+          </Link>
           <SignOutButton />
         </div>
       </header>

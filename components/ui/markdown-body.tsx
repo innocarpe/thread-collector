@@ -1,31 +1,20 @@
 type Props = { content: string };
 
-export function MarkdownBody({ content }: Props) {
-  // Strip leading # heading (already rendered as post-title)
+function renderMarkdownContent(content: string) {
   const body = content.replace(/^\s*#[^#][^\n]*\n?/, "").trim();
-
-  // Split on double newlines → paragraphs
   const blocks = body.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
+  return blocks
+    .map((block) => {
+      if (block.startsWith("## ")) {
+        return `<h2>${block.slice(3)}</h2>`;
+      }
+      const lines = block.split("\n");
+      return `<p>${lines.map((line) => line.replace(/</g, "&lt;").replace(/>/g, "&gt;")).join("<br />")}</p>`;
+    })
+    .join("");
+}
 
-  return (
-    <div className="markdown-body">
-      {blocks.map((block, i) => {
-        if (block.startsWith("## ")) {
-          return <h2 key={i}>{block.slice(3)}</h2>;
-        }
-        // Single newlines within a block → <br>
-        const lines = block.split("\n");
-        return (
-          <p key={i}>
-            {lines.map((line, j) => (
-              <span key={j}>
-                {line}
-                {j < lines.length - 1 && <br />}
-              </span>
-            ))}
-          </p>
-        );
-      })}
-    </div>
-  );
+export function MarkdownBody({ content }: Props) {
+  const html = renderMarkdownContent(content);
+  return <div className="markdown-body" dangerouslySetInnerHTML={{ __html: html }} />;
 }

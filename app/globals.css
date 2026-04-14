@@ -1133,3 +1133,101 @@ ul, ol { padding-left: 20px; }
     height: auto;
   }
 }
+
+/* ── NaverCafe Category Colors ────────────── */
+
+:root {
+  --color-naver-income:       #16a34a;
+  --color-naver-income-bg:    #f0fdf4;
+  --color-naver-tools:        #0284c7;
+  --color-naver-tools-bg:     #f0f9ff;
+  --color-naver-cases:        #ea580c;
+  --color-naver-cases-bg:     #fff7ed;
+  --color-naver-marketing:    #db2777;
+  --color-naver-marketing-bg: #fdf2f8;
+  --color-naver-other:        #71717a;
+  --color-naver-other-bg:     #f4f4f5;
+}
+
+.cat-badge.naver-cat-income-methods {
+  background: var(--color-naver-income-bg);
+  color: var(--color-naver-income);
+}
+
+.cat-badge.naver-cat-tools-ai {
+  background: var(--color-naver-tools-bg);
+  color: var(--color-naver-tools);
+}
+
+.cat-badge.naver-cat-case-studies {
+  background: var(--color-naver-cases-bg);
+  color: var(--color-naver-cases);
+}
+
+.cat-badge.naver-cat-marketing {
+  background: var(--color-naver-marketing-bg);
+  color: var(--color-naver-marketing);
+}
+
+.cat-badge.naver-cat-uncategorized {
+  background: var(--color-naver-other-bg);
+  color: var(--color-naver-other);
+}
+
+/* ── NaverCafe Tabs ───────────────────────── */
+
+.naver-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-3);
+}
+
+.naver-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.naver-tab-btn:hover {
+  background: var(--color-surface-strong);
+  color: var(--color-text);
+}
+
+.naver-tab-btn.active {
+  background: var(--color-accent-soft);
+  border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  color: var(--color-accent-strong);
+  font-weight: 600;
+}
+
+/* ── Header Nav Link ──────────────────────── */
+
+.app-header-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 5px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.app-header-nav-link:hover {
+  background: var(--color-surface-strong);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}

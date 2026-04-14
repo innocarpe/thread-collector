@@ -8,6 +8,12 @@ export const CATEGORY_LABELS: Record<CategorySlug, string> = {
 
 export const CATEGORIES: CategorySlug[] = ["tech-dev", "product-business", "career-philosophy"];
 
+export type InsightsContent = {
+  overview?: string;
+  patterns?: string;
+  keyPosts?: string;
+};
+
 export type PostMeta = {
   pk: string;           // Threads post ID — used as URL slug
   username: string;     // "@dalgom.bami"
