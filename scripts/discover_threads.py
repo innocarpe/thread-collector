@@ -667,12 +667,30 @@ def discover_hashtag(config: DiscoverConfig) -> dict:
     return candidates
 
 
+# ── Source: explore ───────────────────────────────────────────────────────────
+
+def discover_explore(config: DiscoverConfig) -> dict:
+    """
+    Phase 4 stub. Threads Explore/For You 피드는 공개 리버스엔지니어링 doc_id 없음.
+    m1guelpf/threads-re, junhoyeo/threads-api 에서도 personalized feed 엔드포인트 미발견.
+    향후 Meta 앱 네트워크 트래픽 분석으로 /api/v1/feed/text_post_app_for_you/ 등 확인 시 구현.
+
+    TODO(phase-4): Explore 엔드포인트 발견 후 구현.
+    """
+    raise NotImplementedError(
+        "discover_explore 는 Phase 4 stub 입니다.\n"
+        "Threads Explore/For You 피드는 공개 리버스엔지니어링 엔드포인트가 없습니다.\n"
+        "현재는 --sources corpus,search,hashtag 를 사용하세요."
+    )
+
+
 # ── Source registry ───────────────────────────────────────────────────────────
 
 DISCOVERY_SOURCES: dict = {
     "corpus": discover_corpus,
     "search": discover_search,
     "hashtag": discover_hashtag,
+    "explore": discover_explore,
 }
 
 
