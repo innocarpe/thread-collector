@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { SignOutButton } from "@/components/auth-buttons";
@@ -7,7 +8,7 @@ import { FilterItem } from "@/components/ui/filter-item";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PostListClient } from "@/components/reader/post-list-client";
 import { SidebarReaderFilters } from "@/components/reader/sidebar-reader-filters";
-import { getAllPostMetas, getUsers } from "@/lib/posts";
+import { getAllPostMetas, getInsightsForUser, getUsers } from "@/lib/posts";
 import { CATEGORIES, CATEGORY_LABELS } from "@/types/post";
 import type { CategorySlug } from "@/types/post";
 
@@ -80,15 +81,29 @@ export default async function HomePage({ searchParams }: PageProps) {
                     label="전체 유저"
                     count={allPosts.length}
                   />
-                  {users.map((u) => (
-                    <FilterItem
-                      key={u}
-                      href={buildHref({ user: u, category: categoryFilter })}
-                      active={userFilter === u}
-                      label={`@${u}`}
-                      count={allPosts.filter((p) => p.usernameSlug === u).length}
-                    />
-                  ))}
+                  {users.map((u) => {
+                    const hasInsights = Boolean(getInsightsForUser(u));
+                    return (
+                      <div key={u} className="filter-item-row">
+                        <FilterItem
+                          href={buildHref({ user: u, category: categoryFilter })}
+                          active={userFilter === u}
+                          label={`@${u}`}
+                          count={allPosts.filter((p) => p.usernameSlug === u).length}
+                        />
+                        {hasInsights && (
+                          <Link
+                            href={`/insights/${u}`}
+                            className="insights-pill"
+                            aria-label={`@${u} 인사이트`}
+                            title="인사이트 보기"
+                          >
+                            ✨
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
