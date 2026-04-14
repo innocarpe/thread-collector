@@ -170,6 +170,33 @@ def _dt_parse_json(output: str) -> dict | None:
     return None
 
 
+def _decode_unicode_escapes(s: str | None) -> str | None:
+    r"""SSR 블롭에서 추출한 문자열의 \uXXXX 리터럴을 실제 유니코드로 변환한다.
+
+    JS 정규식이 JSON 문자열 안의 \\uXXXX 이스케이프를 그대로 캡처하면
+    Python json.loads 이후에도 \\uXXXX 리터럴이 남는다.
+    서로게이트 페어(\\uD800-\\uDFFF)는 두 개를 묶어 U+10000 이상 코드포인트로 변환한다.
+    """
+    if not s or r"\u" not in s:
+        return s
+    try:
+        # 서로게이트 페어 먼저 처리 (\uD800-\uDBFF 뒤에 \uDC00-\uDFFF)
+        def _replace_pair(m: re.Match) -> str:
+            codes = [int(x, 16) for x in re.findall(r"[0-9a-fA-F]{4}", m.group(0))]
+            high, low = codes[0], codes[1]
+            return chr(0x10000 + (high - 0xD800) * 0x400 + (low - 0xDC00))
+
+        s = re.sub(
+            r"\\u[Dd][89AaBb][0-9a-fA-F]{2}\\u[Dd][C-Fc-f][0-9a-fA-F]{2}",
+            _replace_pair, s,
+        )
+        # 나머지 \uXXXX 처리
+        s = re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), s)
+        return s
+    except Exception:
+        return s
+
+
 # ── JavaScript templates (discover 전용) ──────────────────────────────────────
 
 # SSR 블롭에서 userID 추출 (collect.py JS_GET_USERID 인라인 복사)
@@ -825,13 +852,13 @@ def enrich_candidate(cand: Candidate) -> None:
         print(f"[enrich] {cand.handle}: 비공개 계정", file=sys.stderr)
         return
 
-    # 필드 채우기
-    cand.bio = profile.get("bio")
+    # 필드 채우기 (SSR 블롭에서 추출한 문자열은 \uXXXX 리터럴이 남을 수 있으므로 디코딩)
+    cand.bio = _decode_unicode_escapes(profile.get("bio"))
     cand.follower_count = profile.get("follower_count")
     cand.is_private = profile.get("is_private")
     cand.is_verified = profile.get("is_verified")
     if cand.full_name is None:
-        cand.full_name = profile.get("full_name")
+        cand.full_name = _decode_unicode_escapes(profile.get("full_name"))
     cand.enrich_status = "success"
     print(f"[enrich] {cand.handle}: 프로필 완료 (팔로워={cand.follower_count})", file=sys.stderr)
 
