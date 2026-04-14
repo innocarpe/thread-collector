@@ -1,197 +1,73 @@
 ---
-date: 2026-04-13
+date: 2026-04-14
 source: NaverCafe/vibemoney
 ---
 
-# vibemoney 카페 — 전체 분석 개요
-
-> 이 파일은 vibemoney 분석 허브다. 각 섹션에서 세부 파일로 이동하라.
-
----
+# vibemoney 개요
 
 ## 1. 카페 개요
 
-- **카페명**: vibemoney (네이버 카페, clubId: 31623270)
-- **URL**: cafe.naver.com/vibemoney
-- **성격**: 바이브코딩(AI 보조 개발) + 온라인 수익화 중심 커뮤니티
-- **운영자**: 만능시바 / 만렙시바 (바이브머니 닉네임 병행 사용)
-- **회원 수**: 오픈채팅방 기준 7,000명+ (2026-03-18 기준), 카페 가입자 더 많을 것으로 추정
-- **활동 기간**: 2025년 12월 개설, 약 4개월 만에 급성장
-- **수집 규모**:
-  - 운영자 글: 30개 (전수 수집)
-  - 커뮤니티 전체: 약 1,107개 이상 (income-methods), QnA 1,062개+, tools-ai 416개, case-studies 28개
-  - 분석 샘플: 커뮤니티 약 400개 글
-- **주요 게시판**: 수익화 가이드 / AI 바이브코딩 가이드 / 수익화 후기 / QnA / 공지사항
-
----
+- 성격: `바이브코딩(AI 보조 개발) + 온라인 수익화`를 결합한 네이버 카페. 기술 커뮤니티라기보다 `수익화 실험 + 강의/외주 퍼널` 성격이 강하다. 관련 근거는 [운영자 전체 분석](operator/full-analysis.md), [커뮤니티 수익화 분석](community/income-methods.md).
+- 운영자: `만능시바 / 만렙시바` 계열 닉네임으로 보이는 단일 운영자 중심 구조. 실무형 판매자이자 강의 판매자, 외주 중개자 역할을 같이 한다. 관련 근거는 [운영자 전체 분석](operator/full-analysis.md), [운영자 마케팅 전술](operator/marketing-tactics.md).
+- 콘텐츠 규모: 운영자 분석 표본은 `28개 글 전수`, 커뮤니티 분석 표본은 `income-methods 80개`, `tools-ai 80개`, `case-studies 36개`, `qa-pain-points 종합 246개`다. 관련 근거는 [운영자 전체 분석](operator/full-analysis.md), [커뮤니티 Q&A 분석](community/qa-pain-points.md).
 
 ## 2. 파일 구조 안내
 
-```
-insights/
-├── 00-overview.md                  ← 지금 이 파일 (네비게이션 허브)
-│
-├── operator/                       ← 운영자(만능시바) 분석
-│   ├── full-analysis.md            ← 운영자 글 30개 전수 분석 + 강의 판매 타임라인 + 진위 판단
-│   ├── income-methods.md           ← 운영자가 언급한 수익화 방법 7가지 (실행 단계 포함)
-│   ├── marketing-tactics.md        ← 운영자 마케팅 전술 + 퍼널 구조 + Temperstone 참고/피해야 할 것
-│   └── tools-stack.md              ← 운영자 사용/추천 기술 스택 정리 (도구별 비용·난이도 포함)
-│
-└── community/                      ← 커뮤니티 회원 분석
-    ├── income-methods.md           ← 회원들의 수익화 방법 언급 빈도 + 성공 사례 + 막히는 지점
-    ├── case-studies.md             ← 구체적 성공/실패 사례 상세 (퀀트허브, 하루손금, 토스 미니앱 7개 등)
-    ├── tools-ai.md                 ← 도구 언급 빈도 + 조합 패턴 + 불만/비용 분석
-    └── qa-pain-points.md           ← QnA 게시판 자주 묻는 질문 TOP 20 + 단계별 막힘 포인트
-```
+- 운영자 전체 흐름, 강의 판매 구조, 진위 판단을 보려면 [operator/full-analysis.md](operator/full-analysis.md)
+- 운영자가 실제로 미는 수익 모델만 보려면 [operator/income-methods.md](operator/income-methods.md)
+- 운영자의 후킹, CTA, 무료자료-강의 전환 구조를 보려면 [operator/marketing-tactics.md](operator/marketing-tactics.md)
+- 운영자 툴 스택과 인프라 조합을 보려면 [operator/tools-stack.md](operator/tools-stack.md)
+- 회원들이 어떤 방식으로 돈 벌려 하는지 보려면 [community/income-methods.md](community/income-methods.md)
+- 실제 성공/실패 사례만 빠르게 보려면 [community/case-studies.md](community/case-studies.md)
+- 커뮤니티 표준 툴 조합과 불만을 보려면 [community/tools-ai.md](community/tools-ai.md)
+- 회원들이 반복해서 막히는 질문을 보려면 [community/qa-pain-points.md](community/qa-pain-points.md)
 
----
+## 3. 핵심 발견 Top 10
 
-## 3. 핵심 발견 요약 (Top 10)
-
-**1. 입문자의 실제 첫 수익 경로는 "시바님 토스 외주"**
-독립 영업보다 운영자가 수강생에게 하청 외주를 넘겨주는 구조가 첫 수익화 경로의 표준으로 굳어져 있다. 커뮤니티가 정보 공유 공간이 아니라 운영자 중심의 외주 생태계로 기능하고 있다.
-→ [상세: community/case-studies.md](community/case-studies.md)
-
-**2. 커뮤니티의 50%는 아직 시작조차 못 함**
-"어떻게 시작하나요?" 질문이 2025년 12월부터 2026년 4월까지 반복된다. 수백 건의 답변에도 동일 질문이 계속 나오는 이유는 정보 부족이 아닌 확신 부족이다. 이 커뮤니티 회원 절반은 관망 단계에 있다.
-→ [상세: community/qa-pain-points.md](community/qa-pain-points.md)
-
-**3. Claude(+Claude Code)가 압도적 1위 도구, 안티그래비티가 가장 가까운 IDE**
-언급 빈도 기준 Claude 97건+, 안티그래비티 63건. "안티그래비티 IDE + Claude 모델" 조합이 커뮤니티 표준 세트로 정착됐다. GPT는 인지도는 있으나 실사용에서 밀린다.
-→ [상세: community/tools-ai.md](community/tools-ai.md)
-
-**4. 토스 미니앱이 2026년 2~4월 집중 폭발**
-"바이브코딩 → 토스 미니앱 출시"가 성공 공식처럼 퍼졌다. 7개를 연속 출시한 회원도 있고, 홍보 글만 44건. 앱스토어 대비 검수 기준이 낮다는 인식으로 빠른 진입 시도가 몰리고 있다.
-→ [상세: community/case-studies.md](community/case-studies.md)
-
-**5. 운영자의 30개 글 중 실질 정보는 11개, 홍보성은 11개**
-무료 글에서 실제로 작동하는 정보(코드 명령어, 플랫폼 비교 등)가 있지만, 전체의 37%는 강의 판매 목적의 후킹성 글이다. 무료와 유료의 경계가 명확하게 설계되어 있다.
-→ [상세: operator/full-analysis.md](operator/full-analysis.md)
-
-**6. "만들었는데 아무도 안 온다"가 커뮤니티 최대 공통 좌절**
-결제 연동, 배포, 마케팅이 기술 이후 3대 장벽이다. 특히 트래픽 확보(마케팅)는 커뮤니티 내 완전한 공백 영역이다. "파는 법"을 다루는 글이 거의 없다.
-→ [상세: community/income-methods.md](community/income-methods.md)
-
-**7. 오픈클로가 보안 논란 속에서 빠르게 부상 중**
-2026년 2월 이후 언급 35건. 저비용 Claude 자동화 대안으로 주목받지만 보안 우려로 진입 장벽이 남아 있다. "중요 자료 없는 PC에 설치"라는 임시방편 답변만 있고 체계적 가이드가 없다.
-→ [상세: community/tools-ai.md](community/tools-ai.md)
-
-**8. 운세/심리테스트 계열 서비스가 가장 빠른 수익화 트렌드**
-사주, 관상, 손금, 테토에겐 테스트 앱이 2026년 2~4월 집중 등장. AdSense 트래픽 모으기 목적. 기술 난이도 낮고 바이럴 가능성 높아서 비개발자 첫 진입 패턴으로 굳어지고 있다.
-→ [상세: community/income-methods.md](community/income-methods.md)
-
-**9. 결제 연동이 기술 장벽 1위**
-PG사 계약 복잡성이 지속적으로 막히는 포인트다. "토스페이먼츠 어떻게 붙이나요?" 질문이 반복된다. 커뮤니티에서 이 질문은 사실상 방치되어 있다.
-→ [상세: community/qa-pain-points.md](community/qa-pain-points.md)
-
-**10. 성공 사례의 공통점은 개발자 배경 + 빠른 피드백 루프**
-커뮤니티 수익 인증 글 다수가 프론트엔드/백엔드 경력자다. 완전 비개발자의 독립 수익화 성공은 드물고, 있어도 소액이거나 지인 소개 루트다. "초보자도 됩니다"라는 커뮤니티 담론과 실제 사례 사이에 괴리가 있다.
-→ [상세: community/case-studies.md](community/case-studies.md)
-
----
+1. 이 카페의 본질은 `기술 커뮤니티`보다 `수익화 퍼널 커뮤니티`에 가깝다. 운영자 글은 정보 제공과 동시에 무료자료, 특강, 강의, 오픈채팅으로 이어지는 전환 장치가 거의 항상 붙는다. 근거: [operator/full-analysis.md](operator/full-analysis.md), [operator/marketing-tactics.md](operator/marketing-tactics.md)
+2. 운영자는 실무 경험이 아예 없는 사람으로 보이지는 않는다. 배포, 서버, 결제, 토스 미니앱, 오픈클로 같은 기술 글은 디테일이 있다. 다만 수익 수치와 속도는 과장이 섞여 있다. 근거: [operator/full-analysis.md](operator/full-analysis.md), [operator/tools-stack.md](operator/tools-stack.md)
+3. 운영자가 가장 강하게 미는 돈 버는 방식은 `외주 제작`, `결제 모듈 부착`, `DB/리드 생성`, `SNS 자동화 유입`, `작은 수익형 서비스 제작`이다. 기술보다 판매와 트래픽이 우선이다. 근거: [operator/income-methods.md](operator/income-methods.md)
+4. 커뮤니티 다수는 아직 수익화 이전 단계다. `무엇부터 시작`, `비개발자도 가능`, `어떤 툴`, `어떻게 홍보` 같은 질문이 중심이고 실제 수익 후기 비중은 낮다. 근거: [community/income-methods.md](community/income-methods.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+5. 실제 첫 수익은 거대한 SaaS보다 `작은 외주`에서 먼저 나온다. 15만 원 홈페이지, 첫 랜딩페이지 납품, 지인 소개 작업 같은 사례가 가장 재현 가능성이 높다. 근거: [community/case-studies.md](community/case-studies.md)
+6. 커뮤니티 공통 병목은 `만드는 것`이 아니라 `배포 이후`다. 유입이 없고, 홍보를 모르고, 결제를 못 붙이고, 플랫폼 승인에서 막힌다. 근거: [community/income-methods.md](community/income-methods.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+7. 툴 선택의 핵심 기준은 성능 자체보다 `비용 대비 제어 가능성`이다. Claude, Cursor, Antigravity, Gemini가 반복되지만 비용과 통제 실패 불만도 같이 나온다. 근거: [community/tools-ai.md](community/tools-ai.md)
+8. 운영자와 커뮤니티 모두 `Threads 자동화`를 핵심 유입 채널로 본다. 그러나 실제 수익 메커니즘과 지속 가능성은 충분히 설명되지 않았고 제재 리스크도 내재한다. 근거: [operator/income-methods.md](operator/income-methods.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+9. 이 카페의 설득 논리는 계속 같다. `성과 수치 제시 -> 무료 미끼 -> 후기/수강생 사례 -> 유료 전환`이다. 정보 자체보다 퍼널 설계 능력이 운영자의 진짜 강점이다. 근거: [operator/marketing-tactics.md](operator/marketing-tactics.md), [operator/full-analysis.md](operator/full-analysis.md)
+10. 커뮤니티 전체를 보면 `초보자도 된다`는 메시지와 `실제 독립 성공 사례의 희소성` 사이에 간극이 있다. 돈을 만든 사례는 있지만, 대다수는 아직 탐색 단계다. 근거: [community/case-studies.md](community/case-studies.md), [community/income-methods.md](community/income-methods.md)
 
 ## 4. 이 카페에서 보이는 시장 구조
 
-> 기준: 2025년 12월 ~ 2026년 4월
+- 국내 바이브코딩/수익화 생태계는 아직 `초기 팽창기`다. 비개발자와 초급자가 AI 코딩툴을 통해 빠르게 진입하지만, 실제 시장은 아직 학습 수요와 기대가 성과보다 훨씬 크다. 근거: [community/qa-pain-points.md](community/qa-pain-points.md), [community/tools-ai.md](community/tools-ai.md)
+- 시장의 실제 주력 모델은 고난도 SaaS보다 `저비용 제작물 판매`에 가깝다. 외주 랜딩, 홈페이지, 결제 기능 부착, 간단 서비스, 토스 미니앱, 운세/테스트류가 주요 후보군이다. 근거: [operator/income-methods.md](operator/income-methods.md), [community/case-studies.md](community/case-studies.md)
+- 상단 퍼널은 SNS가 잡고, 중간 신뢰 형성은 카페가 맡고, 최종 전환은 랜딩/오픈채팅/강의가 맡는다. 즉 `콘텐츠 -> 커뮤니티 -> 판매` 구조가 이미 정착해 있다. 근거: [operator/marketing-tactics.md](operator/marketing-tactics.md)
+- 시장에서 가장 부족한 것은 개발툴이 아니라 `유통 지식`이다. 회원들은 앱은 만들지만 고객 획득, 광고, 세일즈, 결제, 법적 이슈 정리가 약하다. 근거: [community/income-methods.md](community/income-methods.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+- 따라서 현재 생태계는 `기술 자동화 시장`이라기보다 `초급 제작자 대상 수익화 교육 시장` 성격이 더 강하다. 운영자는 이 간극을 가장 잘 활용하는 플레이어다. 근거: [operator/full-analysis.md](operator/full-analysis.md), [operator/marketing-tactics.md](operator/marketing-tactics.md)
 
-### 현재 국내 바이브코딩/온라인 수익화 생태계의 상태
+## 5. 운영자 요약 판단
 
-**진입 폭발기다.** 2025년 하반기부터 AI 코딩 도구(Claude Code, 안티그래비티)가 일반화되면서 비개발자들이 처음으로 "코딩 없이 앱 만들기"를 실제로 시도하기 시작했다. vibemoney는 그 진입 욕구를 가장 빠르게 포착한 채널 중 하나다.
+- 신뢰도: `중간`. 실무 디테일은 있고 완전 허구로 보이지는 않지만, 인증은 캡처·서술 중심이고 과장 표현이 많다. 근거: [operator/full-analysis.md](operator/full-analysis.md)
+- 정체성: `실무형 마케터 + 강한 세일즈 성향의 강의 판매자`. 기술보다 퍼널, 후킹, 전환 설계에 강점이 있다. 근거: [operator/marketing-tactics.md](operator/marketing-tactics.md)
+- 강의 가치: `입문자에게는 있다`, 다만 기대 조정이 필요하다. 외주 시작 전략, 툴 조합, 퍼널 감각은 배울 수 있지만, 빠른 고수익 재현을 기대하면 과대평가될 가능성이 크다. 근거: [operator/income-methods.md](operator/income-methods.md), [operator/tools-stack.md](operator/tools-stack.md)
+- 결론: `사기성 정보상`으로 단정할 수준은 아니지만, `공격적 판매자`로 보고 읽는 것이 맞다. 실무 팁은 취하고 수익 수치는 보수적으로 봐야 한다. 근거: [operator/full-analysis.md](operator/full-analysis.md)
 
-**구조적 특징:**
-- **유입**: 스레드(Threads.net) SNS → 카페 유입 → 오픈채팅 락인의 3단계 깔때기
-- **수익화 담론의 중심**: 운영자 1인이 담론을 거의 단독으로 공급한다. 회원들의 수익 사례는 대부분 운영자가 매개한 것
-- **기술 수준**: Git을 모르는 사람이 다수이고 MCP 개념이 낯선 층이 주요 회원층
-- **주요 수익화 경로**: 외주(크몽/위시켓/지인) > AdSense > 토스 미니앱 > SaaS 구독 순
-- **트렌드 사이클**: 빠르다. 운세 앱 트렌드가 3개월 만에 커뮤니티 내 주류가 되었고, 토스 미니앱 열풍도 2개월 만에 형성됐다
+## 6. 커뮤니티 3대 공통 문제
 
-**시장 성숙도:**
-대부분의 참여자가 아직 첫 수익도 못 낸 단계(~80%)다. "되는 거 맞지?"를 확인하는 단계의 사람이 과반이다. 시장이 막 형성되고 있으므로 조기 포지셔닝 가치가 높다.
+1. 시작 단계에서 멈춘다. 무엇을 만들지, 비개발자도 되는지, 어떤 툴을 써야 하는지에서 오래 머문다. 근거: [community/qa-pain-points.md](community/qa-pain-points.md), [community/tools-ai.md](community/tools-ai.md)
+2. 만들고 나서 팔지 못한다. 유입, 홍보, 외주 영업, 결제 연동, 플랫폼 승인에서 막히며 이 구간의 자료가 특히 부족하다. 근거: [community/income-methods.md](community/income-methods.md), [community/case-studies.md](community/case-studies.md)
+3. 비용과 통제 문제로 흔들린다. 구독료, 토큰, 도구 선택, AI 결과 품질 통제가 동시에 부담이 된다. 근거: [community/tools-ai.md](community/tools-ai.md), [community/qa-pain-points.md](community/qa-pain-points.md)
 
----
+## 7. 독자 사업에 시사하는 기회
 
-## 5. 운영자(만능시바/만렙시바) 요약 판단
-
-→ [상세: operator/full-analysis.md](operator/full-analysis.md)
-
-| 항목 | 판단 |
-|------|------|
-| **사기 여부** | 아니다. 기술 정보는 실제로 작동하고, 수강생 협업도 실재한다 |
-| **과장 여부** | 상당하다. "2주 만에 월 천", "초보도 3일이면 결제 시스템"은 검증 불가이며 배경 조건이 빠진 수치다 |
-| **정보 가치** | 30개 글 중 실질적으로 실행 가능한 정보는 11개. 무료 글의 40%는 실제 참고할 만하다 |
-| **강의 가격 대비** | 언급된 얼리버드 강의 기준으로 "전자책 대신 사는 수준의 정보"는 있다. 단, 핵심 노하우(DB리드, 수익화 구체 방법)는 유료에만 있다는 게 명확하다 |
-| **신뢰도** | 중간. 퍼널 구조가 교과서적이고 urgency 조성·품절 연출이 반복되므로 감안하고 봐야 한다. 하지만 콘텐츠 자체의 기술적 정확도는 높다 |
-| **핵심 역할** | 운영자 = 강의 판매자이면서 외주 중개자. 커뮤니티 첫 수익의 상당수가 이 사람을 통해 발생한다는 점에서 인프라 역할을 하고 있다 |
-
-→ [마케팅 전술 상세: operator/marketing-tactics.md](operator/marketing-tactics.md)
-
----
-
-## 6. 커뮤니티가 공통으로 겪는 3대 문제
-
-### 문제 1: 시작 불능 — "뭘 만들지 모르겠다 + 내가 될지 모르겠다"
-아이디어 부재와 자기 검증 욕구가 혼재한다. 기술 정보보다 "나 같은 사람도 됐다"는 구체적인 사례와 심리적 허락이 없으면 움직이지 않는다. QnA 30~40%가 이 패턴이다.
-
-### 문제 2: 만든 후 막힘 — "아무도 안 온다 + 결제 못 붙인다"
-서비스를 배포하고 나서 트래픽과 결제라는 두 벽에 막힌다. 트래픽은 마케팅 지식 없이 해결 불가, 결제는 PG사 계약 복잡성으로 막힌다. 이 구간에서 포기율이 높다.
-
-### 문제 3: 도구/비용 혼란 — "뭘 써야 하고 얼마나 써야 하나"
-Claude Code, 안티그래비티, Cursor, GPT, 오픈클로 — 도구가 너무 많고 각 도구의 포지션이 불명확하다. 한 달 구독비만 수십만 원이 나올 수 있는데 "내 수준에 맞는 최적 조합"을 알려주는 자료가 없다.
-
-→ [상세: community/qa-pain-points.md](community/qa-pain-points.md)
-
----
-
-## 7. Temperstone이 주목할 기회
-
-> 이 커뮤니티에서 드러난 미충족 니즈 중 사업적으로 의미 있는 것
-
-### 기회 1: "내 수준/목적별 도구 조합 추천" (즉시 실행 가능)
-**근거**: "뭐 써야 해요?" 류 질문 40건+. 동일 답변이 수백 번 반복되지만 개인화가 없다.  
-**형태**: 간단한 설문(코딩 경험 / 목표 / 예산) → 맞춤 스택 + 이유 + 비용 계산  
-**차별점**: 커뮤니티 답변은 "클코 써라"로 끝난다. 구체적 비교 + 비용 최적화 조합이 없다.
-
-### 기회 2: "만들고 나서 할 일" — 비기술 수익화 가이드 (블루오션)
-**근거**: 결제 연동·첫 고객·마케팅·세금이 커뮤니티 내 완전 공백이다.  
-**형태**: 시리즈 콘텐츠. "PG사 계약 없이 바로 쓰는 결제 연동 → 크몽/위시켓 첫 등록 → SNS 마케팅 기초 → 사업자 등록"  
-**차별점**: 바이브코딩 커뮤니티 전체가 "만드는 법"에 집중되어 있다. "파는 법"은 아무도 다루지 않는다.
-
-### 기회 3: 검증된 수익화 사례 아카이브
-**근거**: "실제로 돈 버는 사람 있나요?" 질문이 반복되며 해소가 안 된다. 성공한 사람들이 수치를 공개하길 꺼리기 때문이다.  
-**형태**: 익명/닉네임 기반 케이스 아카이브. 방법/기간/금액대 포함 (구간으로). 인터뷰 또는 설문 기반.  
-**차별점**: 운영자의 수익 인증은 불투명하다. 신뢰할 수 있는 제3자 형태의 사례 아카이브에 공백이 있다.
-
-### 기회 4: AI 구독비 최적화 가이드 (뉴스레터 유입용)
-**근거**: "한 달 AI 구독료 얼마 써요?" 질문이 반복. API vs 유료 계정 혼란, 오픈클로 비용 구조 이해 부족.  
-**형태**: "월 N만원으로 쓸 수 있는 최적 조합" + 주기적 업데이트  
-**차별점**: 새 도구가 계속 나오므로 업데이트 콘텐츠 수요가 지속적이다. 뉴스레터 구독 유도 포인트.
-
-### 기회 5: 오픈클로 보안 가이드 (선점 가능)
-**근거**: 언급 35건, 보안 우려 관련 글 3건+. 빠르게 성장 중이지만 체계적 가이드가 없다.  
-**형태**: "오픈클로 안전하게 쓰는 법" 1페이지. 보안 이슈 팩트체크 + 격리 설정 방법.  
-**차별점**: 커뮤니티 내 아직 아무도 다루지 않았다. 빠르게 내면 레퍼런스가 된다.
-
-→ [커뮤니티 수익화 분석: community/income-methods.md](community/income-methods.md)  
-→ [QnA 분석: community/qa-pain-points.md](community/qa-pain-points.md)  
-→ [도구 분석: community/tools-ai.md](community/tools-ai.md)
-
----
+- `만든 뒤 무엇을 할지`를 가르치는 상품 공백이 크다. 배포, 결제, 첫 고객 획득, 외주 영업, 광고 기초를 묶은 실전형 자료에 기회가 있다. 근거: [community/income-methods.md](community/income-methods.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+- 초보자용 `도구 선택/비용 최적화 가이드` 수요가 높다. 어떤 조합을 왜 쓰는지, 월 비용이 얼마인지, 어떤 단계에서 업그레이드할지를 정리한 상품이나 콘텐츠가 먹힌다. 근거: [community/tools-ai.md](community/tools-ai.md)
+- 검증된 `작은 수익화 사례 아카이브` 자체가 제품이 될 수 있다. 이 시장은 큰 수익 인증보다 첫 외주, 첫 결제, 첫 서비스 출시 같은 좁은 성공 사례에 더 목말라 있다. 근거: [community/case-studies.md](community/case-studies.md), [community/income-methods.md](community/income-methods.md)
+- 보안과 운영 리스크를 정리한 `OpenClaw/자동화 안전 가이드`도 틈새가 있다. 관심은 높지만 표준 답안이 없다. 근거: [operator/tools-stack.md](operator/tools-stack.md), [community/qa-pain-points.md](community/qa-pain-points.md)
+- 운영자처럼 과장 세일즈를 하지 않더라도, `신뢰 가능한 중간자` 포지션으로 시장에 들어갈 여지가 있다. 현재는 후킹은 강하지만 검증과 체계화는 약하다. 근거: [operator/marketing-tactics.md](operator/marketing-tactics.md), [operator/full-analysis.md](operator/full-analysis.md)
 
 ## 8. 추가 수집 권장 사항
 
-### 즉시 수집할 곳
-
-| 대상 | 이유 | 방법 |
-|------|------|------|
-| **vibemoney 오픈채팅방 (카카오)** | 7,000명 규모. 카페보다 날것의 Q&A가 많을 것. 강의 판매 전후 분위기 파악 가능 | 직접 참여 후 수동 수집 |
-| **vibemoney 수익화 후기 게시판 전수** | 현재 샘플만 수집됨. 실제 수익 인증 글 전체를 보면 수익화 현실 분포가 명확해짐 | `collect_naver.py --menu-id` 특정 게시판 지정 |
-| **인프런 "Prometheus" 강의 페이지** | 현재 최종 판매 중인 통합 강의. 수강생 후기/평점/수강자 수가 공개되어 있으면 운영자 신뢰도 검증 가능 | 브라우저 수동 확인 |
-
-### 비교 분석을 위해 볼 곳
-
-| 대상 | 이유 |
-|------|------|
-| **네이버 카페: 디지털노마드 코리아** | 바이브코딩 외 온라인 수익화 전반을 다루는 대형 카페. vibemoney와 회원 중복이 있을 것 |
-| **유튜브: 바이브코딩 관련 채널들** | vibemoney 커뮤니티에서 언급되는 "타 강사들"의 콘텐츠 구조와 비교 가능 |
-| **스레드 @baivemoney / 만능시바 계정** | 운영자의 SNS 자동화 실제 콘텐츠. 카페와 다른 메시지가 있는지 확인 |
-| **크몽/위시켓 바이브코딩 카테고리** | 실제 외주 수요와 단가 현황. 커뮤니티 주장(30만~50만)과 실제 마켓 비교 |
+- 카페 내 `수익화 후기` 게시판 전수 수집. 현재 커뮤니티 분석은 샘플 기반이라 실제 성공률 분포를 더 정확히 보려면 후기 원본 풀셋이 필요하다. 관련 근거: [community/case-studies.md](community/case-studies.md), [community/income-methods.md](community/income-methods.md)
+- 운영자 랜딩 페이지와 오픈채팅 동선 수집. 무료자료, 특강, 강의, 오픈채팅이 어떻게 연결되는지 실제 퍼널 캡처가 있으면 전환 구조 해석이 더 단단해진다. 관련 근거: [operator/marketing-tactics.md](operator/marketing-tactics.md)
+- 스레드 계정과 릴스 계정 원문 수집. 운영자가 말하는 자동화/유입 구조가 실제로 어떤 카피와 어떤 콘텐츠로 굴러가는지 확인이 필요하다. 관련 근거: [operator/full-analysis.md](operator/full-analysis.md), [operator/income-methods.md](operator/income-methods.md)
+- 댓글 데이터 수집. 현재 Q&A 분석은 본문 기준이라, 질문이 실제로 해결되는지, 어떤 답변이 반복되는지는 댓글까지 봐야 판단 가능하다. 관련 근거: [community/qa-pain-points.md](community/qa-pain-points.md)
+- 외부 검증 데이터 수집. 인프런 강의 페이지, 크몽/위시켓 실제 단가, 토스 미니앱 출시 현황을 대조하면 운영자 주장과 시장 현실의 차이를 더 정확히 잴 수 있다. 관련 근거: [operator/income-methods.md](operator/income-methods.md), [community/case-studies.md](community/case-studies.md)
