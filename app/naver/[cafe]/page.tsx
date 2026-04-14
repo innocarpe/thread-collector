@@ -1,10 +1,13 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { FilterItem } from "@/components/ui/filter-item";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Chip } from "@/components/ui/chip";
-import { NaverPostCard } from "@/components/naver/naver-post-card";
+import { NaverReaderProvider } from "@/components/naver/naver-reader-context";
+import { NaverPostListClient } from "@/components/naver/naver-post-list-client";
+import { NaverSidebarStatusFilters } from "@/components/naver/naver-sidebar-status-filters";
 import {
   getNaverPostMetas,
   getNaverInsights,
@@ -19,16 +22,17 @@ import type { NaverCategorySlug, NaverSegment } from "@/types/naver-post";
 
 type PageProps = {
   params: { cafe: string };
-  searchParams?: { segment?: string; category?: string };
+  searchParams?: { segment?: string; category?: string; status?: string };
 };
 
 function buildHref(
   cafe: string,
-  params: { segment?: string; category?: string }
+  params: { segment?: string; category?: string; status?: string }
 ) {
   const q = new URLSearchParams();
   if (params.segment) q.set("segment", params.segment);
   if (params.category) q.set("category", params.category);
+  if (params.status) q.set("status", params.status);
   const s = q.toString();
   return s ? `/naver/${cafe}?${s}` : `/naver/${cafe}`;
 }
@@ -53,14 +57,15 @@ export default async function NaverCafePage({ params, searchParams }: PageProps)
   const insights = getNaverInsights(cafe);
   const hasInsights = Boolean(insights && Object.values(insights).some(Boolean));
 
-  const filtered = allPosts.filter((p) => {
+  // Pre-filter by segment/category (server-side); status filter is client-side
+  const preFiltered = allPosts.filter((p) => {
     if (segmentFilter && p.segment !== segmentFilter) return false;
     if (categoryFilter && p.categorySlug !== categoryFilter) return false;
     return true;
   });
 
   return (
-    <>
+    <NaverReaderProvider>
       <header className="app-header">
         <div className="app-header-brand">
           <Link href="/" className="app-header-wordmark" style={{ cursor: "pointer" }}>
@@ -145,6 +150,15 @@ export default async function NaverCafePage({ params, searchParams }: PageProps)
                 </div>
               </div>
 
+              <Suspense fallback={null}>
+                <NaverSidebarStatusFilters
+                  posts={preFiltered}
+                  cafe={cafe}
+                  segmentFilter={segmentFilter}
+                  categoryFilter={categoryFilter}
+                />
+              </Suspense>
+
               {hasInsights && (
                 <div className="sidebar-group">
                   <SectionHeading kind="sidebar">Insights</SectionHeading>
@@ -161,27 +175,17 @@ export default async function NaverCafePage({ params, searchParams }: PageProps)
             </section>
           </aside>
 
-          {/* Post List */}
-          <div>
-            <div className="toolbar">
-              <span className="muted" style={{ fontSize: "var(--text-sm)" }}>
-                {filtered.length}개 글
-              </span>
-            </div>
-            {filtered.length === 0 ? (
-              <p className="muted" style={{ fontSize: "var(--text-sm)" }}>
-                해당 조건의 글이 없습니다.
-              </p>
-            ) : (
-              <div className="card-list">
-                {filtered.map((post) => (
-                  <NaverPostCard key={post.id} post={post} cafe={cafe} />
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Post List — client component for star/hide filtering */}
+          <Suspense fallback={null}>
+            <NaverPostListClient
+              posts={preFiltered}
+              cafe={cafe}
+              segmentFilter={segmentFilter}
+              categoryFilter={categoryFilter}
+            />
+          </Suspense>
         </div>
       </main>
-    </>
+    </NaverReaderProvider>
   );
 }

@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { MarkdownBody } from "@/components/ui/markdown-body";
 import { NaverCatBadge } from "@/components/naver/naver-cat-badge";
+import { NaverReaderProvider } from "@/components/naver/naver-reader-context";
+import { NaverPostActions } from "@/components/naver/naver-post-actions";
 import { getNaverPost, getAllNaverPostIds, getNaverCafes } from "@/lib/naver-posts";
 import { NAVER_SEGMENT_LABELS } from "@/types/naver-post";
 
@@ -38,7 +40,7 @@ export default async function NaverPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <>
+    <NaverReaderProvider>
       <header className="app-header">
         <div className="app-header-brand">
           <Link href="/" className="app-header-wordmark">
@@ -141,9 +143,11 @@ export default async function NaverPostPage({ params }: Props) {
             </header>
 
             <MarkdownBody content={post.content} />
+
+            <NaverPostActions id={post.id} cafe={cafe} />
           </article>
         </div>
       </main>
-    </>
+    </NaverReaderProvider>
   );
 }
