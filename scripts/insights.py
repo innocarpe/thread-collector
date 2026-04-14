@@ -16,7 +16,18 @@ import subprocess
 import sys
 from pathlib import Path
 
-CAT_DIRS = ["tech-dev", "product-business", "career-philosophy"]
+CAT_DIRS = [
+    "ai-llm",
+    "viral-sns",
+    "monetization",
+    "dev-tools",
+    "product-strategy",
+    "startup-philosophy",
+    "career-growth",
+    "learning-retro",
+    "productivity",
+    "web-app",
+]
 
 
 def _find_codex() -> str | None:
@@ -78,7 +89,7 @@ def main() -> None:
 
     prompt = (
         f"Analyze Threads.net posts by @{username} in this directory.\n\n"
-        f"Read ALL .md files in tech-dev/, product-business/, career-philosophy/ "
+        f"Read ALL .md files in these categorized folders: {', '.join(CAT_DIRS)}. "
         f"({len(md_files)} total). Each file: YAML frontmatter + post text.\n\n"
         "Create these 3 files in insights/:\n\n"
         "**insights/overview.md**\n"
