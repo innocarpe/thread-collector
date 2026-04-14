@@ -606,11 +606,73 @@ def discover_search(config: DiscoverConfig) -> dict:
     return candidates
 
 
+# ── Source: hashtag ───────────────────────────────────────────────────────────
+
+def discover_hashtag(config: DiscoverConfig) -> dict:
+    """
+    threads.net/tag/{tag} SSR 블롭을 파싱해 포스트 작성자 목록을 반환한다.
+    URL 패턴 실증 실패(404 / 빈 결과) 시 stderr 경고 후 빈 dict 반환 (graceful degradation).
+    """
+    if not config.hashtags:
+        return {}
+
+    candidates: dict = {}
+
+    for tag in config.hashtags:
+        tag_clean = tag.lstrip("#")
+        url = f"https://www.threads.net/tag/{tag_clean}"
+        print(f"[hashtag] {url} 방문 중 ...", file=sys.stderr)
+        try:
+            _dt_browse_goto(url)
+            time.sleep(2.0)  # SSR 렌더링 대기
+            js = JS_HASHTAG_AUTHORS.replace("TAG_PLACEHOLDER", tag_clean.replace('"', '\\"'))
+            out = _dt_browse_eval(js, "/tmp/_dt_hashtag.js")
+            data = _dt_parse_json(out)
+        except Exception as e:
+            print(f"[hashtag] eval 실패 (tag={tag_clean!r}): {e}", file=sys.stderr)
+            continue
+
+        if not data:
+            print(f"[hashtag] JSON 파싱 실패 (tag={tag_clean!r})", file=sys.stderr)
+            continue
+
+        if data.get("isNotFound"):
+            print(f"[hashtag] 페이지를 찾을 수 없음 (tag={tag_clean!r}). URL 패턴 확인 필요.", file=sys.stderr)
+            continue
+
+        handles = data.get("handles", [])
+        if not handles:
+            print(f"[hashtag] 작성자 없음 (tag={tag_clean!r}). SSR 구조가 다를 수 있음.", file=sys.stderr)
+            continue
+
+        # 노이즈 필터링
+        valid_handles = [
+            h for h in handles
+            if _is_valid_handle(h)
+            and h not in config.existing
+            and h not in NOISE_HANDLES
+        ]
+        print(f"[hashtag] {len(valid_handles)}명 발견 (tag={tag_clean!r})", file=sys.stderr)
+
+        for handle in valid_handles:
+            if handle not in candidates:
+                candidates[handle] = Candidate(handle=handle)
+            cand = candidates[handle]
+            cand.discovered_via.add("hashtag")
+            if tag_clean not in cand.hashtag_matches:
+                cand.hashtag_matches.append(tag_clean)
+
+        time.sleep(random.uniform(1.0, 2.0))
+
+    return candidates
+
+
 # ── Source registry ───────────────────────────────────────────────────────────
 
 DISCOVERY_SOURCES: dict = {
     "corpus": discover_corpus,
     "search": discover_search,
+    "hashtag": discover_hashtag,
 }
 
 
@@ -970,6 +1032,8 @@ def main() -> None:
                     help="Comma-separated discovery sources: corpus,search,hashtag,explore (default: corpus)")
     ap.add_argument("--query", action="append", default=[],
                     help="Search keyword (repeatable: --query 'AI 수익화' --query '바이브코딩')")
+    ap.add_argument("--hashtag", action="append", default=[],
+                    help="Hashtag to scrape (repeatable: --hashtag ai_llm --hashtag vibe_coding)")
     ap.add_argument("--weights", default=None,
                     help="Score weights, e.g. 'corpus:3,search:1,hashtag:1' (default: corpus:3,search:1,hashtag:1,explore:2)")
     args = ap.parse_args()
@@ -997,7 +1061,7 @@ def main() -> None:
         existing=existing,
         enrich=args.enrich,
         queries=args.query or [],
-        hashtags=[],
+        hashtags=args.hashtag or [],
         min_mentions=args.min_mentions,
         limit=args.limit,
         enrich_limit=args.enrich_limit,
