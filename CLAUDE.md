@@ -44,7 +44,8 @@ tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
 Key routing rules:
 - "/collect", "collect @username", "수집해", "게시글 모아줘", "threads 분석" → invoke `collect` skill and run the full pipeline (`collect → classify → insights`) unless the user explicitly requests a narrower scope
 - 특정 유저 인사이트 요청, "@username 글 뽑아줘" → invoke `collect` skill and run the full pipeline (`collect → classify → insights`) unless the user explicitly requests a narrower scope
-- "/classify", "분류해", "미분류 정리", "uncategorized 처리" → Threads면 `classify` 스킬, NaverCafe면 `python3 scripts/classify_naver.py {cafe}`
+- "/collect-naver", "카페 수집", "네이버 수집", "vibemoney 수집" → invoke `collect-naver` skill
+- "/classify", "분류해", "미분류 정리", "uncategorized 처리" → Threads면 `classify` 스킬, NaverCafe면 `collect-naver` 스킬 (classify 단계만)
 - "/insights", "인사이트 뽑아줘", "분석해줘", "overview 만들어" → invoke `insights` skill (Threads: @username / NaverCafe: cafe_name 자동 판별)
 - "/run-blog", "블로그 켜줘", "로컬 실행", "dev 서버" → invoke `run-blog` skill
 - "/setup-thread-cookies", "쿠키 셋업", "threads 로그인 설정", "새 맥 셋업" → invoke `setup-thread-cookies` skill
