@@ -523,6 +523,119 @@ def mine_corpus(existing: set) -> dict:
     return candidates
 
 
+# ── Enrich ────────────────────────────────────────────────────────────────────
+
+def _fetch_recent_posts(handle: str, user_id: str) -> list:
+    """
+    JS_COLLECT_RECENT (first:3, maxPages:1) 로 최근 포스트 최대 3개를 가져온다.
+    프로필 페이지에 이미 goto 된 상태이므로 추가 goto 불필요.
+    실패 시 빈 리스트 반환 (graceful).
+    """
+    js = (
+        JS_COLLECT_RECENT
+        .replace("USER_ID_PLACEHOLDER", user_id)
+        .replace("USERNAME_PLACEHOLDER", handle)
+    )
+    try:
+        out = _dt_browse_eval(js, f"/tmp/_dt_recent_{handle}.js")
+        data = _dt_parse_json(out)
+    except Exception as e:
+        print(f"[enrich] {handle}: 최근 포스트 fetch 오류 — {e}", file=sys.stderr)
+        return []
+
+    if not data:
+        print(f"[enrich] {handle}: 최근 포스트 JSON 파싱 실패", file=sys.stderr)
+        return []
+
+    posts_raw = data.get("posts", [])
+    result = []
+    for p in posts_raw[:3]:
+        text = str(p.get("text", "")).strip()
+        taken_at = p.get("taken_at")
+        if text:
+            result.append({"text": text, "taken_at": taken_at})
+    return result
+
+
+def enrich_candidate(cand: Candidate) -> None:
+    """
+    scout-2 옵션 A: SSR JSON blob 에서 프로필 메타를 추출해 cand 에 채운다.
+    프로필 메타 성공 후 JS_COLLECT_RECENT 로 최근 포스트 3개도 채운다.
+    실패해도 cand 를 제거하지 않고 enrich_status 로 표기한다.
+    recent_posts fetch 실패 시 bio/follower 등 다른 필드는 유지하고
+    enrich_status 는 "success" 를 그대로 둔다 (부분 성공).
+    """
+    url = f"https://www.threads.net/@{cand.handle}"
+    try:
+        _dt_browse_goto(url)
+        time.sleep(1.0)  # SSR 렌더링 대기
+        out = _dt_browse_eval(JS_ENRICH_PROFILE, f"/tmp/_dt_enrich_{cand.handle}.js")
+        data = _dt_parse_json(out)
+    except Exception as e:
+        print(f"[enrich] {cand.handle}: 실행 오류 — {e}", file=sys.stderr)
+        cand.enrich_status = "failed"
+        return
+
+    if not data:
+        print(f"[enrich] {cand.handle}: JSON 파싱 실패", file=sys.stderr)
+        cand.enrich_status = "failed"
+        return
+
+    # LSD 토큰 미준비 시 한 번 재시도
+    if not data.get("lsdOk"):
+        print(f"[enrich] {cand.handle}: LSD 미준비, 재시도 ...", file=sys.stderr)
+        _dt_browse_goto(url)
+        time.sleep(1.5)
+        out = _dt_browse_eval(JS_ENRICH_PROFILE, f"/tmp/_dt_enrich_{cand.handle}.js")
+        data = _dt_parse_json(out) or {}
+
+    if data.get("isNotFound"):
+        print(f"[enrich] {cand.handle}: 페이지 없음 (404)", file=sys.stderr)
+        cand.enrich_status = "failed"
+        return
+
+    profile = data.get("profile")
+    if not profile:
+        print(f"[enrich] {cand.handle}: 프로필 데이터 없음", file=sys.stderr)
+        cand.enrich_status = "failed"
+        return
+
+    # 비공개 계정
+    if profile.get("is_private"):
+        cand.is_private = True
+        cand.enrich_status = "private"
+        print(f"[enrich] {cand.handle}: 비공개 계정", file=sys.stderr)
+        return
+
+    # 필드 채우기
+    cand.bio = profile.get("bio")
+    cand.follower_count = profile.get("follower_count")
+    cand.is_private = profile.get("is_private")
+    cand.is_verified = profile.get("is_verified")
+    if cand.full_name is None:
+        cand.full_name = profile.get("full_name")
+    cand.enrich_status = "success"
+    print(f"[enrich] {cand.handle}: 프로필 완료 (팔로워={cand.follower_count})", file=sys.stderr)
+
+    # 최근 포스트 3개 fetch — userID 먼저 확보 (이미 프로필 페이지에 있으므로 goto 불필요)
+    js_uid = JS_GET_USERID_DT.replace("USERNAME_PLACEHOLDER", cand.handle)
+    try:
+        uid_out = _dt_browse_eval(js_uid, f"/tmp/_dt_uid_{cand.handle}.js")
+        uid_data = _dt_parse_json(uid_out)
+        user_id = uid_data.get("userId") if uid_data else None
+    except Exception as e:
+        print(f"[enrich] {cand.handle}: userID 추출 오류 — {e}", file=sys.stderr)
+        user_id = None
+
+    if user_id:
+        print(f"[enrich] {cand.handle}: userID={user_id}, 최근 포스트 fetch 중 ...", file=sys.stderr)
+        posts = _fetch_recent_posts(cand.handle, user_id)
+        cand.recent_posts = posts
+        print(f"[enrich] {cand.handle}: 최근 포스트 {len(posts)}개 수집", file=sys.stderr)
+    else:
+        print(f"[enrich] {cand.handle}: userID 없음, 최근 포스트 skip (recent_posts=[])", file=sys.stderr)
+
+
 # ── Ranking ───────────────────────────────────────────────────────────────────
 
 def score_candidates(candidates: dict, interests: list) -> None:
@@ -548,6 +661,7 @@ def render_report(
     total_posts: int,
     total_users: int,
     min_mentions: int,
+    enrich_enabled: bool = False,
 ) -> str:
     today = date.today().isoformat()
     lines = [
@@ -584,6 +698,28 @@ def render_report(
         lines.append(f"- **주요 카테고리**: {cat_label}")
         lines.append(f"- **언급한 유저**: {src_label}")
         lines.append(f"- **점수**: {cand.score:.2f}")
+
+        # enrichment 섹션
+        if cand.enrich_status == "success":
+            if cand.full_name:
+                lines.append(f"- **이름**: {cand.full_name}")
+            if cand.is_verified:
+                lines.append("- **인증 계정**: ✓")
+            if cand.follower_count is not None:
+                lines.append(f"- **팔로워**: {cand.follower_count:,}명")
+            if cand.bio:
+                lines.append(f"- **소개**: {cand.bio[:120]}")
+            if cand.recent_posts:
+                lines.append("")
+                lines.append("**최근 포스트:**")
+                for p in cand.recent_posts[:3]:
+                    snippet = str(p.get("text", ""))[:120]
+                    lines.append(f"> {snippet}")
+        elif cand.enrich_status == "private":
+            lines.append("- **계정 상태**: 🔒 비공개 계정")
+        elif cand.enrich_status == "failed":
+            lines.append("- **계정 상태**: ⚠️ enrich 실패 (수동 확인 필요)")
+
         lines.append("")
         lines.append("**멘션 컨텍스트**:")
         lines.append("")
@@ -603,11 +739,17 @@ def render_report(
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Discover candidate Threads users via corpus mention mining.")
+    # Phase 1 기존 인자 (유지)
     ap.add_argument("--interest", help="Comma-separated category slugs (overrides interest file and auto-derivation)")
     ap.add_argument("--limit", type=int, default=20, help="Max candidates in the report (default 20)")
     ap.add_argument("--min-mentions", type=int, default=2, help="Minimum mention count (default 2)")
     ap.add_argument("--output", help="Output markdown path (default .claude/discover-threads/YYYYMMDD-candidates.md)")
     ap.add_argument("--print", action="store_true", help="Also print report to stdout")
+    # Phase 2 신규 인자
+    ap.add_argument("--enrich", action="store_true", default=False,
+                    help="Enrich candidates with profile bio/follower count via SSR parsing (slow, opt-in)")
+    ap.add_argument("--enrich-limit", type=int, default=10,
+                    help="Max candidates to enrich (default 10, to save time)")
     args = ap.parse_args()
 
     if not THREADS_ROOT.is_dir():
@@ -625,6 +767,17 @@ def main() -> None:
     score_candidates({c.handle: c for c in filtered}, interests)
     ranked = sorted(filtered, key=lambda c: c.score, reverse=True)[: args.limit]
 
+    # Enrichment (opt-in)
+    if args.enrich and ranked:
+        enrich_limit = args.enrich_limit
+        print(f"[enrich] 상위 {min(enrich_limit, len(ranked))}명 enrichment 시작 ...", file=sys.stderr)
+        for cand in ranked[:enrich_limit]:
+            enrich_candidate(cand)
+            time.sleep(random.uniform(1.0, 2.0))
+        # enrich 후 재점수 (follower 부스트는 현재 score_candidates 에 없어 재순위 불필요하지만 일관성 유지)
+        score_candidates({c.handle: c for c in ranked}, interests)
+        ranked = sorted(ranked, key=lambda c: c.score, reverse=True)
+
     report = render_report(
         ranked,
         interests=interests,
@@ -632,6 +785,7 @@ def main() -> None:
         total_posts=total_posts,
         total_users=total_users,
         min_mentions=args.min_mentions,
+        enrich_enabled=args.enrich,
     )
 
     out_path = Path(args.output) if args.output else OUTPUT_ROOT / f"{date.today().strftime('%Y%m%d')}-candidates.md"
