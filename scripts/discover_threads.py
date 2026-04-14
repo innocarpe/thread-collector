@@ -1040,12 +1040,11 @@ def main() -> None:
     ap.add_argument("--min-mentions", type=int, default=2, help="Minimum mention count for corpus source (default 2)")
     ap.add_argument("--output", help="Output markdown path (default .claude/discover-threads/YYYYMMDD-candidates.md)")
     ap.add_argument("--print", action="store_true", help="Also print report to stdout")
-    # Phase 2 신규 인자
+    # Phase 2+ 신규 인자
     ap.add_argument("--enrich", action="store_true", default=False,
                     help="Enrich candidates with profile bio/follower count via SSR parsing (slow, opt-in)")
     ap.add_argument("--enrich-limit", type=int, default=10,
                     help="Max candidates to enrich (default 10, to save time)")
-    # Phase 3 신규 인자 (멀티소스)
     ap.add_argument("--sources", default="corpus",
                     help="Comma-separated discovery sources: corpus,search,hashtag,explore (default: corpus)")
     ap.add_argument("--query", action="append", default=[],
@@ -1097,6 +1096,7 @@ def main() -> None:
             print(f"[discover] {src}: {len(result)}명 발견", file=sys.stderr)
         except NotImplementedError as e:
             print(f"[discover] {src}: {e}", file=sys.stderr)
+            # explore 같은 stub 는 경고 후 스킵
             continue
         except Exception as e:
             print(f"[discover] {src}: 오류 발생 — {e}", file=sys.stderr)
