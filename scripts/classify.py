@@ -142,6 +142,9 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
             "Rules:\n"
             "- Pick the single BEST fit. If a post could fit multiple, choose the one matching "
             "the post's primary topic (what the author is mainly talking about).\n"
+            "- AI 도구·LLM 제품·AI 코딩 어시스턴트(Claude Code, Cursor, openclaw, Google AI Studio, "
+            "Gemini, ChatGPT 등)에 대한 리뷰·사용기·소감은 무조건 'ai-llm' 으로 배정. 'dev-tools' 는 "
+            "AI가 아닌 일반 개발 도구(IDE, CLI, 빌드 체인, 프레임워크, 라이브러리)에 한정.\n"
             "- AI/LLM 이야기라도 주제가 '수익화 실험'이면 monetization, '앱 만드는 기술'이면 web-app 등으로 "
             "구체 의도에 맞춰 배정할 것.\n"
             "- 'viral-sns'는 SNS 플랫폼 운영·그로스 전술에 한정. 단순 바이럴된 글 공유는 해당 주제로.\n\n"
@@ -150,8 +153,13 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
             "No explanation. Only write the JSON file."
         )
 
+        proc = None
         try:
-            subprocess.run(
+            # Wipe any stale output from a previous batch so we can distinguish
+            # "codex did not write this run" from "codex wrote a parseable file".
+            if os.path.isfile(tmp_output):
+                os.unlink(tmp_output)
+            proc = subprocess.run(
                 [codex, "exec", "--full-auto", "--ephemeral",
                  "--model", "gpt-5.4-mini",
                  "--add-dir", "/tmp",
@@ -176,7 +184,20 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
             except Exception:
                 pass
 
-        print(f" {classified_count} classified" if classified_count else " parse failed")
+        if classified_count:
+            print(f" {classified_count} classified")
+        else:
+            # Surface codex stderr so rate-limit / auth / quota errors don't
+            # silently turn into "everything skipped → deleted" downstream.
+            print(" parse failed")
+            if proc and proc.stderr:
+                tail = "\n".join(proc.stderr.strip().splitlines()[-5:])
+                if tail:
+                    print(f"    codex stderr (tail):\n    {tail}")
+            if proc and proc.stdout:
+                tail = "\n".join(proc.stdout.strip().splitlines()[-5:])
+                if tail and "ERROR" in tail.upper():
+                    print(f"    codex stdout (tail):\n    {tail}")
 
     return result
 
@@ -235,16 +256,28 @@ def main() -> None:
     skipped = 0
     failed = 0
 
+    unresolved = 0
     for post in posts:
         cat = pk_map.get(str(post["pk"]))
-        if not cat or cat == "skip":
+        if cat == "skip":
             post["filepath"].unlink()
             skipped += 1
         elif cat in CATEGORY_LABELS:
             move_to_category(post, cat, output_root, username)
             stats[cat] += 1
+        elif cat is None:
+            # Codex returned no classification for this pk (rate limit, timeout,
+            # parse failure, etc.). DO NOT delete — leave it in uncategorized/
+            # so the next /classify run can retry.
+            unresolved += 1
         else:
             failed += 1  # unknown category — leave in place
+
+    if unresolved:
+        print(
+            f"  [warn] {unresolved} posts left in uncategorized/ — codex returned "
+            f"no result (rate limit? timeout?). Re-run /classify to retry."
+        )
 
     # Remove uncategorized dir if now empty
     try:
