@@ -523,6 +523,70 @@ def mine_corpus(existing: set) -> dict:
     return candidates
 
 
+# ── Source: corpus ────────────────────────────────────────────────────────────
+
+def discover_corpus(config: DiscoverConfig) -> dict:
+    """기존 코퍼스 멘션 마이닝 소스. Phase 1 mine_corpus 를 플러그인 인터페이스로 래핑."""
+    candidates = mine_corpus(config.existing)
+    for cand in candidates.values():
+        cand.discovered_via.add("corpus")
+    return candidates
+
+
+# ── Source registry ───────────────────────────────────────────────────────────
+
+DISCOVERY_SOURCES: dict = {
+    "corpus": discover_corpus,
+}
+
+
+# ── Dedup & merge ─────────────────────────────────────────────────────────────
+
+def merge_candidates(source_results: list) -> dict:
+    """
+    여러 소스에서 반환된 dict[handle, Candidate] 들을 handle 기준으로 merge.
+    discovered_via set 합집합, mentions/search_queries/hashtag_matches 합산.
+    """
+    merged: dict = {}
+    for source_name, cands in source_results:
+        for handle, cand in cands.items():
+            if handle not in merged:
+                merged[handle] = cand
+            else:
+                base = merged[handle]
+                # 소스 집합 합산
+                base.discovered_via |= cand.discovered_via
+                # corpus 멘션 누적 (search/hashtag 는 mentions=0 초기값)
+                base.mentions = max(base.mentions, cand.mentions)
+                base.category_counts += cand.category_counts
+                base.source_users |= cand.source_users
+                # contexts 는 corpus 우선 (비어 있을 때만 채움)
+                if not base.contexts:
+                    base.contexts = cand.contexts
+                # search_queries 중복 제거 병합
+                for q in cand.search_queries:
+                    if q not in base.search_queries:
+                        base.search_queries.append(q)
+                # hashtag_matches 중복 제거 병합
+                for t in cand.hashtag_matches:
+                    if t not in base.hashtag_matches:
+                        base.hashtag_matches.append(t)
+                # explore_rank 최소값 유지
+                if cand.explore_rank is not None:
+                    base.explore_rank = (
+                        min(base.explore_rank, cand.explore_rank)
+                        if base.explore_rank is not None else cand.explore_rank
+                    )
+                # search API 가 반환한 프로필 정보 채우기
+                if base.full_name is None and cand.full_name:
+                    base.full_name = cand.full_name
+                if base.is_private is None and cand.is_private is not None:
+                    base.is_private = cand.is_private
+                if base.is_verified is None and cand.is_verified is not None:
+                    base.is_verified = cand.is_verified
+    return merged
+
+
 # ── Enrich ────────────────────────────────────────────────────────────────────
 
 def _fetch_recent_posts(handle: str, user_id: str) -> list:
@@ -638,32 +702,63 @@ def enrich_candidate(cand: Candidate) -> None:
 
 # ── Ranking ───────────────────────────────────────────────────────────────────
 
-def score_candidates(candidates: dict, interests: list) -> None:
+def score_candidates(candidates: dict, config: DiscoverConfig) -> None:
     """
-    Score = mentions * (1 + topic_match_ratio).
-    topic_match_ratio = fraction of mentions that occurred in interest categories.
-    Also boost by source-user diversity (prevents one user's inside jokes).
+    소스별 가중치 합산으로 최종 score 를 계산한다.
+    Phase 1 단독 호출 시 corpus 점수만 계산되어 기존 공식과 동일한 상대 순위를 유지.
     """
-    interest_set = set(interests)
+    interest_set = set(config.interests)
+    w = config.weights
+
     for cand in candidates.values():
-        in_topic = sum(n for cat, n in cand.category_counts.items() if cat in interest_set)
-        ratio = in_topic / cand.mentions if cand.mentions else 0
-        diversity = min(len(cand.source_users), 3) / 3  # cap at 3 unique mentioners
-        cand.score = cand.mentions * (1 + ratio) * (0.5 + 0.5 * diversity)
+        # corpus 점수 (기존 Phase 1 공식 유지)
+        corpus_score = 0.0
+        if "corpus" in cand.discovered_via and cand.mentions > 0:
+            in_topic = sum(n for cat, n in cand.category_counts.items() if cat in interest_set)
+            ratio = in_topic / cand.mentions
+            diversity = min(len(cand.source_users), 3) / 3
+            corpus_score = cand.mentions * (1 + ratio) * (0.5 + 0.5 * diversity)
+
+        # search 점수
+        search_score = 0.0
+        if "search" in cand.discovered_via:
+            search_score = len(cand.search_queries) * 2.0
+
+        # hashtag 점수
+        hashtag_score = 0.0
+        if "hashtag" in cand.discovered_via:
+            hashtag_score = len(cand.hashtag_matches) * 1.5
+
+        # explore 점수
+        explore_score = 0.0
+        if "explore" in cand.discovered_via and cand.explore_rank:
+            explore_score = 1.0 / cand.explore_rank
+
+        # enrichment 부스트 (follower count 로그 스케일)
+        enrich_boost = 1.0
+        if cand.enrich_status == "success" and cand.follower_count:
+            enrich_boost = 1.0 + math.log10(max(cand.follower_count, 1)) / 10.0
+
+        cand.score = (
+            w.get("corpus", 3.0) * corpus_score
+            + w.get("search", 1.0) * search_score
+            + w.get("hashtag", 1.0) * hashtag_score
+            + w.get("explore", 2.0) * explore_score
+        ) * enrich_boost
 
 
 # ── Markdown report ───────────────────────────────────────────────────────────
 
 def render_report(
     candidates: list,
-    interests: list,
+    config: DiscoverConfig,
     interest_source: str,
     total_posts: int,
     total_users: int,
-    min_mentions: int,
-    enrich_enabled: bool = False,
 ) -> str:
     today = date.today().isoformat()
+    active_sources = ", ".join(config.sources)
+
     lines = [
         f"# Threads 후보 유저 발견 — {today}",
         "",
@@ -672,32 +767,52 @@ def render_report(
         "",
         "## 스캔 결과",
         "",
-        f"- 스캔 소스: 기존 코퍼스 멘션 마이닝 (`{THREADS_ROOT}/`)",
+        f"- 소스: **{active_sources}**",
         f"- 분석 대상: **{total_posts}** 개 포스트, **{total_users}** 명 유저",
-        f"- 관심사: **{', '.join(interests) if interests else '(없음)'}** ({interest_source})",
-        f"- 필터: 멘션 {min_mentions}회 이상",
+        f"- 관심사: **{', '.join(config.interests) if config.interests else '(없음)'}** ({interest_source})",
+        f"- 필터: 멘션 {config.min_mentions}회 이상 (corpus 소스에만 적용)",
         f"- 후보 수: **{len(candidates)}** 명",
-        "",
-        "---",
-        "",
     ]
 
+    if config.queries:
+        lines.append(f"- 검색 쿼리: {', '.join(repr(q) for q in config.queries)}")
+    if config.hashtags:
+        lines.append(f"- 해시태그: {', '.join('#' + t for t in config.hashtags)}")
+
+    lines += ["", "---", ""]
+
     if not candidates:
-        lines.append("> 멘션 조건을 만족하는 후보가 없습니다. `--min-mentions 1` 로 다시 실행해 보세요.")
+        lines.append("> 조건을 만족하는 후보가 없습니다. `--min-mentions 1` 또는 `--sources` 를 추가해 보세요.")
         return "\n".join(lines)
 
     for i, cand in enumerate(candidates, 1):
         top_cats = cand.category_counts.most_common(3)
-        cat_label = ", ".join(f"{c} ({n})" for c, n in top_cats)
-        src_label = ", ".join(f"@{u}" for u in sorted(cand.source_users))
+        cat_label = ", ".join(f"{c} ({n})" for c, n in top_cats) if top_cats else "(없음)"
+        src_label = ", ".join(f"@{u}" for u in sorted(cand.source_users)) if cand.source_users else "(없음)"
 
         lines.append(f"## {i}. @{cand.handle}")
         lines.append("")
         lines.append(f"- [프로필 열기](https://www.threads.net/@{cand.handle})")
         lines.append(f"- **멘션 수**: {cand.mentions}회")
-        lines.append(f"- **주요 카테고리**: {cat_label}")
-        lines.append(f"- **언급한 유저**: {src_label}")
+
+        if top_cats:
+            lines.append(f"- **주요 카테고리**: {cat_label}")
+        if cand.source_users:
+            lines.append(f"- **언급한 유저**: {src_label}")
         lines.append(f"- **점수**: {cand.score:.2f}")
+
+        # 소스 배지
+        via_sorted = sorted(cand.discovered_via)
+        via_badges = []
+        for v in via_sorted:
+            if v == "search" and cand.search_queries:
+                via_badges.append(f'[search: {", ".join(repr(q) for q in cand.search_queries)}]')
+            elif v == "hashtag" and cand.hashtag_matches:
+                via_badges.append(f'[hashtag: {", ".join("#" + t for t in cand.hashtag_matches)}]')
+            else:
+                via_badges.append(f"[{v}]")
+        if via_badges:
+            lines.append(f"- **소스**: {' '.join(via_badges)}")
 
         # enrichment 섹션
         if cand.enrich_status == "success":
@@ -719,13 +834,22 @@ def render_report(
             lines.append("- **계정 상태**: 🔒 비공개 계정")
         elif cand.enrich_status == "failed":
             lines.append("- **계정 상태**: ⚠️ enrich 실패 (수동 확인 필요)")
+        elif cand.enrich_status == "skipped":
+            # enrich 미실행 시 search API 가 반환한 메타 출력
+            if cand.full_name:
+                lines.append(f"- **이름**: {cand.full_name}")
+            if cand.is_verified:
+                lines.append("- **인증 계정**: ✓")
 
-        lines.append("")
-        lines.append("**멘션 컨텍스트**:")
-        lines.append("")
-        for src, snippet in cand.contexts:
-            lines.append(f"> *@{src}*: {snippet}")
-            lines.append(">")
+        # corpus 컨텍스트
+        if cand.contexts:
+            lines.append("")
+            lines.append("**멘션 컨텍스트**:")
+            lines.append("")
+            for src, snippet in cand.contexts:
+                lines.append(f"> *@{src}*: {snippet}")
+                lines.append(">")
+
         lines.append("")
         lines.append(f"**다음 단계**: 프로필 확인 후 괜찮으면 → `/collect @{cand.handle}`")
         lines.append("")
@@ -737,12 +861,29 @@ def render_report(
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
+def parse_weights(raw: str) -> dict:
+    """'corpus:3,search:1,hashtag:1' 형태 문자열을 dict 로 파싱한다."""
+    result = {}
+    for pair in raw.split(","):
+        pair = pair.strip()
+        if ":" not in pair:
+            continue
+        key, val = pair.split(":", 1)
+        try:
+            result[key.strip()] = float(val.strip())
+        except ValueError:
+            pass
+    return result
+
+
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Discover candidate Threads users via corpus mention mining.")
+    ap = argparse.ArgumentParser(
+        description="Discover candidate Threads users via corpus mention mining, search, and hashtag pages."
+    )
     # Phase 1 기존 인자 (유지)
     ap.add_argument("--interest", help="Comma-separated category slugs (overrides interest file and auto-derivation)")
     ap.add_argument("--limit", type=int, default=20, help="Max candidates in the report (default 20)")
-    ap.add_argument("--min-mentions", type=int, default=2, help="Minimum mention count (default 2)")
+    ap.add_argument("--min-mentions", type=int, default=2, help="Minimum mention count for corpus source (default 2)")
     ap.add_argument("--output", help="Output markdown path (default .claude/discover-threads/YYYYMMDD-candidates.md)")
     ap.add_argument("--print", action="store_true", help="Also print report to stdout")
     # Phase 2 신규 인자
@@ -750,6 +891,11 @@ def main() -> None:
                     help="Enrich candidates with profile bio/follower count via SSR parsing (slow, opt-in)")
     ap.add_argument("--enrich-limit", type=int, default=10,
                     help="Max candidates to enrich (default 10, to save time)")
+    # Phase 3 신규 인자 (멀티소스)
+    ap.add_argument("--sources", default="corpus",
+                    help="Comma-separated discovery sources: corpus,search,hashtag,explore (default: corpus)")
+    ap.add_argument("--weights", default=None,
+                    help="Score weights, e.g. 'corpus:3,search:1,hashtag:1' (default: corpus:3,search:1,hashtag:1,explore:2)")
     args = ap.parse_args()
 
     if not THREADS_ROOT.is_dir():
@@ -757,50 +903,101 @@ def main() -> None:
 
     existing = existing_user_handles()
     total_users = len(existing)
+    interests, interest_source = resolve_interests(args.interest)
 
-    interests, source = resolve_interests(args.interest)
+    # 가중치 파싱
+    default_weights = {"corpus": 3.0, "search": 1.0, "hashtag": 1.0, "explore": 2.0}
+    weights = {**default_weights, **(parse_weights(args.weights) if args.weights else {})}
 
-    candidates_map = mine_corpus(existing)
-    total_posts = sum(1 for _ in iter_posts())
+    # 소스 목록 파싱
+    sources = [s.strip() for s in args.sources.split(",") if s.strip()]
+    unknown = set(sources) - set(DISCOVERY_SOURCES)
+    if unknown:
+        sys.exit(f"알 수 없는 소스: {', '.join(sorted(unknown))}. 가능한 소스: {', '.join(DISCOVERY_SOURCES)}")
 
-    filtered = [c for c in candidates_map.values() if c.mentions >= args.min_mentions]
-    score_candidates({c.handle: c for c in filtered}, interests)
-    ranked = sorted(filtered, key=lambda c: c.score, reverse=True)[: args.limit]
+    config = DiscoverConfig(
+        sources=sources,
+        interests=interests,
+        existing=existing,
+        enrich=args.enrich,
+        queries=[],
+        hashtags=[],
+        min_mentions=args.min_mentions,
+        limit=args.limit,
+        enrich_limit=args.enrich_limit,
+        weights=weights,
+    )
+
+    # 소스별 discover 실행 + merge
+    source_results = []
+    for src in sources:
+        fn = DISCOVERY_SOURCES[src]
+        print(f"[discover] 소스 실행: {src}", file=sys.stderr)
+        try:
+            result = fn(config)
+            source_results.append((src, result))
+            print(f"[discover] {src}: {len(result)}명 발견", file=sys.stderr)
+        except NotImplementedError as e:
+            print(f"[discover] {src}: {e}", file=sys.stderr)
+            continue
+        except Exception as e:
+            print(f"[discover] {src}: 오류 발생 — {e}", file=sys.stderr)
+            continue
+
+    candidates_map = merge_candidates(source_results)
+
+    # corpus min_mentions 필터 (corpus 소스가 있는 경우에만)
+    if "corpus" in sources:
+        candidates_map = {
+            h: c for h, c in candidates_map.items()
+            if "corpus" not in c.discovered_via or c.mentions >= config.min_mentions
+        }
+
+    # 총 포스트 수 계산 (corpus 소스가 있을 때만)
+    total_posts = sum(1 for _ in iter_posts()) if "corpus" in sources else 0
+
+    # 점수 계산
+    score_candidates(candidates_map, config)
+    ranked = sorted(candidates_map.values(), key=lambda c: c.score, reverse=True)[: args.limit]
 
     # Enrichment (opt-in)
     if args.enrich and ranked:
-        enrich_limit = args.enrich_limit
-        print(f"[enrich] 상위 {min(enrich_limit, len(ranked))}명 enrichment 시작 ...", file=sys.stderr)
-        for cand in ranked[:enrich_limit]:
+        print(f"[enrich] 상위 {min(args.enrich_limit, len(ranked))}명 enrichment 시작 ...", file=sys.stderr)
+        for cand in ranked[: args.enrich_limit]:
             enrich_candidate(cand)
             time.sleep(random.uniform(1.0, 2.0))
-        # enrich 후 재점수 (follower 부스트는 현재 score_candidates 에 없어 재순위 불필요하지만 일관성 유지)
-        score_candidates({c.handle: c for c in ranked}, interests)
-        ranked = sorted(ranked, key=lambda c: c.score, reverse=True)
+        # enrich 후 재점수 (follower 부스트 반영)
+        score_candidates(candidates_map, config)
+        ranked = sorted(candidates_map.values(), key=lambda c: c.score, reverse=True)[: args.limit]
 
     report = render_report(
         ranked,
-        interests=interests,
-        interest_source=source,
+        config=config,
+        interest_source=interest_source,
         total_posts=total_posts,
         total_users=total_users,
-        min_mentions=args.min_mentions,
-        enrich_enabled=args.enrich,
     )
 
-    out_path = Path(args.output) if args.output else OUTPUT_ROOT / f"{date.today().strftime('%Y%m%d')}-candidates.md"
+    out_path = (
+        Path(args.output)
+        if args.output
+        else OUTPUT_ROOT / f"{date.today().strftime('%Y%m%d')}-candidates.md"
+    )
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(report, encoding="utf-8")
 
     print(f"DiscoverThreads done — {len(ranked)} candidates")
-    print(f"  Interests: {', '.join(interests)}  ({source})")
-    print(f"  Scanned:   {total_posts} posts from {total_users} users")
+    print(f"  Sources:   {', '.join(sources)}")
+    print(f"  Interests: {', '.join(interests)}  ({interest_source})")
+    if "corpus" in sources:
+        print(f"  Scanned:   {total_posts} posts from {total_users} users")
     print(f"  Report:    {out_path}")
     if ranked:
         print(f"\n  Top 5 by score:")
         for c in ranked[:5]:
+            via = "+".join(sorted(c.discovered_via))
             print(f"    {c.score:5.2f}  @{c.handle:25s}  ({c.mentions} mentions, "
-                  f"from {len(c.source_users)} users)")
+                  f"src={via}, enrich={c.enrich_status})")
 
     if args.print:
         print()
