@@ -152,6 +152,40 @@ def categorize(subject: str, content: str) -> str:
     return max(scores, key=lambda k: scores[k])
 
 
+# ── clubId 자동 탐색 ──────────────────────────────────────────────────────────
+
+def discover_club_id(cafe_name: str) -> str | None:
+    """카페 메인 페이지 HTML에서 clubId 자동 추출."""
+    import re as _re
+    url = f"https://cafe.naver.com/{cafe_name}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "ko-KR,ko;q=0.9",
+    }
+    try:
+        r = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
+        html = r.text
+    except Exception:
+        return None
+
+    # 패턴 1: iframe src에 clubid=XXXXXXXX
+    m = _re.search(r"clubid=(\d+)", html, _re.IGNORECASE)
+    if m:
+        return m.group(1)
+
+    # 패턴 2: JS 변수 cafeId / clubId / cafe_club_id
+    m = _re.search(r"""(?:cafeId|clubId|cafe_club_id)['":\s=]+(\d{6,12})""", html, _re.IGNORECASE)
+    if m:
+        return m.group(1)
+
+    # 패턴 3: JSON 형태 "clubId":"XXXXXXXX"
+    m = _re.search(r'"clubId"\s*:\s*"?(\d{6,12})"?', html)
+    if m:
+        return m.group(1)
+
+    return None
+
+
 # ── 쿠키 / 헤더 ───────────────────────────────────────────────────────────────
 
 def load_cookies(cafe_url: str) -> dict:
@@ -434,7 +468,16 @@ def main() -> None:
 
     club_id = args.club_id or KNOWN_CAFES.get(cafe_name)
     if not club_id:
-        sys.exit(f"ERROR: '{cafe_name}' clubId 불명. --club-id 로 지정하세요.")
+        print(f"  [clubId] '{cafe_name}' 자동 탐색 중 ...")
+        club_id = discover_club_id(cafe_name)
+        if club_id:
+            print(f"  [clubId] 발견: {club_id}")
+        else:
+            sys.exit(
+                f"ERROR: '{cafe_name}' clubId 자동 탐색 실패.\n"
+                f"  직접 지정: python3 scripts/collect_naver.py {cafe_name} --club-id XXXXXXXX\n"
+                f"  카페 URL: https://cafe.naver.com/{cafe_name}"
+            )
 
     output_root = Path(args.output_dir) if args.output_dir else Path.cwd() / "NaverCafe"
 
