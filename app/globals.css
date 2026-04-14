@@ -867,12 +867,86 @@ ul, ol { padding-left: 20px; }
   margin-bottom: 0;
 }
 
+.markdown-body h1 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
+  margin: 2em 0 0.6em;
+}
+
 .markdown-body h2 {
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: var(--tracking-tight);
   margin: 1.8em 0 0.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.markdown-body h2:first-child { margin-top: 0; }
+
+.markdown-body h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 1.4em 0 0.4em;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.4em;
+  margin-bottom: 1.2em;
+}
+
+.markdown-body li {
+  margin-bottom: 0.4em;
+  line-height: var(--leading-body);
+}
+
+.markdown-body li > ul,
+.markdown-body li > ol {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.markdown-body strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.markdown-body code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.875em;
+  background: var(--color-surface-raised, #f4f4f5);
+  color: var(--color-accent-strong, #1d4ed8);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.markdown-body pre {
+  background: var(--color-surface-raised, #f4f4f5);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 1.2em;
+  font-size: var(--text-sm);
+}
+
+.markdown-body pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.markdown-body blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: var(--space-4);
+  color: var(--color-text-muted);
+  margin: 1.2em 0;
+  font-style: italic;
 }
 
 .markdown-body a {
@@ -882,6 +956,202 @@ ul, ol { padding-left: 20px; }
 }
 
 .markdown-body a:hover { color: var(--color-accent-strong); }
+
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 1.8em 0;
+}
+
+/* ── Filter Sheet (mobile) ────────────────── */
+
+/* Desktop: sheet is transparent — children flow normally into the sidebar surface */
+.filter-sheet-triggers { display: none; }
+.filter-sheet,
+.filter-sheet-panel,
+.filter-sheet-body { display: contents; }
+.filter-sheet-overlay,
+.filter-sheet-header { display: none; }
+
+@media (max-width: 960px) {
+  .filter-sheet-triggers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .filter-sheet-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
+    padding: 10px var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .filter-sheet-trigger-label {
+    color: var(--color-text-soft);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .filter-sheet-trigger-summary {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .filter-sheet-trigger-caret {
+    display: none;
+  }
+
+  /* Flatten the inline surface on mobile so each fixed panel can escape its box.
+     Panels use position:fixed so they consume no layout space, and the only
+     visible sidebar content becomes the trigger row above. */
+  aside.sidebar > .surface.sidebar,
+  aside.sidebar .surface.sidebar {
+    all: unset;
+    display: contents;
+  }
+
+  .filter-sheet { display: block; }
+
+  .filter-sheet-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(24, 24, 27, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+    z-index: 40;
+  }
+
+  .filter-sheet-panel {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 85vh;
+    background: var(--color-surface);
+    border-top-left-radius: var(--radius-xl);
+    border-top-right-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(100%);
+    transition: transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+    z-index: 41;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .filter-sheet.open .filter-sheet-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filter-sheet.open .filter-sheet-panel {
+    transform: translateY(0);
+  }
+
+  .filter-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .filter-sheet-handle {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--color-border-strong);
+  }
+
+  .filter-sheet-title {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .filter-sheet-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 999px;
+  }
+
+  .filter-sheet-close:hover {
+    background: var(--color-surface-strong);
+    color: var(--color-text);
+  }
+
+  .filter-sheet-body {
+    display: block;
+    flex: 1;
+    padding: var(--space-4) var(--space-5) var(--space-6);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Inside the sheet, always render filters as a vertical list
+     (override the small-screen horizontal carousel defined below) */
+  .filter-sheet .filter-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--space-2);
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .filter-sheet .filter-item {
+    padding: 9px var(--space-3);
+    font-size: var(--text-sm);
+    flex-shrink: 1;
+  }
+
+  .filter-sheet .filter-item-row {
+    flex-shrink: 1;
+  }
+
+  .filter-sheet .filter-item-row > .filter-item {
+    flex: 1 1 auto;
+  }
+
+  .filter-sheet .sidebar-group {
+    padding: 0;
+  }
+}
 
 /* ── Insights Page ────────────────────────── */
 
