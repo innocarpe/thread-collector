@@ -13,9 +13,16 @@ type Props = {
   userFilter?: string;
   categoryFilter?: string;
   autoLabelCounts?: AutoLabelCount[];
+  section?: "status" | "topics";
 };
 
-export function SidebarReaderFilters({ posts, userFilter, categoryFilter, autoLabelCounts }: Props) {
+export function SidebarReaderFilters({
+  posts,
+  userFilter,
+  categoryFilter,
+  autoLabelCounts,
+  section,
+}: Props) {
   const { getStatus, allLabels } = useReader();
   const searchParams = useSearchParams();
   const statusFilter = searchParams.get("status") ?? "";
@@ -39,8 +46,12 @@ export function SidebarReaderFilters({ posts, userFilter, categoryFilter, autoLa
   const starredCount = mounted ? visiblePosts.filter((p) => getStatus(p.pk).starred).length : 0;
   const hiddenCount = mounted ? posts.filter((p) => getStatus(p.pk).hidden).length : 0;
 
+  const showStatus = !section || section === "status";
+  const showTopics = !section || section === "topics";
+
   return (
     <>
+      {showStatus && (
       <div className="sidebar-group">
         <SectionHeading kind="sidebar">Status</SectionHeading>
         <div className="filter-list">
@@ -72,8 +83,9 @@ export function SidebarReaderFilters({ posts, userFilter, categoryFilter, autoLa
           )}
         </div>
       </div>
+      )}
 
-      {(autoLabelCounts?.length ?? 0) > 0 && (
+      {showTopics && (autoLabelCounts?.length ?? 0) > 0 && (
         <div className="sidebar-group">
           <SectionHeading kind="sidebar">토픽</SectionHeading>
           <div className="filter-list">
@@ -90,7 +102,7 @@ export function SidebarReaderFilters({ posts, userFilter, categoryFilter, autoLa
         </div>
       )}
 
-      {allLabels.length > 0 && (
+      {showTopics && allLabels.length > 0 && (
         <div className="sidebar-group">
           <SectionHeading kind="sidebar">내 태그</SectionHeading>
           <div className="filter-list">

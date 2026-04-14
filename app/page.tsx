@@ -8,6 +8,11 @@ import { FilterItem } from "@/components/ui/filter-item";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PostListClient } from "@/components/reader/post-list-client";
 import { SidebarReaderFilters } from "@/components/reader/sidebar-reader-filters";
+import {
+  FilterSheetProvider,
+  FilterSheetTrigger,
+  FilterSheetPanel,
+} from "@/components/reader/filter-sheet";
 import { getAllPostMetas, getInsightsForUser, getUsers } from "@/lib/posts";
 import { CATEGORIES, CATEGORY_LABELS } from "@/types/post";
 import type { CategorySlug } from "@/types/post";
@@ -21,7 +26,13 @@ function buildHref(params: { user?: string; category?: string }) {
 }
 
 type PageProps = {
-  searchParams?: { user?: string; category?: string };
+  searchParams?: { user?: string; category?: string; status?: string; label?: string };
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  unread: "안읽음",
+  starred: "⭐ 중요",
+  hidden: "숨긴 글",
 };
 
 export default async function HomePage({ searchParams }: PageProps) {
@@ -51,6 +62,14 @@ export default async function HomePage({ searchParams }: PageProps) {
     .map(([label, count]) => ({ label, count }))
     .sort((a, b) => b.count - a.count);
 
+  const userSummary = userFilter ? `@${userFilter}` : "전체";
+  const categorySummary = categoryFilter ? CATEGORY_LABELS[categoryFilter] : "전체";
+  const statusKey = searchParams?.status;
+  const labelKey = searchParams?.label;
+  const statusSummary = statusKey && STATUS_LABELS[statusKey] ? STATUS_LABELS[statusKey] : "전체";
+  const topicsSummary = labelKey ? `#${labelKey}` : "전체";
+  const hasTopics = autoLabelCounts.length > 0 || Boolean(labelKey);
+
   return (
     <>
       <header className="app-header">
@@ -74,7 +93,17 @@ export default async function HomePage({ searchParams }: PageProps) {
         <div className="layout">
           {/* Sidebar */}
           <aside className="sidebar">
+            <FilterSheetProvider>
+            <div className="filter-sheet-triggers">
+              <FilterSheetTrigger id="users" label="유저" summary={userSummary} />
+              <FilterSheetTrigger id="category" label="카테고리" summary={categorySummary} />
+              <FilterSheetTrigger id="status" label="상태" summary={statusSummary} />
+              {hasTopics && (
+                <FilterSheetTrigger id="topics" label="토픽" summary={topicsSummary} />
+              )}
+            </div>
             <section className="surface sidebar">
+              <FilterSheetPanel id="users" label="유저">
               <div className="sidebar-group">
                 <SectionHeading kind="sidebar">Users</SectionHeading>
                 <div className="filter-list">
@@ -109,7 +138,9 @@ export default async function HomePage({ searchParams }: PageProps) {
                   })}
                 </div>
               </div>
+              </FilterSheetPanel>
 
+              <FilterSheetPanel id="category" label="카테고리">
               <div className="sidebar-group">
                 <SectionHeading kind="sidebar">Category</SectionHeading>
                 <div className="filter-list">
@@ -134,16 +165,34 @@ export default async function HomePage({ searchParams }: PageProps) {
                   ))}
                 </div>
               </div>
+              </FilterSheetPanel>
 
-              <Suspense fallback={null}>
-                <SidebarReaderFilters
-                  posts={filtered}
-                  userFilter={userFilter}
-                  categoryFilter={categoryFilter}
-                  autoLabelCounts={autoLabelCounts}
-                />
-              </Suspense>
+              <FilterSheetPanel id="status" label="상태">
+                <Suspense fallback={null}>
+                  <SidebarReaderFilters
+                    posts={filtered}
+                    userFilter={userFilter}
+                    categoryFilter={categoryFilter}
+                    section="status"
+                  />
+                </Suspense>
+              </FilterSheetPanel>
+
+              {hasTopics && (
+                <FilterSheetPanel id="topics" label="토픽">
+                  <Suspense fallback={null}>
+                    <SidebarReaderFilters
+                      posts={filtered}
+                      userFilter={userFilter}
+                      categoryFilter={categoryFilter}
+                      autoLabelCounts={autoLabelCounts}
+                      section="topics"
+                    />
+                  </Suspense>
+                </FilterSheetPanel>
+              )}
             </section>
+            </FilterSheetProvider>
           </aside>
 
           {/* Post List */}
