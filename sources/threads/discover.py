@@ -503,6 +503,81 @@ def resolve_interests(cli_arg: str | None) -> tuple:
     return [slug for slug, _ in top], "auto-derived from corpus (top 3)"
 
 
+# ── Auto keyword derivation (for search/hashtag when CLI args missing) ────────
+
+# 카테고리 → search query 와 hashtag 후보 매핑. 사용자가 --query 나 --hashtag 를
+# 주지 않고 /discover-full 같은 멀티소스 스킬을 호출했을 때 관심사 기반으로
+# 자동 채워 넣는 용도.
+CATEGORY_AUTO_KEYWORDS: dict = {
+    "ai-llm": {
+        "queries": ["AI 수익화", "바이브코딩", "LLM"],
+        "hashtags": ["ai", "vibecoding", "llm"],
+    },
+    "viral-sns": {
+        "queries": ["쇼츠", "바이럴", "스레드 그로스"],
+        "hashtags": ["viral", "shorts", "sns마케팅"],
+    },
+    "monetization": {
+        "queries": ["부수입", "온라인 수익화", "디지털노마드"],
+        "hashtags": ["부업", "수익화", "sidehustle"],
+    },
+    "dev-tools": {
+        "queries": ["개발도구", "productivity tools"],
+        "hashtags": ["devtools", "productivity"],
+    },
+    "product-strategy": {
+        "queries": ["PMF", "제품전략", "MVP"],
+        "hashtags": ["startup", "productmarketfit", "mvp"],
+    },
+    "startup-philosophy": {
+        "queries": ["인디해킹", "1인창업", "창업"],
+        "hashtags": ["indiehacking", "solopreneur", "startup"],
+    },
+    "career-growth": {
+        "queries": ["개발자 커리어", "커리어 성장"],
+        "hashtags": ["career", "개발자커리어"],
+    },
+    "learning-retro": {
+        "queries": ["학습법", "개발 공부", "회고"],
+        "hashtags": ["learning", "study", "회고"],
+    },
+    "productivity": {
+        "queries": ["생산성", "루틴", "workflow"],
+        "hashtags": ["productivity", "routine", "workflow"],
+    },
+    "web-app": {
+        "queries": ["웹개발", "앱개발", "풀스택"],
+        "hashtags": ["webdev", "appdev", "fullstack"],
+    },
+}
+
+
+def auto_derive_search_inputs(
+    interests: list, max_queries: int = 3, max_hashtags: int = 3
+) -> tuple:
+    """
+    관심사 슬러그 리스트로부터 search keyword 와 hashtag 후보를 자동 도출.
+
+    Returns:
+        (queries, hashtags) — 각각 중복 제거된 리스트, 요청한 최대 개수까지.
+    """
+    queries: list = []
+    hashtags: list = []
+    for slug in interests:
+        spec = CATEGORY_AUTO_KEYWORDS.get(slug)
+        if not spec:
+            continue
+        for q in spec.get("queries", []):
+            if q not in queries and len(queries) < max_queries:
+                queries.append(q)
+        for h in spec.get("hashtags", []):
+            if h not in hashtags and len(hashtags) < max_hashtags:
+                hashtags.append(h)
+        if len(queries) >= max_queries and len(hashtags) >= max_hashtags:
+            break
+    return queries, hashtags
+
+
 # ── Corpus scanning ───────────────────────────────────────────────────────────
 
 def existing_user_handles() -> set:
@@ -1216,13 +1291,43 @@ def main() -> None:
     if unknown:
         sys.exit(f"알 수 없는 소스: {', '.join(sorted(unknown))}. 가능한 소스: {', '.join(DISCOVERY_SOURCES)}")
 
+    # --query / --hashtag 미지정 + search/hashtag 소스 활성 시 관심사 기반 자동 도출
+    effective_queries = list(args.query or [])
+    effective_hashtags = list(args.hashtag or [])
+    if "search" in sources and not effective_queries:
+        auto_q, _ = auto_derive_search_inputs(interests, max_queries=3, max_hashtags=0)
+        if auto_q:
+            effective_queries = auto_q
+            print(
+                f"[auto] --query 미지정 → 관심사 기반 자동 생성: {auto_q}",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                "[auto] --query 미지정이고 관심사 매핑도 없어 search 소스를 스킵합니다.",
+                file=sys.stderr,
+            )
+    if "hashtag" in sources and not effective_hashtags:
+        _, auto_h = auto_derive_search_inputs(interests, max_queries=0, max_hashtags=3)
+        if auto_h:
+            effective_hashtags = auto_h
+            print(
+                f"[auto] --hashtag 미지정 → 관심사 기반 자동 생성: {auto_h}",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                "[auto] --hashtag 미지정이고 관심사 매핑도 없어 hashtag 소스를 스킵합니다.",
+                file=sys.stderr,
+            )
+
     config = DiscoverConfig(
         sources=sources,
         interests=interests,
         existing=existing,
         enrich=args.enrich,
-        queries=args.query or [],
-        hashtags=args.hashtag or [],
+        queries=effective_queries,
+        hashtags=effective_hashtags,
         min_mentions=args.min_mentions,
         limit=args.limit,
         enrich_limit=args.enrich_limit,
