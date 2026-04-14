@@ -37,6 +37,26 @@ from datetime import date
 from pathlib import Path
 from typing import Callable
 
+try:
+    import requests as _requests
+    _REQUESTS_AVAILABLE = True
+except ImportError:
+    _REQUESTS_AVAILABLE = False
+
+# Chrome profile paths for cookie extraction (search API fallback)
+_DT_CHROME_PROFILE_PATHS = [
+    "~/Library/Application Support/Google/Chrome/Profile 7/Cookies",
+    "~/Library/Application Support/Google/Chrome/Default/Cookies",
+    "~/Library/Application Support/Chromium/Default/Cookies",
+    "~/.config/google-chrome/Default/Cookies",
+]
+_DT_THREADS_COOKIE_URL = "https://www.threads.com"
+# Instagram mobile UA required for /api/v1/users/search/ to return JSON (not HTML)
+_DT_MOBILE_UA = (
+    "Instagram 303.0.0.11.111 Android (30/11; 420dpi; 1080x2280; "
+    "Xiaomi; M2004J19C; gauguin; qcom; ko_KR; 488558062)"
+)
+
 THREADS_ROOT = Path("Threads")
 OUTPUT_ROOT = Path(".claude/discover-threads")
 INTEREST_FILE = Path(".thread-collector-interests.json")
@@ -562,46 +582,143 @@ def discover_corpus(config: DiscoverConfig) -> dict:
 
 # ── Source: search ────────────────────────────────────────────────────────────
 
+def _build_search_session() -> tuple | None:
+    """
+    Python requests 세션 + LSD/CSRF 토큰을 준비한다.
+    pycookiecheat 없거나 쿠키 없으면 None 반환.
+    반환: (session, lsd, csrf) or None
+    """
+    if not _REQUESTS_AVAILABLE:
+        return None
+    try:
+        import pycookiecheat  # type: ignore
+    except ImportError:
+        return None
+
+    cookies: dict = {}
+    for raw_path in _DT_CHROME_PROFILE_PATHS:
+        p = os.path.expanduser(raw_path)
+        if not os.path.isfile(p):
+            continue
+        try:
+            c = pycookiecheat.chrome_cookies(_DT_THREADS_COOKIE_URL, cookie_file=p)
+            if c:
+                cookies = c
+                break
+        except Exception:
+            continue
+
+    if not cookies:
+        return None
+
+    session = _requests.Session()
+    session.cookies.update(cookies)
+
+    # LSD 토큰을 threads.net 홈페이지 HTML에서 추출
+    try:
+        r = session.get(
+            "https://www.threads.net",
+            headers={"User-Agent": _DT_MOBILE_UA},
+            timeout=20,
+            allow_redirects=True,
+        )
+        lsd_m = re.search(r'"LSD",\[\],\{"token":"([^"]+)"', r.text)
+        lsd = lsd_m.group(1) if lsd_m else ""
+    except Exception:
+        lsd = ""
+
+    csrf = cookies.get("csrftoken", "")
+    return (session, lsd, csrf)
+
+
+def _search_users_python(query: str, count: int, session, lsd: str, csrf: str) -> dict:
+    """
+    Python requests 로 /api/v1/users/search/ 를 직접 호출한다.
+    Instagram mobile UA 필수 (desktop UA 는 400 useragent mismatch 반환).
+    반환: {"users": [...], "status": 200, "query": query} or {"error": ..., "status": ...}
+    """
+    url = (
+        "https://www.threads.net/api/v1/users/search/"
+        f"?q={_requests.utils.quote(query)}&count={count}"
+    )
+    headers = {
+        "User-Agent": _DT_MOBILE_UA,
+        "Accept": "*/*",
+        "X-FB-LSD": lsd,
+        "X-CSRFToken": csrf,
+        "X-IG-App-ID": "238260118697367",
+        "X-ASBD-ID": "359341",
+    }
+    try:
+        r = session.get(url, headers=headers, timeout=20)
+        if r.status_code == 200:
+            data = r.json()
+            users = [
+                {
+                    "username": u.get("username", ""),
+                    "pk": u.get("pk", ""),
+                    "full_name": u.get("full_name") or None,
+                    "is_private": bool(u.get("text_post_app_is_private", False)),
+                    "is_verified": bool(u.get("is_verified", False)),
+                }
+                for u in data.get("users", [])
+            ]
+            return {"users": users, "status": r.status_code, "query": query}
+        return {"error": f"HTTP {r.status_code}", "status": r.status_code,
+                "raw": r.text[:200]}
+    except Exception as e:
+        return {"error": str(e), "status": 0}
+
+
 def discover_search(config: DiscoverConfig) -> dict:
     """
     /api/v1/users/search/ 비공식 REST 를 통해 키워드 → 유저 목록을 반환한다.
     config.queries 의 각 키워드마다 한 번씩 호출하고 결과를 합산한다.
     실패(401/403/빈 응답) 시 stderr 경고 후 빈 결과 반환 (graceful degradation).
+
+    구현: Python requests + Instagram mobile UA 직접 호출.
+    browse eval XHR 은 threads.net → threads.com 리다이렉트로 인한 cross-origin 차단으로
+    사용 불가. Python requests 는 same-session cookie 를 유지하며 직접 API 를 호출한다.
     """
     if not config.queries:
         return {}
 
-    # LSD 토큰 확보를 위해 threads.net 를 먼저 방문
-    print("[search] threads.net 방문해 LSD 토큰 확보 중 ...", file=sys.stderr)
-    _dt_browse_goto("https://www.threads.net")
-    time.sleep(1.5)
+    # Python requests 세션 초기화
+    print("[search] Python requests 세션 초기화 중 ...", file=sys.stderr)
+    search_session = _build_search_session()
+    if search_session is None:
+        print(
+            "[search] 경고: requests/pycookiecheat 미설치 또는 쿠키 없음 — search 소스 건너뜀.\n"
+            "  pip install requests pycookiecheat 후 재시도하세요.",
+            file=sys.stderr,
+        )
+        return {}
+
+    py_session, lsd, csrf = search_session
+    if not lsd:
+        print("[search] 경고: LSD 토큰 추출 실패 — search 소스 건너뜀.", file=sys.stderr)
+        return {}
 
     candidates: dict = {}
 
     for query in config.queries:
         print(f"[search] 검색 중: {query!r}", file=sys.stderr)
-        js = (JS_SEARCH_USERS
-              .replace("QUERY_PLACEHOLDER", query.replace('"', '\\"'))
-              .replace("COUNT_PLACEHOLDER", "20"))
-        try:
-            out = _dt_browse_eval(js, "/tmp/_dt_search.js")
-            data = _dt_parse_json(out)
-        except Exception as e:
-            print(f"[search] eval 실패: {e}", file=sys.stderr)
-            continue
-
-        if not data:
-            print(f"[search] JSON 파싱 실패 (query={query!r})", file=sys.stderr)
-            continue
+        data = _search_users_python(query, 20, py_session, lsd, csrf)
 
         if "error" in data:
-            print(f"[search] 엔드포인트 오류 (query={query!r}): {data['error']} (status={data.get('status')})",
-                  file=sys.stderr)
+            print(
+                f"[search] 엔드포인트 오류 (query={query!r}): {data['error']} "
+                f"(status={data.get('status')})",
+                file=sys.stderr,
+            )
             continue
 
         status = data.get("status", 0)
         if status in (401, 403):
-            print(f"[search] 인증 오류 {status} (query={query!r}). 세션 쿠키를 확인하세요.", file=sys.stderr)
+            print(
+                f"[search] 인증 오류 {status} (query={query!r}). 세션 쿠키를 확인하세요.",
+                file=sys.stderr,
+            )
             continue
 
         users = data.get("users", [])
