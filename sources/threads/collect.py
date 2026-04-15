@@ -586,8 +586,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--types",
-        default="tech,product,career",
-        help="Comma-separated category filters: tech, product, career. Default: all.",
+        default="",
+        help="Comma-separated category slugs (13-category 체계). 비우면 전체. 예: ai-llm,monetization,viral-sns",
     )
     parser.add_argument(
         "--user-id",
@@ -620,14 +620,18 @@ def main() -> None:
     # Resolve output directory
     output_root = Path(args.output_dir) if args.output_dir else Path.cwd() / "Threads"
 
-    # Resolve requested categories
+    # Resolve requested categories (비우면 전체 13-category)
     requested_types_raw = [t.strip().lower() for t in args.types.split(",") if t.strip()]
     requested_cats: set[str] = set()
-    for t in requested_types_raw:
-        if t in TYPE_ALIASES:
-            requested_cats.add(TYPE_ALIASES[t])
-        else:
-            sys.exit(f"ERROR: Unknown type '{t}'. Valid options: tech, product, career.")
+    if not requested_types_raw:
+        requested_cats = set(TYPE_ALIASES.values())
+    else:
+        for t in requested_types_raw:
+            if t in TYPE_ALIASES:
+                requested_cats.add(TYPE_ALIASES[t])
+            else:
+                valid = ", ".join(sorted(TYPE_ALIASES.keys()))
+                sys.exit(f"ERROR: Unknown type '{t}'. Valid options: {valid}.")
 
     print(f"ThreadCollector — @{username}")
     print(f"  Categories : {', '.join(sorted(requested_cats))}")
