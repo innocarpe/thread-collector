@@ -52,10 +52,12 @@ CATEGORY_LABELS = {
 # 카페별 운영자 닉네임
 CAFE_OPERATORS = {
     "vibemoney": {"만능시바", "만렙시바"},
+    "shortsyoutuber": {"쇼츠유튜버"},
 }
 
 KNOWN_CAFES = {
     "vibemoney": "31623270",
+    "shortsyoutuber": "31606881",
 }
 
 # 카페별 게시판 목록 (menuId → 이름)
@@ -84,12 +86,18 @@ KNOWN_MENUS = {
         28: "📚 과제 게시판",
         34: "👨‍👩‍👦 행사 안내",
         36: "👕 기타 상품 홍보",
-    }
+    },
+    "shortsyoutuber": {
+        1: "자유게시판",
+        2: "쇼츠 정보게시판",
+        3: "수강생 숙제 게시판",
+    },
 }
 
 # 기본 수집 게시판 (--only-menus 미지정 시)
 DEFAULT_MENUS = {
     "vibemoney": {1, 4, 7, 8, 9, 22, 23, 29, 30, 31},
+    "shortsyoutuber": {1, 2, 3},
 }
 
 # ── 키워드 분류기 ─────────────────────────────────────────────────────────────

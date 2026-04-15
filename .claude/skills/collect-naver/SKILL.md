@@ -99,8 +99,16 @@ NaverCafe 수집 완료 — {CAFE}
 | 슬러그 | clubId | 설명 |
 |--------|--------|------|
 | vibemoney | 31623270 | 바이브코딩 · 온라인 수익화 |
+| shortsyoutuber | 31606881 | 쇼츠 유튜브 운영 · 알고리즘 · 채널 운영 |
 
 새 카페 추가 시 `sources/naver_cafe/collect.py` 의 `KNOWN_CAFES` 딕셔너리에 등록.
+
+### 쇼츠유튜버 기본값
+- cafe slug: `shortsyoutuber`
+- clubId: `31606881`
+- 운영자 닉네임: `쇼츠유튜버`
+- 게시판: `1`(자유게시판), `2`(쇼츠 정보게시판), `3`(수강생 숙제 게시판)
+- 수집 예시: `python3 -m sources.naver_cafe.collect shortsyoutuber --only-menus 1,2,3`
 
 ---
 
