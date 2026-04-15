@@ -284,10 +284,8 @@ class RssAdapter(BaseAdapter):
     def fetch_post(self, post_ref: PostRef) -> Post:
         """개별 글을 가져온다."""
         url = post_ref.url
-        if not can_fetch(url):
-            raise PermissionError(f"robots.txt에 의해 skip: {url}")
 
-        # 먼저 피드 XML에서 content 추출 시도
+        # 먼저 피드 XML에서 content 추출 시도 (robots.txt 확인 전 — 피드에서 이미 허용된 콘텐츠)
         feed_xml: str | None = None
         for cached_xml in self._feed_xml_cache.values():
             content_html = _extract_content_from_feed_item(cached_xml, url)
@@ -298,7 +296,9 @@ class RssAdapter(BaseAdapter):
         if feed_xml and len(feed_xml) > 200:
             markdown = html_to_markdown(feed_xml)
         else:
-            # 직접 HTTP fetch
+            # 직접 HTTP fetch — robots.txt 확인
+            if not can_fetch(url):
+                raise PermissionError(f"robots.txt에 의해 skip: {url}")
             try:
                 html_text = fetch_text(url)
             except Exception as exc:

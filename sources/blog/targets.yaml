@@ -97,8 +97,8 @@ creators:
   - slug: weyoume
     name: WeYouMe
     urls:
-      - https://mydevspace.blogspot.com/
-    adapter: generic_html
+      - https://mydevspace.blogspot.com/feeds/posts/default
+    adapter: rss
     category_hint: [dev-tools, portfolio-ops]
     lang: en
     rate_limit_sec: 2
