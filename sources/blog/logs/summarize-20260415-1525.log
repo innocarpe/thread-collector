@@ -1,0 +1,24 @@
+SummarizeCreator — programmingzombie
+  인사이트 소스: 173 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (4,309 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,483 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (8,021 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (13,350 bytes)
+
+SummarizeCreator 완료 — programmingzombie
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    programmingzombie/insights/overview.md  (4,309 bytes)
+    programmingzombie/insights/patterns.md  (4,483 bytes)
+    programmingzombie/insights/key-posts.md  (8,021 bytes)
+    programmingzombie/insights/replication-playbook.md  (13,350 bytes)

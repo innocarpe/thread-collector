@@ -1,0 +1,13 @@
+2026-04-15 12:51:00,260 [INFO] pipeline.programmingzombie: === programmingzombie 수집 시작 (adapter=auto) ===
+2026-04-15 12:51:00,260 [INFO] pipeline.programmingzombie: discover_posts: https://programmingzombie.com/
+2026-04-15 12:51:00,712 [INFO] sources.blog.adapters.rss: RSS/Atom 피드를 찾을 수 없음: https://programmingzombie.com/
+2026-04-15 12:51:00,712 [INFO] pipeline.programmingzombie: https://programmingzombie.com/: 0개 포스트 발견
+2026-04-15 12:51:00,712 [INFO] pipeline.programmingzombie: discover_posts: https://soulduse.tistory.com/
+2026-04-15 12:51:00,807 [INFO] sources.blog.adapters.tistory: Tistory RSS: 10개 포스트
+2026-04-15 12:51:00,894 [INFO] sources.blog.adapters.tistory: Tistory sitemap 병합: 251개 추가
+2026-04-15 12:51:00,895 [INFO] sources.blog.adapters.tistory: Tistory discover 완료: 총 261개 포스트 (https://soulduse.tistory.com/)
+2026-04-15 12:51:00,895 [INFO] pipeline.programmingzombie: https://soulduse.tistory.com/: 261개 포스트 발견
+2026-04-15 13:00:42,767 [INFO] pipeline.programmingzombie: === programmingzombie 완료: discovered=261, saved=261, skipped=0, failed=0 ===
+
+── 수집 요약 ──
+  programmingzombie: discovered=261, saved=261, skipped=0, failed=0
