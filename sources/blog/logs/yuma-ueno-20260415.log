@@ -1,0 +1,49 @@
+2026-04-15 16:17:05,181 [INFO] pipeline.yuma-ueno: === yuma-ueno 수집 시작 (adapter=medium) ===
+2026-04-15 16:17:05,181 [INFO] pipeline.yuma-ueno: discover_posts: https://medium.com/@yumaueno
+2026-04-15 16:17:05,218 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@yumaueno — HTTP Error 403: Forbidden
+2026-04-15 16:17:05,218 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@yumaueno
+2026-04-15 16:17:08,744 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/feed/@yumaueno)
+2026-04-15 16:17:08,744 [INFO] pipeline.yuma-ueno: https://medium.com/@yumaueno: 5개 포스트 발견
+2026-04-15 16:17:08,744 [INFO] pipeline.yuma-ueno: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:17:08,744 [INFO] pipeline.yuma-ueno:   - https://medium.com/@yumaueno/matthew-gallagher-the-41-year-old-genius-who-built-a-410m-empire-in-under-2-years-552595a04e15?source=rss-7318b164240a------2 | Matthew Gallagher: The 41-Year-Old Genius Who Built a $410M Empire in Under 2 Years | 2026-04-14
+2026-04-15 16:17:08,745 [INFO] pipeline.yuma-ueno:   - https://medium.com/@yumaueno/launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-running-whole-companies-9f3b87f7970a?source=rss-7318b164240a------2 | Launch to $6.2M ARR in Just 3 Months Solo! The AI Agent Running Whole Companies | 2026-04-06
+2026-04-15 16:17:08,745 [INFO] pipeline.yuma-ueno:   - https://medium.com/@yumaueno/evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to-14k-month-d04fc9093873?source=rss-7318b164240a------2 | Evan Yadegari: The 14-Year-Old Prodigy Who Scaled His App to $14k/Month | 2026-03-30
+2026-04-15 16:17:08,745 [INFO] pipeline.yuma-ueno: === yuma-ueno 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:21,309 [INFO] pipeline.yuma-ueno: === yuma-ueno 수집 시작 (adapter=medium) ===
+2026-04-15 16:20:21,309 [INFO] pipeline.yuma-ueno: discover_posts: https://medium.com/@yumaueno
+2026-04-15 16:20:21,360 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@yumaueno — HTTP Error 403: Forbidden
+2026-04-15 16:20:21,360 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@yumaueno
+2026-04-15 16:20:23,400 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@yumaueno — HTTP Error 403: Forbidden
+2026-04-15 16:20:23,400 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@yumaueno
+2026-04-15 16:20:27,439 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@yumaueno — HTTP Error 403: Forbidden
+2026-04-15 16:20:27,439 [DEBUG] sources.blog.adapters.rss: root_url HTML 읽기 실패: https://medium.com/@yumaueno — fetch 최종 실패: https://medium.com/@yumaueno
+2026-04-15 16:20:33,203 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/@yumaueno/feed)
+2026-04-15 16:20:33,203 [INFO] pipeline.yuma-ueno: https://medium.com/@yumaueno: 10개 포스트 발견
+2026-04-15 16:20:33,251 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/matthew-gallagher-the-41-year-old-genius-who-built-a-410m-empire-in-under-2-years-552595a04e15?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/matthew-gallagher-the-41-year-old-genius-who-built-a-410m-empire-in-under-2-years-552595a04e15?source=rss-7318b164240a------2
+2026-04-15 16:20:34,257 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-running-whole-companies-9f3b87f7970a?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-running-whole-companies-9f3b87f7970a?source=rss-7318b164240a------2
+2026-04-15 16:20:35,268 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to-14k-month-d04fc9093873?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to-14k-month-d04fc9093873?source=rss-7318b164240a------2
+2026-04-15 16:20:36,278 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/the-23-year-old-genius-who-built-an-app-empire-300m-downloads-150m-in-revenue-d8ab522e8d26?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/the-23-year-old-genius-who-built-an-app-empire-300m-downloads-150m-in-revenue-d8ab522e8d26?source=rss-7318b164240a------2
+2026-04-15 16:20:37,289 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/the-17-year-old-genius-who-scaled-his-app-to-5-7-291558593f01?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/the-17-year-old-genius-who-scaled-his-app-to-5-7-291558593f01?source=rss-7318b164240a------2
+2026-04-15 16:20:38,299 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/ernesto-lopez-the-21-year-old-prodigy-building-11-ai-apps-making-over-70k-month-ebcb74c111e6?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/ernesto-lopez-the-21-year-old-prodigy-building-11-ai-apps-making-over-70k-month-ebcb74c111e6?source=rss-7318b164240a------2
+2026-04-15 16:20:39,304 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/the-peter-steinberger-from-solo-indie-success-to-openclaw-4957b9b64785?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/the-peter-steinberger-from-solo-indie-success-to-openclaw-4957b9b64785?source=rss-7318b164240a------2
+2026-04-15 16:20:40,309 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/from-zero-code-student-to-14-000-mo-how-ai-and-discord-marketing-fueled-explosive-app-growth-ffc19a55a65a?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/from-zero-code-student-to-14-000-mo-how-ai-and-discord-marketing-fueled-explosive-app-growth-ffc19a55a65a?source=rss-7318b164240a------2
+2026-04-15 16:20:41,320 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/from-data-scientist-to-indie-hacker-my-journey-of-building-failing-and-scaling-ai-products-0907521a261c?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/from-data-scientist-to-indie-hacker-my-journey-of-building-failing-and-scaling-ai-products-0907521a261c?source=rss-7318b164240a------2
+2026-04-15 16:20:42,330 [WARNING] pipeline.yuma-ueno: fetch 실패: https://medium.com/@yumaueno/jack-friks-the-man-of-the-moment-who-scaled-a-couples-app-to-5-000-month-in-just-2-months-9f64d58cd9cf?source=rss-7318b164240a------2 — robots.txt에 의해 skip: https://medium.com/@yumaueno/jack-friks-the-man-of-the-moment-who-scaled-a-couples-app-to-5-000-month-in-just-2-months-9f64d58cd9cf?source=rss-7318b164240a------2
+2026-04-15 16:20:42,331 [INFO] pipeline.yuma-ueno: === yuma-ueno 완료: discovered=10, saved=0, skipped=0, failed=10 ===
+2026-04-15 16:21:34,359 [INFO] pipeline.yuma-ueno: === yuma-ueno 수집 시작 (adapter=medium) ===
+2026-04-15 16:21:34,359 [INFO] pipeline.yuma-ueno: discover_posts: https://medium.com/@yumaueno
+2026-04-15 16:21:34,407 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@yumaueno — HTTP Error 403: Forbidden
+2026-04-15 16:21:34,407 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@yumaueno
+2026-04-15 16:21:37,803 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/feed/@yumaueno)
+2026-04-15 16:21:37,803 [INFO] pipeline.yuma-ueno: https://medium.com/@yumaueno: 10개 포스트 발견
+2026-04-15 16:21:37,806 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-04-14-matthew-gallagher-the-41-year-old-genius-who-built-a-410m-em.md
+2026-04-15 16:21:38,818 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-04-06-launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-runnin.md
+2026-04-15 16:21:39,830 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-03-30-evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to-.md
+2026-04-15 16:21:40,841 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-03-23-the-23-year-old-genius-who-built-an-app-empire-300m-download.md
+2026-04-15 16:21:41,851 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-03-17-the-17-year-old-genius-who-scaled-his-app-to-5-7-291558593f0.md
+2026-04-15 16:21:42,861 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-03-11-ernesto-lopez-the-21-year-old-prodigy-building-11-ai-apps-ma.md
+2026-04-15 16:21:43,864 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-03-05-the-peter-steinberger-from-solo-indie-success-to-openclaw-49.md
+2026-04-15 16:21:44,876 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-02-17-from-zero-code-student-to-14-000-mo-how-ai-and-discord-marke.md
+2026-04-15 16:21:45,888 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-02-11-from-data-scientist-to-indie-hacker-my-journey-of-building-f.md
+2026-04-15 16:21:46,900 [DEBUG] pipeline.yuma-ueno: 저장: Blog/yuma-ueno/uncategorized/2026-02-07-jack-friks-the-man-of-the-moment-who-scaled-a-couples-app-to.md
+2026-04-15 16:21:46,900 [INFO] pipeline.yuma-ueno: === yuma-ueno 완료: discovered=10, saved=10, skipped=0, failed=0 ===

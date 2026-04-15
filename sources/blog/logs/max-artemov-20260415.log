@@ -1,0 +1,6 @@
+2026-04-15 16:18:44,356 [INFO] pipeline.max-artemov: === max-artemov 수집 시작 (adapter=generic_html) ===
+2026-04-15 16:18:44,356 [INFO] pipeline.max-artemov: discover_posts: https://www.indiehackers.com/product/max-artemov
+2026-04-15 16:18:44,805 [WARNING] sources.blog.adapters.generic_html: robots.txt skip: https://www.indiehackers.com/product/max-artemov
+2026-04-15 16:18:44,805 [INFO] pipeline.max-artemov: https://www.indiehackers.com/product/max-artemov: 0개 포스트 발견
+2026-04-15 16:18:44,805 [INFO] pipeline.max-artemov: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:44,805 [INFO] pipeline.max-artemov: === max-artemov 완료: discovered=0, saved=0, skipped=0, failed=0 ===

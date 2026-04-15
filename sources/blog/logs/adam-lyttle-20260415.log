@@ -1,0 +1,10 @@
+2026-04-15 16:18:47,952 [INFO] pipeline.adam-lyttle: === adam-lyttle 수집 시작 (adapter=generic_html) ===
+2026-04-15 16:18:47,952 [INFO] pipeline.adam-lyttle: discover_posts: https://www.starterstory.com/adam-lyttle
+2026-04-15 16:18:48,403 [WARNING] sources.blog.adapters.generic_html: robots.txt skip: https://www.starterstory.com/adam-lyttle
+2026-04-15 16:18:48,403 [INFO] pipeline.adam-lyttle: https://www.starterstory.com/adam-lyttle: 0개 포스트 발견
+2026-04-15 16:18:48,403 [INFO] pipeline.adam-lyttle: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:48,403 [INFO] pipeline.adam-lyttle: discover_posts: https://www.indiehackers.com/adamlyttle
+2026-04-15 16:18:48,830 [WARNING] sources.blog.adapters.generic_html: robots.txt skip: https://www.indiehackers.com/adamlyttle
+2026-04-15 16:18:48,830 [INFO] pipeline.adam-lyttle: https://www.indiehackers.com/adamlyttle: 0개 포스트 발견
+2026-04-15 16:18:48,830 [INFO] pipeline.adam-lyttle: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:48,830 [INFO] pipeline.adam-lyttle: === adam-lyttle 완료: discovered=0, saved=0, skipped=0, failed=0 ===

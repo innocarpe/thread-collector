@@ -1,0 +1,164 @@
+2026-04-15 16:17:09,716 [INFO] pipeline.josh-manders: === josh-manders 수집 시작 (adapter=rss) ===
+2026-04-15 16:17:09,716 [INFO] pipeline.josh-manders: discover_posts: https://joshmanders.com/
+2026-04-15 16:17:10,216 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:10,216 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:17:12,247 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:12,247 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:17:16,278 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:16,495 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:16,495 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:17:18,524 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:18,524 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:17:22,551 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:22,779 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:17:22,779 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:17:24,802 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:17:24,803 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:17:28,829 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:17:29,074 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:29,075 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:17:31,104 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:31,104 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:17:35,130 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:35,369 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:35,369 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:17:37,392 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:37,392 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:17:41,420 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:41,633 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:17:41,633 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:17:41,641 [INFO] pipeline.josh-manders: === josh-manders 수집 시작 (adapter=rss) ===
+2026-04-15 16:17:41,641 [INFO] pipeline.josh-manders: discover_posts: https://joshmanders.com/
+2026-04-15 16:17:41,890 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:41,890 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:17:43,659 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:17:43,659 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:17:43,921 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:43,921 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:17:47,686 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:17:47,902 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:17:47,903 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:17:47,945 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:17:47,964 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:47,964 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:17:49,929 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:17:49,929 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:17:49,991 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:49,991 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:17:53,958 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:17:53,959 [INFO] sources.blog.adapters.rss: RSS/Atom 피드를 찾을 수 없음: https://joshmanders.com/
+2026-04-15 16:17:53,959 [INFO] pipeline.josh-manders: https://joshmanders.com/: 0개 포스트 발견
+2026-04-15 16:17:53,959 [INFO] pipeline.josh-manders: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:17:53,959 [INFO] pipeline.josh-manders: === josh-manders 완료: discovered=0, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:17:54,015 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:17:54,031 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:17:54,031 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:17:56,063 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:17:56,063 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:18:00,088 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:18:00,107 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:00,108 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:18:02,131 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:02,132 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:18:06,161 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:06,182 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:06,182 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:18:08,207 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:08,207 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:18:12,236 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:12,256 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:12,256 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:18:14,276 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:14,276 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:18:14,318 [INFO] pipeline.josh-manders: === josh-manders 수집 시작 (adapter=rss) ===
+2026-04-15 16:18:14,318 [INFO] pipeline.josh-manders: discover_posts: https://joshmanders.com/
+2026-04-15 16:18:14,356 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:18:14,356 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:18:16,381 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:18:16,381 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:18:18,300 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:18,316 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:18,316 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:18:20,343 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:20,343 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:18:20,407 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:18:20,427 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:20,427 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:18:22,451 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:22,451 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:18:24,384 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:24,384 [INFO] sources.blog.adapters.rss: RSS/Atom 피드를 찾을 수 없음: https://joshmanders.com/
+2026-04-15 16:18:24,384 [INFO] pipeline.josh-manders: https://joshmanders.com/: 0개 포스트 발견
+2026-04-15 16:18:24,384 [INFO] pipeline.josh-manders: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:24,384 [INFO] pipeline.josh-manders: === josh-manders 완료: discovered=0, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:18:26,481 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:26,501 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:18:26,501 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:18:28,533 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:18:28,533 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:18:32,564 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:18:32,583 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:32,583 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:18:34,611 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:34,611 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:18:38,636 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:38,657 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:38,657 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:18:40,710 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:40,710 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:18:44,732 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:18:44,748 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:44,749 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:18:46,780 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:46,780 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:18:50,811 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:18:50,833 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:50,833 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:18:52,850 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:52,851 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:18:56,406 [INFO] pipeline.josh-manders: === josh-manders 수집 시작 (adapter=rss) ===
+2026-04-15 16:18:56,406 [INFO] pipeline.josh-manders: discover_posts: https://joshmanders.com/
+2026-04-15 16:18:56,442 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:18:56,442 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:18:56,871 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:18:56,871 [INFO] sources.blog.adapters.rss: RSS/Atom 피드를 찾을 수 없음: https://joshmanders.com/
+2026-04-15 16:18:56,871 [INFO] pipeline.josh-manders: https://joshmanders.com/: 0개 포스트 발견
+2026-04-15 16:18:56,871 [INFO] pipeline.josh-manders: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:56,872 [INFO] pipeline.josh-manders: === josh-manders 완료: discovered=0, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:18:58,471 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:18:58,471 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss
+2026-04-15 16:19:02,495 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss — HTTP Error 404: Not Found
+2026-04-15 16:19:02,515 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:02,515 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:19:04,541 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:04,541 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss.xml
+2026-04-15 16:19:08,568 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:08,588 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:19:08,588 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:19:10,618 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:19:10,618 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed
+2026-04-15 16:19:14,643 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed — HTTP Error 404: Not Found
+2026-04-15 16:19:14,664 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:14,664 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:19:16,693 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:16,693 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed.xml
+2026-04-15 16:19:20,720 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:20,739 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:20,739 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:19:22,762 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:22,762 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/atom.xml
+2026-04-15 16:19:26,790 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/atom.xml — HTTP Error 404: Not Found
+2026-04-15 16:19:26,810 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:19:26,810 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:19:28,836 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:19:28,836 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/feed/
+2026-04-15 16:19:32,862 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/feed/ — HTTP Error 404: Not Found
+2026-04-15 16:19:32,881 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:19:32,881 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:19:34,907 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:19:34,907 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://joshmanders.com/rss/
+2026-04-15 16:19:38,933 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://joshmanders.com/rss/ — HTTP Error 404: Not Found
+2026-04-15 16:19:38,933 [INFO] sources.blog.adapters.rss: RSS/Atom 피드를 찾을 수 없음: https://joshmanders.com/
+2026-04-15 16:19:38,933 [INFO] pipeline.josh-manders: https://joshmanders.com/: 0개 포스트 발견
+2026-04-15 16:19:38,933 [INFO] pipeline.josh-manders: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:19:38,933 [INFO] pipeline.josh-manders: === josh-manders 완료: discovered=0, saved=0, skipped=0, failed=0 ===

@@ -1,0 +1,74 @@
+2026-04-15 16:16:45,707 [INFO] pipeline.roman-koch: === roman-koch 수집 시작 (adapter=medium) ===
+2026-04-15 16:16:45,707 [INFO] pipeline.roman-koch: discover_posts: https://medium.com/@romankoch
+2026-04-15 16:16:45,739 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:16:45,739 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:16:47,791 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:16:47,791 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:16:51,824 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:16:51,824 [DEBUG] sources.blog.adapters.rss: root_url HTML 읽기 실패: https://medium.com/@romankoch — fetch 최종 실패: https://medium.com/@romankoch
+2026-04-15 16:16:51,852 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:16:51,852 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch/rss
+2026-04-15 16:16:53,894 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:16:53,895 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch/rss
+2026-04-15 16:16:57,940 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:16:57,970 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch/rss.xml — HTTP Error 403: Forbidden
+2026-04-15 16:16:57,971 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch/rss.xml
+2026-04-15 16:17:00,008 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch/rss.xml — HTTP Error 403: Forbidden
+2026-04-15 16:17:00,008 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch/rss.xml
+2026-04-15 16:17:05,042 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/@romankoch/feed)
+2026-04-15 16:17:05,042 [INFO] pipeline.roman-koch: https://medium.com/@romankoch: 5개 포스트 발견
+2026-04-15 16:17:05,042 [INFO] pipeline.roman-koch: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:17:05,042 [INFO] pipeline.roman-koch:   - https://medium.com/@romankoch/what-i-had-to-relearn-as-an-indie-developer-9c621d23ddff?source=rss-4f0be52319a3------2 | What I Had to Relearn as an Indie Developer | 2026-04-06
+2026-04-15 16:17:05,042 [INFO] pipeline.roman-koch:   - https://medium.com/@romankoch/i-never-planned-to-use-my-own-blood-pressure-app-until-i-ended-up-in-the-emergency-room-81556fd5d739?source=rss-4f0be52319a3------2 | I Never Planned to Use My Own Blood Pressure App, Until I Ended Up in the Emergency Room | 2026-03-12
+2026-04-15 16:17:05,042 [INFO] pipeline.roman-koch:   - https://medium.com/@romankoch/what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-38084b0a21f5?source=rss-4f0be52319a3------2 | What Happens When Anyone Can Build an iOS App in a Weekend? | 2026-02-07
+2026-04-15 16:17:05,043 [INFO] pipeline.roman-koch: === roman-koch 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:18,595 [INFO] pipeline.roman-koch: === roman-koch 수집 시작 (adapter=medium) ===
+2026-04-15 16:20:18,595 [INFO] pipeline.roman-koch: discover_posts: https://medium.com/@romankoch
+2026-04-15 16:20:18,630 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:20:18,630 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:20:30,882 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch — HTTP Error 503: Service Unavailable
+2026-04-15 16:20:30,882 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:20:34,929 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:20:34,929 [DEBUG] sources.blog.adapters.rss: root_url HTML 읽기 실패: https://medium.com/@romankoch — fetch 최종 실패: https://medium.com/@romankoch
+2026-04-15 16:20:34,965 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:20:34,965 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch/rss
+2026-04-15 16:20:37,010 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:20:37,010 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch/rss
+2026-04-15 16:20:41,065 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@romankoch/rss — HTTP Error 403: Forbidden
+2026-04-15 16:20:41,092 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch/rss.xml — HTTP Error 403: Forbidden
+2026-04-15 16:20:41,092 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch/rss.xml
+2026-04-15 16:20:43,160 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch/rss.xml — HTTP Error 403: Forbidden
+2026-04-15 16:20:43,160 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch/rss.xml
+2026-04-15 16:20:47,196 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://medium.com/@romankoch/rss.xml — HTTP Error 403: Forbidden
+2026-04-15 16:20:47,603 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/@romankoch/feed)
+2026-04-15 16:20:47,603 [INFO] pipeline.roman-koch: https://medium.com/@romankoch: 10개 포스트 발견
+2026-04-15 16:20:47,665 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/what-i-had-to-relearn-as-an-indie-developer-9c621d23ddff?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/what-i-had-to-relearn-as-an-indie-developer-9c621d23ddff?source=rss-4f0be52319a3------2
+2026-04-15 16:20:48,666 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/i-never-planned-to-use-my-own-blood-pressure-app-until-i-ended-up-in-the-emergency-room-81556fd5d739?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/i-never-planned-to-use-my-own-blood-pressure-app-until-i-ended-up-in-the-emergency-room-81556fd5d739?source=rss-4f0be52319a3------2
+2026-04-15 16:20:49,676 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-38084b0a21f5?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-38084b0a21f5?source=rss-4f0be52319a3------2
+2026-04-15 16:20:50,682 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/how-to-know-if-your-mobile-app-idea-is-worth-building-5-simple-steps-c3619d254289?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/how-to-know-if-your-mobile-app-idea-is-worth-building-5-simple-steps-c3619d254289?source=rss-4f0be52319a3------2
+2026-04-15 16:20:51,693 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/my-10-step-workflow-to-build-fast-mobile-apps-with-cursor-f9ef3ffe7dc8?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/my-10-step-workflow-to-build-fast-mobile-apps-with-cursor-f9ef3ffe7dc8?source=rss-4f0be52319a3------2
+2026-04-15 16:20:52,695 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/my-2025-recap-as-an-indie-developer-6846593eaad6?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/my-2025-recap-as-an-indie-developer-6846593eaad6?source=rss-4f0be52319a3------2
+2026-04-15 16:20:53,706 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/the-most-underrated-part-of-indie-dev-support-8e5eed00f592?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/the-most-underrated-part-of-indie-dev-support-8e5eed00f592?source=rss-4f0be52319a3------2
+2026-04-15 16:20:54,716 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/your-complete-quit-smoking-timeline-what-to-expect-hour-by-hour-day-by-day-5bb9f0f6d037?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/your-complete-quit-smoking-timeline-what-to-expect-hour-by-hour-day-by-day-5bb9f0f6d037?source=rss-4f0be52319a3------2
+2026-04-15 16:20:55,726 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/how-i-validate-my-app-ideas-before-writing-a-single-line-of-code-87dfc2fdfc1c?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/how-i-validate-my-app-ideas-before-writing-a-single-line-of-code-87dfc2fdfc1c?source=rss-4f0be52319a3------2
+2026-04-15 16:20:56,737 [WARNING] pipeline.roman-koch: fetch 실패: https://medium.com/@romankoch/5-mistakes-i-made-as-a-new-indie-developer-so-you-dont-have-to-daf000718b0f?source=rss-4f0be52319a3------2 — robots.txt에 의해 skip: https://medium.com/@romankoch/5-mistakes-i-made-as-a-new-indie-developer-so-you-dont-have-to-daf000718b0f?source=rss-4f0be52319a3------2
+2026-04-15 16:20:56,737 [INFO] pipeline.roman-koch: === roman-koch 완료: discovered=10, saved=0, skipped=0, failed=10 ===
+2026-04-15 16:21:33,215 [INFO] pipeline.roman-koch: === roman-koch 수집 시작 (adapter=medium) ===
+2026-04-15 16:21:33,215 [INFO] pipeline.roman-koch: discover_posts: https://medium.com/@romankoch
+2026-04-15 16:21:33,647 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:21:33,647 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:21:35,693 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://medium.com/@romankoch — HTTP Error 403: Forbidden
+2026-04-15 16:21:35,694 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://medium.com/@romankoch
+2026-04-15 16:21:40,984 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://medium.com/feed/@romankoch)
+2026-04-15 16:21:40,984 [INFO] pipeline.roman-koch: https://medium.com/@romankoch: 10개 포스트 발견
+2026-04-15 16:21:40,988 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-04-06-what-i-had-to-relearn-as-an-indie-developer-9c621d23ddff.md
+2026-04-15 16:21:42,001 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-03-12-i-never-planned-to-use-my-own-blood-pressure-app-until-i-end.md
+2026-04-15 16:21:43,016 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-02-07-what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-3.md
+2026-04-15 16:21:44,029 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-01-30-how-to-know-if-your-mobile-app-idea-is-worth-building-5-simp.md
+2026-04-15 16:21:45,044 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-01-05-my-10-step-workflow-to-build-fast-mobile-apps-with-cursor-f9.md
+2026-04-15 16:21:46,057 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2026-01-04-my-2025-recap-as-an-indie-developer-6846593eaad6.md
+2026-04-15 16:21:47,069 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2025-08-15-the-most-underrated-part-of-indie-dev-support-8e5eed00f592.md
+2026-04-15 16:21:48,086 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2025-07-26-your-complete-quit-smoking-timeline-what-to-expect-hour-by-h.md
+2026-04-15 16:21:49,091 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2025-04-18-how-i-validate-my-app-ideas-before-writing-a-single-line-of-.md
+2026-04-15 16:21:50,097 [DEBUG] pipeline.roman-koch: 저장: Blog/roman-koch/uncategorized/2025-02-19-5-mistakes-i-made-as-a-new-indie-developer-so-you-dont-have-.md
+2026-04-15 16:21:50,097 [INFO] pipeline.roman-koch: === roman-koch 완료: discovered=10, saved=10, skipped=0, failed=0 ===

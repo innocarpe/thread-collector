@@ -1,0 +1,236 @@
+=== extract adam-wathan ===
+ExtractInsights — adam-wathan
+  대상: 10 파일
+  출력: Blog/adam-wathan/insights/{slug}-insight.md
+
+  [ok] 2020-08-02-tailwindcss-from-side-project-byproduct-to-multi-mullion-dol-insight.md (8,941 bytes)
+  [ok] 2018-12-27-2018-year-in-review-insight.md (11,417 bytes)
+  [ok] 2017-04-21-the-book-launch-that-let-me-quit-my-job-insight.md (12,003 bytes)
+  [ok] 2018-12-28-going-full-time-on-tailwind-css-insight.md (9,869 bytes)
+  [ok] 2017-08-07-css-utility-classes-and-separation-of-concerns-insight.md (7,966 bytes)
+  [ok] 2017-11-30-dont-use-em-for-media-queries-insight.md (7,601 bytes)
+  [ok] 2018-03-22-renderless-components-in-vuejs-insight.md (5,913 bytes)
+  [ok] 2018-04-19-the-trick-to-understanding-scoped-slots-in-vuejs-insight.md (3,690 bytes)
+  [ok] 2019-10-17-persistent-layout-patterns-in-nextjs-insight.md (5,723 bytes)
+  [ok] 2020-09-18-composing-the-uncomposable-with-css-variables-insight.md (6,941 bytes)
+
+ExtractInsights 완료 — adam-wathan
+  성공: 10
+
+  생성된 인사이트 파일:
+    2017-04-21-the-book-launch-that-let-me-quit-my-job-insight.md  (12,003 bytes)
+    2017-08-07-css-utility-classes-and-separation-of-concerns-insight.md  (7,966 bytes)
+    2017-11-30-dont-use-em-for-media-queries-insight.md  (7,601 bytes)
+    2018-03-22-renderless-components-in-vuejs-insight.md  (5,913 bytes)
+    2018-04-19-the-trick-to-understanding-scoped-slots-in-vuejs-insight.md  (3,690 bytes)
+    2018-12-27-2018-year-in-review-insight.md  (11,417 bytes)
+    2018-12-28-going-full-time-on-tailwind-css-insight.md  (9,869 bytes)
+    2019-10-17-persistent-layout-patterns-in-nextjs-insight.md  (5,723 bytes)
+    2020-08-02-tailwindcss-from-side-project-byproduct-to-multi-mullion-dol-insight.md  (8,941 bytes)
+    2020-09-18-composing-the-uncomposable-with-css-variables-insight.md  (6,941 bytes)
+=== extract yuma-ueno ===
+ExtractInsights — yuma-ueno
+  대상: 10 파일
+  출력: Blog/yuma-ueno/insights/{slug}-insight.md
+
+  [ok] 2026-02-07-jack-friks-the-man-of-the-moment-who-scaled-a-couples-app-to-insight.md (5,173 bytes)
+  [ok] 2026-02-17-from-zero-code-student-to-14-000-mo-how-ai-and-discord-marke-insight.md (2,544 bytes)
+  [ok] 2026-03-11-ernesto-lopez-the-21-year-old-prodigy-building-11-ai-apps-ma-insight.md (2,713 bytes)
+  [ok] 2026-03-17-the-17-year-old-genius-who-scaled-his-app-to-5-7-291558593f0-insight.md (4,955 bytes)
+  [ok] 2026-03-23-the-23-year-old-genius-who-built-an-app-empire-300m-download-insight.md (5,443 bytes)
+  [ok] 2026-03-30-evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to--insight.md (1,738 bytes)
+  [ok] 2026-04-06-launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-runnin-insight.md (4,676 bytes)
+  [ok] 2026-04-14-matthew-gallagher-the-41-year-old-genius-who-built-a-410m-em-insight.md (4,896 bytes)
+  [ok] 2026-02-11-from-data-scientist-to-indie-hacker-my-journey-of-building-f-insight.md (1,482 bytes)
+  [ok] 2026-03-05-the-peter-steinberger-from-solo-indie-success-to-openclaw-49-insight.md (1,397 bytes)
+
+ExtractInsights 완료 — yuma-ueno
+  성공: 10
+
+  생성된 인사이트 파일:
+    2026-02-07-jack-friks-the-man-of-the-moment-who-scaled-a-couples-app-to-insight.md  (5,173 bytes)
+    2026-02-11-from-data-scientist-to-indie-hacker-my-journey-of-building-f-insight.md  (1,482 bytes)
+    2026-02-17-from-zero-code-student-to-14-000-mo-how-ai-and-discord-marke-insight.md  (2,544 bytes)
+    2026-03-05-the-peter-steinberger-from-solo-indie-success-to-openclaw-49-insight.md  (1,397 bytes)
+    2026-03-11-ernesto-lopez-the-21-year-old-prodigy-building-11-ai-apps-ma-insight.md  (2,713 bytes)
+    2026-03-17-the-17-year-old-genius-who-scaled-his-app-to-5-7-291558593f0-insight.md  (4,955 bytes)
+    2026-03-23-the-23-year-old-genius-who-built-an-app-empire-300m-download-insight.md  (5,443 bytes)
+    2026-03-30-evan-yadegari-the-14-year-old-prodigy-who-scaled-his-app-to--insight.md  (1,738 bytes)
+    2026-04-06-launch-to-6-2m-arr-in-just-3-months-solo-the-ai-agent-runnin-insight.md  (4,676 bytes)
+    2026-04-14-matthew-gallagher-the-41-year-old-genius-who-built-a-410m-em-insight.md  (4,896 bytes)
+=== extract roman-koch ===
+ExtractInsights — roman-koch
+  대상: 9 파일
+  출력: Blog/roman-koch/insights/{slug}-insight.md
+
+  [ok] 2025-04-18-how-i-validate-my-app-ideas-before-writing-a-single-line-of--insight.md (5,984 bytes)
+  [ok] 2026-01-30-how-to-know-if-your-mobile-app-idea-is-worth-building-5-simp-insight.md (5,904 bytes)
+  [ok] 2025-02-19-5-mistakes-i-made-as-a-new-indie-developer-so-you-dont-have--insight.md (5,645 bytes)
+  [ok] 2025-08-15-the-most-underrated-part-of-indie-dev-support-8e5eed00f592-insight.md (4,820 bytes)
+  [ok] 2026-02-07-what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-3-insight.md (6,181 bytes)
+
+ExtractInsights 완료 — roman-koch
+  성공: 5
+  Skip (이미 존재): 4
+
+  생성된 인사이트 파일:
+    2025-02-19-5-mistakes-i-made-as-a-new-indie-developer-so-you-dont-have--insight.md  (5,645 bytes)
+    2025-04-18-how-i-validate-my-app-ideas-before-writing-a-single-line-of--insight.md  (5,984 bytes)
+    2025-08-15-the-most-underrated-part-of-indie-dev-support-8e5eed00f592-insight.md  (4,820 bytes)
+    2026-01-04-my-2025-recap-as-an-indie-developer-6846593eaad6-insight.md  (7,312 bytes)
+    2026-01-05-my-10-step-workflow-to-build-fast-mobile-apps-with-cursor-f9-insight.md  (5,625 bytes)
+    2026-01-30-how-to-know-if-your-mobile-app-idea-is-worth-building-5-simp-insight.md  (5,904 bytes)
+    2026-02-07-what-happens-when-anyone-can-build-an-ios-app-in-a-weekend-3-insight.md  (6,181 bytes)
+    2026-03-12-i-never-planned-to-use-my-own-blood-pressure-app-until-i-end-insight.md  (5,002 bytes)
+    2026-04-06-what-i-had-to-relearn-as-an-indie-developer-9c621d23ddff-insight.md  (4,855 bytes)
+=== summarize adam-wathan ===
+SummarizeCreator — adam-wathan
+  인사이트 소스: 10 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,523 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,661 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (9,299 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (13,730 bytes)
+
+SummarizeCreator 완료 — adam-wathan
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    adam-wathan/insights/overview.md  (3,523 bytes)
+    adam-wathan/insights/patterns.md  (4,661 bytes)
+    adam-wathan/insights/key-posts.md  (9,299 bytes)
+    adam-wathan/insights/replication-playbook.md  (13,730 bytes)
+=== summarize yuma-ueno ===
+SummarizeCreator — yuma-ueno
+  인사이트 소스: 10 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,780 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,098 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (8,853 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (11,664 bytes)
+
+SummarizeCreator 완료 — yuma-ueno
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    yuma-ueno/insights/overview.md  (3,780 bytes)
+    yuma-ueno/insights/patterns.md  (4,098 bytes)
+    yuma-ueno/insights/key-posts.md  (8,853 bytes)
+    yuma-ueno/insights/replication-playbook.md  (11,664 bytes)
+=== summarize roman-koch ===
+SummarizeCreator — roman-koch
+  인사이트 소스: 9 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,750 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,524 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (8,715 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (12,340 bytes)
+
+SummarizeCreator 완료 — roman-koch
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    roman-koch/insights/overview.md  (3,750 bytes)
+    roman-koch/insights/patterns.md  (4,524 bytes)
+    roman-koch/insights/key-posts.md  (8,715 bytes)
+    roman-koch/insights/replication-playbook.md  (12,340 bytes)
+=== summarize hussein-el-feky ===
+SummarizeCreator — hussein-el-feky
+  인사이트 소스: 1 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,265 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,317 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (1,359 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (9,605 bytes)
+
+SummarizeCreator 완료 — hussein-el-feky
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    hussein-el-feky/insights/overview.md  (3,265 bytes)
+    hussein-el-feky/insights/patterns.md  (4,317 bytes)
+    hussein-el-feky/insights/key-posts.md  (1,359 bytes)
+    hussein-el-feky/insights/replication-playbook.md  (9,605 bytes)
+=== summarize sebastian-rohl ===
+SummarizeCreator — sebastian-rohl
+  인사이트 소스: 20 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,649 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,614 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (8,061 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (16,628 bytes)
+
+SummarizeCreator 완료 — sebastian-rohl
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    sebastian-rohl/insights/overview.md  (3,649 bytes)
+    sebastian-rohl/insights/patterns.md  (4,614 bytes)
+    sebastian-rohl/insights/key-posts.md  (8,061 bytes)
+    sebastian-rohl/insights/replication-playbook.md  (16,628 bytes)
+=== summarize weyoume ===
+SummarizeCreator — weyoume
+  인사이트 소스: 21 파일
+  생성할 파일: overview, patterns, key-posts, replication-playbook
+
+[1/4] overview.md 생성 중...
+  [ok] overview.md  (3,676 bytes)
+
+[2/4] patterns.md 생성 중...
+  [ok] patterns.md  (4,444 bytes)
+
+[3/4] key-posts.md 생성 중...
+  [ok] key-posts.md  (6,764 bytes)
+
+[4/4] replication-playbook.md 생성 중...
+  [ok] replication-playbook.md  (13,364 bytes)
+
+SummarizeCreator 완료 — weyoume
+  성공: 4 / 시도: 4
+
+  생성된 파일:
+    weyoume/insights/overview.md  (3,676 bytes)
+    weyoume/insights/patterns.md  (4,444 bytes)
+    weyoume/insights/key-posts.md  (6,764 bytes)
+    weyoume/insights/replication-playbook.md  (13,364 bytes)
+=== ALL DONE ===

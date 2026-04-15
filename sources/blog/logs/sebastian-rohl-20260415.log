@@ -1,0 +1,59 @@
+2026-04-15 16:16:37,238 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 수집 시작 (adapter=substack) ===
+2026-04-15 16:16:37,238 [INFO] pipeline.sebastian-rohl: discover_posts: https://sebastianroehl.substack.com/
+2026-04-15 16:16:38,788 [INFO] sources.blog.adapters.rss: RSS discover: 20개 포스트 발견 (https://sebastianroehl.substack.com/feed)
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl: https://sebastianroehl.substack.com/: 5개 포스트 발견
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl:   - https://sebastianroehl.substack.com/p/building-an-indie-app-business-96 | Building An Indie App Business #96 | 2026-03-29
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl:   - https://sebastianroehl.substack.com/p/building-an-indie-app-business-95 | Building An Indie App Business #95 | 2026-03-22
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl:   - https://sebastianroehl.substack.com/p/building-an-indie-app-business-94 | Building An Indie App Business #94 | 2026-03-15
+2026-04-15 16:16:38,788 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:16,637 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 수집 시작 (adapter=substack) ===
+2026-04-15 16:20:16,637 [INFO] pipeline.sebastian-rohl: discover_posts: https://sebastianroehl.substack.com/
+2026-04-15 16:20:16,774 [INFO] sources.blog.adapters.rss: RSS discover: 20개 포스트 발견 (https://sebastianroehl.substack.com/feed)
+2026-04-15 16:20:16,774 [INFO] pipeline.sebastian-rohl: https://sebastianroehl.substack.com/: 20개 포스트 발견
+2026-04-15 16:20:16,806 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-96 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-96
+2026-04-15 16:20:17,811 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-95 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-95
+2026-04-15 16:20:18,821 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-94 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-94
+2026-04-15 16:20:19,826 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-93 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-93
+2026-04-15 16:20:20,837 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-92 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-92
+2026-04-15 16:20:21,848 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-91 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-91
+2026-04-15 16:20:22,849 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-90 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-90
+2026-04-15 16:20:23,854 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-89 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-89
+2026-04-15 16:20:24,864 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-88 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-88
+2026-04-15 16:20:25,867 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-87 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-87
+2026-04-15 16:20:26,877 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-86 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-86
+2026-04-15 16:20:27,888 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-85 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-85
+2026-04-15 16:20:28,890 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/2025-the-year-that-changed-everything — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/2025-the-year-that-changed-everything
+2026-04-15 16:20:29,901 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/from-flutter-to-swiftui-a-case-study — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/from-flutter-to-swiftui-a-case-study
+2026-04-15 16:20:30,906 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-84 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-84
+2026-04-15 16:20:31,915 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-83 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-83
+2026-04-15 16:20:32,923 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/focuskit-is-live — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/focuskit-is-live
+2026-04-15 16:20:33,930 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-82 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-82
+2026-04-15 16:20:34,935 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-81 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-81
+2026-04-15 16:20:35,945 [WARNING] pipeline.sebastian-rohl: fetch 실패: https://sebastianroehl.substack.com/p/building-an-indie-app-business-80 — robots.txt에 의해 skip: https://sebastianroehl.substack.com/p/building-an-indie-app-business-80
+2026-04-15 16:20:35,945 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 완료: discovered=20, saved=0, skipped=0, failed=20 ===
+2026-04-15 16:21:32,724 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 수집 시작 (adapter=substack) ===
+2026-04-15 16:21:32,724 [INFO] pipeline.sebastian-rohl: discover_posts: https://sebastianroehl.substack.com/
+2026-04-15 16:21:32,848 [INFO] sources.blog.adapters.rss: RSS discover: 20개 포스트 발견 (https://sebastianroehl.substack.com/feed)
+2026-04-15 16:21:32,848 [INFO] pipeline.sebastian-rohl: https://sebastianroehl.substack.com/: 20개 포스트 발견
+2026-04-15 16:21:32,851 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-03-29-building-an-indie-app-business-96.md
+2026-04-15 16:21:33,863 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-03-22-building-an-indie-app-business-95.md
+2026-04-15 16:21:34,878 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-03-15-building-an-indie-app-business-94.md
+2026-04-15 16:21:35,893 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-03-08-building-an-indie-app-business-93.md
+2026-04-15 16:21:36,906 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-03-01-building-an-indie-app-business-92.md
+2026-04-15 16:21:37,921 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-02-22-building-an-indie-app-business-91.md
+2026-04-15 16:21:38,934 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-02-15-building-an-indie-app-business-90.md
+2026-04-15 16:21:39,946 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-02-08-building-an-indie-app-business-89.md
+2026-04-15 16:21:40,962 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-02-01-building-an-indie-app-business-88.md
+2026-04-15 16:21:41,977 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-01-25-building-an-indie-app-business-87.md
+2026-04-15 16:21:42,996 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-01-18-building-an-indie-app-business-86.md
+2026-04-15 16:21:44,009 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2026-01-11-building-an-indie-app-business-85.md
+2026-04-15 16:21:45,030 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-12-31-2025-the-year-that-changed-everything.md
+2026-04-15 16:21:46,048 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-12-14-from-flutter-to-swiftui-a-case-study.md
+2026-04-15 16:21:47,062 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-12-07-building-an-indie-app-business-84.md
+2026-04-15 16:21:48,071 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-11-30-building-an-indie-app-business-83.md
+2026-04-15 16:21:49,086 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-11-29-focuskit-is-live.md
+2026-04-15 16:21:50,091 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-11-23-building-an-indie-app-business-82.md
+2026-04-15 16:21:51,105 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-11-16-building-an-indie-app-business-81.md
+2026-04-15 16:21:52,114 [DEBUG] pipeline.sebastian-rohl: 저장: Blog/sebastian-rohl/uncategorized/2025-11-09-building-an-indie-app-business-80.md
+2026-04-15 16:21:52,114 [INFO] pipeline.sebastian-rohl: === sebastian-rohl 완료: discovered=20, saved=20, skipped=0, failed=0 ===

@@ -1,0 +1,33 @@
+2026-04-15 16:16:38,945 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 수집 시작 (adapter=medium) ===
+2026-04-15 16:16:38,945 [INFO] pipeline.hussein-el-feky: discover_posts: https://hfeky.medium.com/
+2026-04-15 16:16:38,982 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:16:38,983 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://hfeky.medium.com/
+2026-04-15 16:16:42,022 [INFO] sources.blog.adapters.rss: RSS discover: 1개 포스트 발견 (https://medium.com/feed/@hfeky)
+2026-04-15 16:16:42,022 [INFO] pipeline.hussein-el-feky: https://hfeky.medium.com/: 1개 포스트 발견
+2026-04-15 16:16:42,022 [INFO] pipeline.hussein-el-feky: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:16:42,022 [INFO] pipeline.hussein-el-feky:   - https://hfeky.medium.com/my-first-1-million-installs-as-an-independent-android-developer-12327d95a739?source=rss-6c9b5da1b37------2 | My First 1 Million Installs as an Independent Android Developer | 2019-07-13
+2026-04-15 16:16:42,023 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 완료: discovered=1, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:17,815 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 수집 시작 (adapter=medium) ===
+2026-04-15 16:20:17,815 [INFO] pipeline.hussein-el-feky: discover_posts: https://hfeky.medium.com/
+2026-04-15 16:20:17,860 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:20:17,860 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://hfeky.medium.com/
+2026-04-15 16:20:19,900 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:20:19,900 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://hfeky.medium.com/
+2026-04-15 16:20:23,936 [DEBUG] sources.blog.fetch: fetch 실패 (시도 3): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:20:23,937 [DEBUG] sources.blog.adapters.rss: root_url HTML 읽기 실패: https://hfeky.medium.com/ — fetch 최종 실패: https://hfeky.medium.com/
+2026-04-15 16:20:23,985 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://hfeky.medium.com/rss — HTTP Error 403: Forbidden
+2026-04-15 16:20:23,986 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://hfeky.medium.com/rss
+2026-04-15 16:20:27,538 [INFO] sources.blog.adapters.rss: RSS discover: 1개 포스트 발견 (https://hfeky.medium.com/feed)
+2026-04-15 16:20:27,538 [INFO] pipeline.hussein-el-feky: https://hfeky.medium.com/: 1개 포스트 발견
+2026-04-15 16:20:27,573 [WARNING] pipeline.hussein-el-feky: fetch 실패: https://hfeky.medium.com/my-first-1-million-installs-as-an-independent-android-developer-12327d95a739?source=rss-6c9b5da1b37------2 — robots.txt에 의해 skip: https://hfeky.medium.com/my-first-1-million-installs-as-an-independent-android-developer-12327d95a739?source=rss-6c9b5da1b37------2
+2026-04-15 16:20:27,573 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 완료: discovered=1, saved=0, skipped=0, failed=1 ===
+2026-04-15 16:21:22,122 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 수집 시작 (adapter=medium) ===
+2026-04-15 16:21:22,122 [INFO] pipeline.hussein-el-feky: discover_posts: https://hfeky.medium.com/
+2026-04-15 16:21:22,156 [DEBUG] sources.blog.fetch: fetch 실패 (시도 1): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:21:22,156 [DEBUG] sources.blog.fetch: 재시도 1/2 — 2초 후 재요청: https://hfeky.medium.com/
+2026-04-15 16:21:24,224 [DEBUG] sources.blog.fetch: fetch 실패 (시도 2): https://hfeky.medium.com/ — HTTP Error 403: Forbidden
+2026-04-15 16:21:24,225 [DEBUG] sources.blog.fetch: 재시도 2/2 — 4초 후 재요청: https://hfeky.medium.com/
+2026-04-15 16:21:29,331 [INFO] sources.blog.adapters.rss: RSS discover: 1개 포스트 발견 (https://medium.com/feed/@hfeky)
+2026-04-15 16:21:29,332 [INFO] pipeline.hussein-el-feky: https://hfeky.medium.com/: 1개 포스트 발견
+2026-04-15 16:21:29,337 [DEBUG] pipeline.hussein-el-feky: 저장: Blog/hussein-el-feky/uncategorized/2019-07-13-my-first-1-million-installs-as-an-independent-android-develo.md
+2026-04-15 16:21:29,337 [INFO] pipeline.hussein-el-feky: === hussein-el-feky 완료: discovered=1, saved=1, skipped=0, failed=0 ===

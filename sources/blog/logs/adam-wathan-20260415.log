@@ -1,0 +1,33 @@
+2026-04-15 16:17:08,911 [INFO] pipeline.adam-wathan: === adam-wathan 수집 시작 (adapter=rss) ===
+2026-04-15 16:17:08,911 [INFO] pipeline.adam-wathan: discover_posts: https://adamwathan.me/
+2026-04-15 16:17:09,584 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://adamwathan.me/rss/index.xml)
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan: https://adamwathan.me/: 5개 포스트 발견
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/composing-the-uncomposable-with-css-variables | Composing the Uncomposable with CSS Variables | 2020-09-18
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/tailwindcss-from-side-project-byproduct-to-multi-mullion-dollar-business | Tailwind CSS: From Side-Project Byproduct to Multi-Million Dollar Business | 2020-08-02
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs | Persistent Layout Patterns in Next.js | 2019-10-17
+2026-04-15 16:17:09,585 [INFO] pipeline.adam-wathan: === adam-wathan 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:17:40,909 [INFO] pipeline.adam-wathan: === adam-wathan 수집 시작 (adapter=rss) ===
+2026-04-15 16:17:40,909 [INFO] pipeline.adam-wathan: discover_posts: https://adamwathan.me/
+2026-04-15 16:17:41,487 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://adamwathan.me/rss/index.xml)
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan: https://adamwathan.me/: 5개 포스트 발견
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/composing-the-uncomposable-with-css-variables | Composing the Uncomposable with CSS Variables | 2020-09-18
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/tailwindcss-from-side-project-byproduct-to-multi-mullion-dollar-business | Tailwind CSS: From Side-Project Byproduct to Multi-Million Dollar Business | 2020-08-02
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan:   - https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs | Persistent Layout Patterns in Next.js | 2019-10-17
+2026-04-15 16:17:41,487 [INFO] pipeline.adam-wathan: === adam-wathan 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:21,985 [INFO] pipeline.adam-wathan: === adam-wathan 수집 시작 (adapter=rss) ===
+2026-04-15 16:20:21,985 [INFO] pipeline.adam-wathan: discover_posts: https://adamwathan.me/
+2026-04-15 16:20:22,720 [INFO] sources.blog.adapters.rss: RSS discover: 10개 포스트 발견 (https://adamwathan.me/rss/index.xml)
+2026-04-15 16:20:22,720 [INFO] pipeline.adam-wathan: https://adamwathan.me/: 10개 포스트 발견
+2026-04-15 16:20:24,140 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2020-09-18-composing-the-uncomposable-with-css-variables.md
+2026-04-15 16:20:26,137 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2020-08-02-tailwindcss-from-side-project-byproduct-to-multi-mullion-dol.md
+2026-04-15 16:20:28,214 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2019-10-17-persistent-layout-patterns-in-nextjs.md
+2026-04-15 16:20:30,406 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2018-12-28-going-full-time-on-tailwind-css.md
+2026-04-15 16:20:32,595 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2018-12-27-2018-year-in-review.md
+2026-04-15 16:20:34,499 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2018-04-19-the-trick-to-understanding-scoped-slots-in-vuejs.md
+2026-04-15 16:20:36,769 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2018-03-22-renderless-components-in-vuejs.md
+2026-04-15 16:20:38,925 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2017-11-30-dont-use-em-for-media-queries.md
+2026-04-15 16:20:41,011 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2017-08-07-css-utility-classes-and-separation-of-concerns.md
+2026-04-15 16:20:43,277 [DEBUG] pipeline.adam-wathan: 저장: Blog/adam-wathan/uncategorized/2017-04-21-the-book-launch-that-let-me-quit-my-job.md
+2026-04-15 16:20:43,277 [INFO] pipeline.adam-wathan: === adam-wathan 완료: discovered=10, saved=10, skipped=0, failed=0 ===

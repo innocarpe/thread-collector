@@ -1,0 +1,78 @@
+2026-04-15 16:18:51,216 [INFO] pipeline.weyoume: === weyoume 수집 시작 (adapter=generic_html) ===
+2026-04-15 16:18:51,216 [INFO] pipeline.weyoume: discover_posts: https://mydevspace.blogspot.com/
+2026-04-15 16:18:52,286 [INFO] sources.blog.adapters.generic_html: generic_html discover: 6개 포스트 후보 (https://mydevspace.blogspot.com/)
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume: https://mydevspace.blogspot.com/: 5개 포스트 발견
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/10/2025-9.html | None | None
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/10/xcode-build-input-file-cannot-be-found.html | None | None
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/09/xcode-26.html | None | None
+2026-04-15 16:18:52,286 [INFO] pipeline.weyoume: === weyoume 완료: discovered=5, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:09,708 [INFO] pipeline.weyoume: === weyoume 수집 시작 (adapter=rss) ===
+2026-04-15 16:20:09,708 [INFO] pipeline.weyoume: discover_posts: https://mydevspace.blogspot.com/feeds/posts/default
+2026-04-15 16:20:11,164 [INFO] sources.blog.adapters.rss: RSS discover: 25개 포스트 발견 (https://mydevspace.blogspot.com/feeds/posts/default)
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume: https://mydevspace.blogspot.com/feeds/posts/default: 10개 포스트 발견
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume: [dry-run] 저장 스킵. 샘플 3개:
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/10/2025-9.html | 2025년 9월 카카오 사태 프로필 미공개 | 2025-10-01
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/10/xcode-build-input-file-cannot-be-found.html | Xcode "Build input file cannot be found" 에러 발생 | 2025-10-01
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume:   - https://mydevspace.blogspot.com/2025/09/xcode-26.html | Xcode 26 화면 전환이나 메뉴 클릭, 코드 수정 시 계속 되는 로딩현상 수정 | 2025-09-28
+2026-04-15 16:20:11,164 [INFO] pipeline.weyoume: === weyoume 완료: discovered=10, saved=0, skipped=0, failed=0 ===
+2026-04-15 16:20:22,621 [INFO] pipeline.weyoume: === weyoume 수집 시작 (adapter=rss) ===
+2026-04-15 16:20:22,621 [INFO] pipeline.weyoume: discover_posts: https://mydevspace.blogspot.com/feeds/posts/default
+2026-04-15 16:20:23,882 [INFO] sources.blog.adapters.rss: RSS discover: 25개 포스트 발견 (https://mydevspace.blogspot.com/feeds/posts/default)
+2026-04-15 16:20:23,883 [INFO] pipeline.weyoume: https://mydevspace.blogspot.com/feeds/posts/default: 25개 포스트 발견
+2026-04-15 16:20:25,370 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-10-01-2025-9html.md
+2026-04-15 16:20:28,475 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-10-01-xcode-build-input-file-cannot-be-foundhtml.md
+2026-04-15 16:20:31,125 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-09-28-xcode-26html.md
+2026-04-15 16:20:33,974 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-09-27-xcodehtml.md
+2026-04-15 16:20:37,060 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-07-22-37-155kghtml.md
+2026-04-15 16:20:39,676 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-05-05-26-139kghtml.md
+2026-04-15 16:20:42,732 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-04-21-23-130kghtml.md
+2026-04-15 16:20:45,860 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-04-14-22-130kghtml.md
+2026-04-15 16:20:48,550 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-04-05-21-130kghtml.md
+2026-04-15 16:20:51,633 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-29-20-124kghtml.md
+2026-04-15 16:20:54,672 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-24-19-116kghtml.md
+2026-04-15 16:20:57,719 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-21-7html.md
+2026-04-15 16:21:00,825 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-15-18-110kghtml.md
+2026-04-15 16:21:03,910 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-13-6html.md
+2026-04-15 16:21:07,110 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-10-non-constant-range-argument-must-behtml.md
+2026-04-15 16:21:10,277 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-07-17html.md
+2026-04-15 16:21:13,377 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-07-5html.md
+2026-04-15 16:21:16,594 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-03-4html.md
+2026-04-15 16:21:19,697 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-03-02-16html.md
+2026-04-15 16:21:22,782 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-26-blog-post-26html.md
+2026-04-15 16:21:25,875 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-24-blog-post-24html.md
+2026-04-15 16:21:28,968 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-23-blog-post-23html.md
+2026-04-15 16:21:32,114 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-22-15html.md
+2026-04-15 16:21:35,102 [INFO] pipeline.weyoume: === weyoume 수집 시작 (adapter=rss) ===
+2026-04-15 16:21:35,102 [INFO] pipeline.weyoume: discover_posts: https://mydevspace.blogspot.com/feeds/posts/default
+2026-04-15 16:21:35,195 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-21-blog-post-21html.md
+2026-04-15 16:21:35,632 [INFO] sources.blog.adapters.rss: RSS discover: 25개 포스트 발견 (https://mydevspace.blogspot.com/feeds/posts/default)
+2026-04-15 16:21:35,632 [INFO] pipeline.weyoume: https://mydevspace.blogspot.com/feeds/posts/default: 25개 포스트 발견
+2026-04-15 16:21:35,632 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/10/2025-9.html
+2026-04-15 16:21:35,632 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/10/xcode-build-input-file-cannot-be-found.html
+2026-04-15 16:21:35,632 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/09/xcode-26.html
+2026-04-15 16:21:35,632 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/09/xcode.html
+2026-04-15 16:21:35,632 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/07/37-155kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/05/26-139kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/04/23-130kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/04/22-130kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/04/21-130kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/20-124kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/19-116kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/7.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/18-110kg.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/6.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/non-constant-range-argument-must-be.html
+2026-04-15 16:21:35,633 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/17.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/5.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/4.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/03/16.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/02/blog-post_26.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/02/blog-post_24.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/02/blog-post_23.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/02/15.html
+2026-04-15 16:21:35,634 [DEBUG] pipeline.weyoume: dedup skip: https://mydevspace.blogspot.com/2025/02/blog-post_21.html
+2026-04-15 16:21:38,481 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-20-3html.md
+2026-04-15 16:21:38,481 [INFO] pipeline.weyoume: === weyoume 완료: discovered=25, saved=25, skipped=0, failed=0 ===
+2026-04-15 16:21:39,221 [DEBUG] pipeline.weyoume: 저장: Blog/weyoume/uncategorized/2025-02-20-3html.md
+2026-04-15 16:21:39,221 [INFO] pipeline.weyoume: === weyoume 완료: discovered=25, saved=1, skipped=24, failed=0 ===
