@@ -107,14 +107,29 @@ def build_key_posts_prompt(creator: str, insights_dir: Path, insight_files: list
     )
 
 
-def build_playbook_prompt(creator: str, insights_dir: Path, insight_files: list[Path]) -> str:
+def build_playbook_prompt(
+    creator: str,
+    insights_dir: Path,
+    insight_files: list[Path],
+    focus: str | None = None,
+) -> str:
     """replication-playbook.md 생성 프롬프트."""
     file_list = "\n".join(f"- {f.name}" for f in insight_files[:50])
     output_path = str(insights_dir / "replication-playbook.md")
+    focus_instruction = ""
+    if focus:
+        focus_instruction = (
+            f"\n\n⚠️ 집중 지시: 이 플레이북은 반드시 다음 관점에만 집중해야 합니다:\n"
+            f"  {focus}\n"
+            f"Android API 디버깅, RecyclerView, Fragment, 권한 처리 같은 개별 기술 팁은 "
+            f"절대 포함하지 마세요. 해당 내용이 포함된 인사이트 파일은 무시하세요.\n"
+            f"포트폴리오 규모 확장, 앱 선정 기준, 수익화 수치, AdMob 운영 전략 관련 "
+            f"파일만 입력으로 활용하세요."
+        )
     return (
         f"당신은 스타트업 전략 컨설턴트입니다. creator '{creator}'의 블로그 인사이트 파일들을 읽고 "
         f"'TemperStone이 이 creator의 전략을 복제하려면 무엇을 해야 하나?'를 "
-        f"구체적인 실행 플레이북으로 작성하세요.\n\n"
+        f"구체적인 실행 플레이북으로 작성하세요.{focus_instruction}\n\n"
         f"읽어야 할 인사이트 파일들 ({len(insight_files)}개):\n{file_list}\n\n"
         f"각 파일은 Blog/{creator}/insights/ 디렉토리에 있습니다.\n\n"
         f"생성할 파일: {output_path}\n\n"
@@ -122,6 +137,12 @@ def build_playbook_prompt(creator: str, insights_dir: Path, insight_files: list[
         f"# {creator} 전략 복제 플레이북\n\n"
         "## 복제할 핵심 전략 (Top 3)\n"
         "- {전략명}: {왜 복제 가능한지, 어떤 결과를 기대할 수 있는지}\n\n"
+        "## 어떤 앱을 만들 것인가 (앱 종류 선정 기준)\n"
+        "- creator의 앱 선정 패턴, 성공/실패 사례, 아이디어 발굴 방법\n\n"
+        "## 얼마나 빠르게 출시할 것인가 (대량 생산 파이프라인)\n"
+        "- creator의 다작 방법론, 자동화 도구, 출시 속도 관련 구체적 수치\n\n"
+        "## 출시 후 무엇을 측정하고 유지할 것인가 (AdMob 수익 모니터링)\n"
+        "- AdMob·Google Ads 운영 방법, 수익 판단 기준, 광고 전략\n\n"
         "## Day 1 (오늘 당장)\n"
         "- [ ] {즉시 실행 가능한 구체적 액션}\n"
         "- 필요 도구: {목록}\n"
@@ -132,6 +153,10 @@ def build_playbook_prompt(creator: str, insights_dir: Path, insight_files: list[
         "- 예상 결과: {지표 또는 산출물}\n\n"
         "## Month 1 (첫 달)\n"
         "- [ ] {한 달 목표}\n"
+        "- 마일스톤: {중간 체크포인트}\n"
+        "- 성공 지표: {측정 가능한 기준}\n\n"
+        "## Month 3 (3개월 후)\n"
+        "- [ ] {3개월 목표}\n"
         "- 마일스톤: {중간 체크포인트}\n"
         "- 성공 지표: {측정 가능한 기준}\n\n"
         "## 주의사항 & 함정\n"
@@ -151,6 +176,17 @@ PROMPT_BUILDERS = {
     "replication-playbook": build_playbook_prompt,
 }
 
+# playbook 외 프롬프트는 focus 인자 미지원 — 시그니처 통일용 래퍼
+def _wrap_prompt_fn(fn, focus: str | None):
+    """focus를 지원하지 않는 프롬프트 빌더를 동일 시그니처로 래핑한다."""
+    def _inner(creator, insights_dir, insight_files):
+        import inspect
+        sig = inspect.signature(fn)
+        if "focus" in sig.parameters:
+            return fn(creator, insights_dir, insight_files, focus=focus)
+        return fn(creator, insights_dir, insight_files)
+    return _inner
+
 
 def run_codex_summary(
     creator: str,
@@ -158,6 +194,7 @@ def run_codex_summary(
     insights_dir: Path,
     insight_files: list[Path],
     codex: str,
+    focus: str | None = None,
 ) -> bool:
     """
     codex exec으로 단일 요약 파일 생성.
@@ -165,7 +202,8 @@ def run_codex_summary(
     """
     output_path = insights_dir / f"{target_name}.md"
     prompt_fn = PROMPT_BUILDERS[target_name]
-    prompt = prompt_fn(creator, insights_dir, insight_files)
+    wrapped_fn = _wrap_prompt_fn(prompt_fn, focus)
+    prompt = wrapped_fn(creator, insights_dir, insight_files)
 
     # stale 파일 제거 (이전 실행 잔여물)
     if output_path.exists():
@@ -216,6 +254,13 @@ def main() -> None:
     )
     parser.add_argument("--blog-dir", dest="blog_dir", default=None,
                         help="Blog/ 루트 경로 (기본: repo 루트의 Blog/)")
+    parser.add_argument(
+        "--focus",
+        default=None,
+        metavar="TEXT",
+        help="replication-playbook 생성 시 집중할 주제 (예: '350앱 포트폴리오 운영 + AdMob 수익화'). "
+             "개별 Android 기술 팁은 자동 제외.",
+    )
     args = parser.parse_args()
 
     blog_root = Path(args.blog_dir) if args.blog_dir else Path.cwd() / "Blog"
@@ -267,7 +312,7 @@ def main() -> None:
 
     for target_name in requested:
         print(f"[{requested.index(target_name)+1}/{len(requested)}] {target_name}.md 생성 중...")
-        ok = run_codex_summary(args.creator, target_name, insights_dir, insight_files, codex)
+        ok = run_codex_summary(args.creator, target_name, insights_dir, insight_files, codex, focus=args.focus)
         if ok:
             success += 1
         else:
