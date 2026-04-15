@@ -57,7 +57,7 @@ CATEGORY_DESCRIPTIONS = {
     "case-study": "특정 앱 성공/실패 사례, 수익 인증, 리텐션 실데이터, postmortem, 실패 후기",
 }
 
-CLASSIFY_BATCH_SIZE = 60
+CLASSIFY_BATCH_SIZE = 20
 
 
 def parse_md_post(filepath: Path) -> dict | None:
@@ -167,7 +167,7 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
                  "--model", "gpt-5.4-mini",
                  "--add-dir", "/tmp",
                  prompt],
-                capture_output=True, text=True, timeout=180,
+                capture_output=True, text=True, timeout=300,
             )
         except subprocess.TimeoutExpired:
             print(" timeout")
