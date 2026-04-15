@@ -36,7 +36,7 @@ args에서 대상 추출.
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-python3 scripts/insights.py @{USERNAME}
+python3 -m sources.threads.insights @{USERNAME}
 ```
 
 완료 확인:
@@ -59,14 +59,14 @@ ls NaverCafe/{CAFE}/community/uncategorized/*.md 2>/dev/null | wc -l
 
 미분류 파일이 있으면 먼저 classify 실행:
 ```bash
-python3 scripts/classify_naver.py {CAFE}
+python3 -m sources.naver_cafe.classify {CAFE}
 ```
 
 ### 2-B-2. 인사이트 생성
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-python3 scripts/insights_naver.py {CAFE}
+python3 -m sources.naver_cafe.insights {CAFE}
 ```
 
 완료 확인:
@@ -85,9 +85,9 @@ InsightsCollector 완료 — {CAFE}
 
 섹션별 단독 실행 옵션:
 ```bash
-python3 scripts/insights_naver.py {CAFE} --only operator
-python3 scripts/insights_naver.py {CAFE} --only community
-python3 scripts/insights_naver.py {CAFE} --only overview
+python3 -m sources.naver_cafe.insights {CAFE} --only operator
+python3 -m sources.naver_cafe.insights {CAFE} --only community
+python3 -m sources.naver_cafe.insights {CAFE} --only overview
 ```
 
 ---

@@ -14,7 +14,7 @@ pkill -f "next dev" 2>/dev/null || true
 sleep 1
 
 # 백그라운드로 dev 서버 실행
-cd /Users/WooseongKim/Projects/TemperStone/ThreadCollector
+cd /Users/WooseongKim/Projects/Temperstone/thread-collector
 npm run dev > /tmp/thread-collector-dev.log 2>&1 &
 echo "PID: $!"
 

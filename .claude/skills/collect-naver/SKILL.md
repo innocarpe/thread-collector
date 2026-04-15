@@ -35,12 +35,12 @@ cafe_name 없으면 AskUserQuestion:
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-python3 scripts/collect_naver.py {CAFE} [옵션들]
+python3 -m sources.naver_cafe.collect {CAFE} [옵션들]
 ```
 
 새 카페인 경우 (`--club-id` 필요):
 ```bash
-python3 scripts/collect_naver.py {CAFE} --club-id {CLUB_ID}
+python3 -m sources.naver_cafe.collect {CAFE} --club-id {CLUB_ID}
 ```
 
 완료 확인: `NaverCafe Collector 완료 — {CAFE}` 출력 확인.
@@ -55,7 +55,7 @@ ls NaverCafe/{CAFE}/community/uncategorized/*.md 2>/dev/null | wc -l
 
 1개 이상이면:
 ```bash
-python3 scripts/classify_naver.py {CAFE}
+python3 -m sources.naver_cafe.classify {CAFE}
 ```
 
 완료 확인: `NaverCafe Classifier 완료` 출력 확인.
@@ -67,16 +67,16 @@ python3 scripts/classify_naver.py {CAFE}
 ## Step 4: 인사이트 생성
 
 ```bash
-python3 scripts/insights_naver.py {CAFE}
+python3 -m sources.naver_cafe.insights {CAFE}
 ```
 
 완료 확인: `InsightsCollector 완료` 출력, 파일 9개 생성 확인.
 
 섹션별 단독 실행이 필요하면:
 ```bash
-python3 scripts/insights_naver.py {CAFE} --only operator
-python3 scripts/insights_naver.py {CAFE} --only community
-python3 scripts/insights_naver.py {CAFE} --only overview
+python3 -m sources.naver_cafe.insights {CAFE} --only operator
+python3 -m sources.naver_cafe.insights {CAFE} --only community
+python3 -m sources.naver_cafe.insights {CAFE} --only overview
 ```
 
 ---
@@ -100,7 +100,7 @@ NaverCafe 수집 완료 — {CAFE}
 |--------|--------|------|
 | vibemoney | 31623270 | 바이브코딩 · 온라인 수익화 |
 
-새 카페 추가 시 `scripts/collect_naver.py` 의 `KNOWN_CAFES` 딕셔너리에 등록.
+새 카페 추가 시 `sources/naver_cafe/collect.py` 의 `KNOWN_CAFES` 딕셔너리에 등록.
 
 ---
 

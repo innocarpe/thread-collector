@@ -18,7 +18,7 @@ username 없으면 AskUserQuestion으로 질문.
 ## Step 2: 스크립트 실행
 
 ```bash
-python3 scripts/classify.py @{USERNAME}
+python3 -m sources.threads.classify @{USERNAME}
 ```
 
 스크립트가 진행 상황을 출력함:
@@ -58,8 +58,8 @@ ClassifyCollector done — @{USERNAME}
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-python3 scripts/classify.py @username
-python3 scripts/classify.py @username --output-dir /path/to/Threads
+python3 -m sources.threads.classify @username
+python3 -m sources.threads.classify @username --output-dir /path/to/Threads
 ```
 
 ARGUMENTS: (username extracted from args by the skill)

@@ -42,7 +42,7 @@ Threads 비공식 REST 검색 엔드포인트(`/api/v1/users/search/`)를 통해
 cd "$(git rev-parse --show-toplevel)"
 
 # 단일 키워드
-python3 scripts/discover_threads.py \
+python3 -m sources.threads.discover \
   --sources search \
   --query "키워드" \
   --enrich \
@@ -50,7 +50,7 @@ python3 scripts/discover_threads.py \
   --limit 15
 
 # 복수 키워드
-python3 scripts/discover_threads.py \
+python3 -m sources.threads.discover \
   --sources search \
   --query "AI 수익화" \
   --query "바이브코딩" \
@@ -59,7 +59,7 @@ python3 scripts/discover_threads.py \
   --limit 15
 
 # 결과 수 조절
-python3 scripts/discover_threads.py \
+python3 -m sources.threads.discover \
   --sources search \
   --query "인디해킹" \
   --enrich \

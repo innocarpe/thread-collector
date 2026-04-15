@@ -55,22 +55,22 @@ args 에서 다음 옵션 추출:
 cd "$(git rev-parse --show-toplevel)"
 
 # Phase 1 기본 (기존 동작, --sources corpus 자동)
-python3 scripts/discover_threads.py
+python3 -m sources.threads.discover
 
 # Phase 2: 프로필 enrichment 추가
-python3 scripts/discover_threads.py --enrich
+python3 -m sources.threads.discover --enrich
 
 # Phase 3.1: 키워드 검색으로 새 유저 발굴
-python3 scripts/discover_threads.py --sources search --query "AI 수익화" --enrich
+python3 -m sources.threads.discover --sources search --query "AI 수익화" --enrich
 
 # Phase 3.2: 해시태그 페이지로 새 유저 발굴
-python3 scripts/discover_threads.py --sources hashtag --hashtag ai_llm --enrich
+python3 -m sources.threads.discover --sources hashtag --hashtag ai_llm --enrich
 
 # 멀티 소스 조합 (corpus + search + hashtag)
-python3 scripts/discover_threads.py --sources corpus,search,hashtag --query "바이브코딩" --hashtag indiehacking --enrich
+python3 -m sources.threads.discover --sources corpus,search,hashtag --query "바이브코딩" --hashtag indiehacking --enrich
 
 # 관심사 / 결과 수 조절
-python3 scripts/discover_threads.py --interest ai-llm,monetization --limit 30 --min-mentions 3
+python3 -m sources.threads.discover --interest ai-llm,monetization --limit 30 --min-mentions 3
 ```
 
 이 스크립트는 소스별로 다음을 수행한다:

@@ -117,16 +117,16 @@ EOF
 ## Step 4: 쿠키 주입 실제 테스트
 
 ```bash
-python3 /Users/WooseongKim/Projects/Temperstone/thread-collector/scripts/setup_cookies.py 2>&1
+# setup_cookies.py 파일은 별도 존재하지 않음 — 아래 인라인 블록으로 직접 실행
 ```
 
-`scripts/setup_cookies.py` 실행:
+쿠키 주입 테스트 (인라인):
 
 ```bash
 python3 - <<'EOF'
 import os, sys, subprocess
 
-sys.path.insert(0, "/Users/WooseongKim/Projects/Temperstone/thread-collector/scripts")
+sys.path.insert(0, "/Users/WooseongKim/Projects/Temperstone/thread-collector")
 
 try:
     import pycookiecheat
