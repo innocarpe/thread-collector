@@ -8,7 +8,10 @@ export type CategorySlug =
   | "career-growth"
   | "learning-retro"
   | "productivity"
-  | "web-app";
+  | "web-app"
+  | "portfolio-ops"
+  | "aso"
+  | "case-study";
 
 export const CATEGORY_LABELS: Record<CategorySlug, string> = {
   "ai-llm": "AI/LLM",
@@ -21,6 +24,9 @@ export const CATEGORY_LABELS: Record<CategorySlug, string> = {
   "learning-retro": "학습/회고",
   "productivity": "생산성/워크플로우",
   "web-app": "웹/앱 개발",
+  "portfolio-ops": "포트폴리오 운영",
+  "aso": "ASO/출시전략",
+  "case-study": "사례연구",
 };
 
 export const CATEGORIES: CategorySlug[] = [
@@ -34,6 +40,9 @@ export const CATEGORIES: CategorySlug[] = [
   "learning-retro",
   "productivity",
   "web-app",
+  "portfolio-ops",
+  "aso",
+  "case-study",
 ];
 
 export type InsightsContent = {

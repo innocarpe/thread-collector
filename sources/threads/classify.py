@@ -1,21 +1,27 @@
 #!/usr/bin/env python3
 """
 ThreadCollector — AI classify uncategorized posts
-Usage: python3 scripts/classify.py @username [--output-dir DIR]
+Usage: python3 -m sources.threads.classify @username [--output-dir DIR]
 
 Reads Threads/{username}/uncategorized/ and classifies each post
 via `codex exec`, moving files to the correct category folder.
 Junk posts are deleted.
 """
+from __future__ import annotations
 
 import argparse
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+# repo 루트를 sys.path에 추가 (직접 실행 및 -m 호출 모두 지원)
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from sources._common.codex import find_codex
 
 CATEGORY_LABELS = {
     "ai-llm": "AI/LLM",
@@ -28,6 +34,10 @@ CATEGORY_LABELS = {
     "learning-retro": "학습/회고",
     "productivity": "생산성/워크플로우",
     "web-app": "웹/앱 개발",
+    # 신규 3개 (2026-04-15)
+    "portfolio-ops": "포트폴리오 운영",
+    "aso": "ASO/출시전략",
+    "case-study": "사례연구",
 }
 
 CATEGORY_DESCRIPTIONS = {
@@ -41,20 +51,13 @@ CATEGORY_DESCRIPTIONS = {
     "learning-retro": "학습법, 스킬 향상, 공부 후기, 회고, 일·프로젝트 인사이트 요약",
     "productivity": "생산성, 루틴, 타임박싱, 셀프 매니지먼트, 집중력, 업무 효율",
     "web-app": "웹/SaaS 개발, 앱 개발, 프론트/백엔드 구체 기술, 배포·인프라",
+    # 신규 3개 (2026-04-15)
+    "portfolio-ops": "다작·자동화·CI/CD·앱 포트폴리오 대량 운영 체계, 350앱 운영 철학, 대량출시 전략",
+    "aso": "앱스토어 최적화, 키워드 리서치, 출시 체크리스트, 리뷰 대응, 플레이스토어 순위 전략",
+    "case-study": "특정 앱 성공/실패 사례, 수익 인증, 리텐션 실데이터, postmortem, 실패 후기",
 }
 
 CLASSIFY_BATCH_SIZE = 60
-
-
-def _find_codex() -> str | None:
-    codex = shutil.which("codex")
-    if codex:
-        return codex
-    for p in ["~/.bun/bin/codex", "~/.local/bin/codex", "/usr/local/bin/codex"]:
-        expanded = os.path.expanduser(p)
-        if os.path.isfile(expanded):
-            return expanded
-    return None
 
 
 def parse_md_post(filepath: Path) -> dict | None:
@@ -108,7 +111,7 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
     if not posts:
         return {}
 
-    codex = _find_codex()
+    codex = find_codex()
     if not codex:
         print("[warn] codex not found — cannot AI-classify")
         return {}
@@ -136,7 +139,7 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
         )
         prompt = (
             f"Read {tmp_input} — JSON array of Threads.net posts (pk + text, Korean).\n\n"
-            "Classify each post into exactly ONE of these 10 categories:\n"
+            "Classify each post into exactly ONE of these 13 categories:\n"
             f"{cat_lines}\n"
             '- "skip": junk — under 20 chars, only emojis, zero insight, pure reaction\n\n'
             "Rules:\n"

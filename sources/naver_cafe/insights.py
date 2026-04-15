@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 NaverCafe — generate insights/ from collected posts
-Usage: python3 scripts/insights_naver.py vibemoney
+Usage: python3 -m sources.naver_cafe.insights vibemoney
 
 Analyzes operator + community posts and writes:
   NaverCafe/{cafe}/insights/operator/full-analysis.md
@@ -14,27 +14,22 @@ Analyzes operator + community posts and writes:
   NaverCafe/{cafe}/insights/community/qa-pain-points.md
   NaverCafe/{cafe}/insights/00-overview.md
 """
+from __future__ import annotations
 
 import argparse
 import os
-import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+# repo 루트를 sys.path에 추가 (직접 실행 및 -m 호출 모두 지원)
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from sources._common.codex import find_codex
+
 OPERATOR_CATS  = ["income-methods", "tools-ai", "case-studies", "marketing"]
 COMMUNITY_CATS = ["income-methods", "tools-ai", "case-studies", "marketing", "uncategorized"]
-
-
-def _find_codex() -> str | None:
-    codex = shutil.which("codex")
-    if codex:
-        return codex
-    for p in ["~/.bun/bin/codex", "~/.local/bin/codex", "/usr/local/bin/codex"]:
-        expanded = os.path.expanduser(p)
-        if os.path.isfile(expanded):
-            return expanded
-    return None
 
 
 def count_posts(base_dir: Path, cats: list[str]) -> dict[str, int]:
@@ -83,7 +78,7 @@ def main() -> None:
     if not cafe_dir.exists():
         sys.exit(f"카페 데이터 없음: {cafe_dir}\npython3 scripts/collect_naver.py {cafe_name} 를 먼저 실행하세요.")
 
-    codex = _find_codex()
+    codex = find_codex()
     if not codex:
         sys.exit("ERROR: codex not found. npm install -g @openai/codex 로 설치하세요.")
 

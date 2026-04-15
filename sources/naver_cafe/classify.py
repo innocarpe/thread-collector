@@ -1,21 +1,27 @@
 #!/usr/bin/env python3
 """
 NaverCafe — AI classify uncategorized community posts
-Usage: python3 scripts/classify_naver.py vibemoney
+Usage: python3 -m sources.naver_cafe.classify vibemoney
 
 Reads NaverCafe/{cafe}/community/uncategorized/ and classifies each post
 via codex exec, moving files to the correct category folder.
 Junk posts are deleted.
 """
+from __future__ import annotations
 
 import argparse
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+# repo 루트를 sys.path에 추가 (직접 실행 및 -m 호출 모두 지원)
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from sources._common.codex import find_codex
 
 CATEGORY_LABELS = {
     "income-methods": "수익화 방법",
@@ -25,17 +31,6 @@ CATEGORY_LABELS = {
 }
 
 CLASSIFY_BATCH_SIZE = 50
-
-
-def _find_codex() -> str | None:
-    codex = shutil.which("codex")
-    if codex:
-        return codex
-    for p in ["~/.bun/bin/codex", "~/.local/bin/codex", "/usr/local/bin/codex"]:
-        expanded = os.path.expanduser(p)
-        if os.path.isfile(expanded):
-            return expanded
-    return None
 
 
 def parse_md_post(filepath: Path) -> dict | None:
@@ -85,7 +80,7 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
     if not posts:
         return {}
 
-    codex = _find_codex()
+    codex = find_codex()
     if not codex:
         print("[warn] codex not found — cannot AI-classify")
         return {}

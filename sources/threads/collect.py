@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
 ThreadCollector — standalone collect script
-Usage: python3 scripts/collect.py @username [--limit 20] [--types tech,product,career]
+Usage: python3 -m sources.threads.collect @username [--limit 20] [--types tech,product,career]
 
 Collects Threads.net posts via GraphQL pagination using the browse binary,
 classifies them into categories, and saves individual markdown files.
 """
+from __future__ import annotations
 
 import argparse
 import json
@@ -16,6 +17,10 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+
+# repo 루트를 sys.path에 추가 (직접 실행 및 -m 호출 모두 지원)
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -34,6 +39,10 @@ CATEGORY_LABELS = {
     "learning-retro": "학습/회고",
     "productivity": "생산성/워크플로우",
     "web-app": "웹/앱 개발",
+    # 신규 3개 (2026-04-15)
+    "portfolio-ops": "포트폴리오 운영",
+    "aso": "ASO/출시전략",
+    "case-study": "사례연구",
     "uncategorized": "미분류",
 }
 
@@ -550,7 +559,7 @@ def save_post(post: dict, username: str, category: str, output_root: Path) -> Pa
 
     # Auto-label immediately after saving
     try:
-        from label import label_file
+        from sources.threads.label import label_file
         labels = label_file(filepath)
         if labels:
             print(f"    → 레이블: {', '.join(labels)}")

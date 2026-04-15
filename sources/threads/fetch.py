@@ -177,4 +177,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # repo 루트를 sys.path에 추가 (직접 실행 시 sources 패키지 import 보장)
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     main()

@@ -8,15 +8,15 @@ Phase 3: Keyword search (--sources search --query "...") + hashtag page (--sourc
 Phase 4: Explore skeleton (NotImplementedError stub).
 
 Usage (Phase 1 기본):
-    python3 scripts/discover_threads.py
-    python3 scripts/discover_threads.py --interest ai-llm,monetization
-    python3 scripts/discover_threads.py --limit 15 --min-mentions 2
+    python3 -m sources.threads.discover
+    python3 -m sources.threads.discover --interest ai-llm,monetization
+    python3 -m sources.threads.discover --limit 15 --min-mentions 2
 
 Usage (Phase 2+3):
-    python3 scripts/discover_threads.py --enrich
-    python3 scripts/discover_threads.py --sources corpus,search --query "AI 수익화" --enrich
-    python3 scripts/discover_threads.py --sources corpus,hashtag --hashtag ai_llm
-    python3 scripts/discover_threads.py --sources corpus,search,hashtag \\
+    python3 -m sources.threads.discover --enrich
+    python3 -m sources.threads.discover --sources corpus,search --query "AI 수익화" --enrich
+    python3 -m sources.threads.discover --sources corpus,hashtag --hashtag ai_llm
+    python3 -m sources.threads.discover --sources corpus,search,hashtag \\
         --query "바이브코딩" --hashtag ai_llm --enrich
 """
 
@@ -1412,4 +1412,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    # repo 루트를 sys.path에 추가 (직접 실행 시 sources._common import 보장)
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     main()

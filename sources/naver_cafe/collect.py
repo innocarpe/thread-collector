@@ -2,9 +2,9 @@
 """
 NaverCafe Collector — 네이버 카페 게시글 수집기
 Usage:
-  python3 scripts/collect_naver.py vibemoney                     # 핵심 게시판 전체
-  python3 scripts/collect_naver.py vibemoney --only-menus 22,8   # 특정 게시판만
-  python3 scripts/collect_naver.py vibemoney --list-menus        # 게시판 목록 출력
+  python3 -m sources.naver_cafe.collect vibemoney                     # 핵심 게시판 전체
+  python3 -m sources.naver_cafe.collect vibemoney --only-menus 22,8   # 특정 게시판만
+  python3 -m sources.naver_cafe.collect vibemoney --list-menus        # 게시판 목록 출력
 
 저장 구조:
   NaverCafe/{cafe}/operator/{category}/  — 운영자 글
@@ -509,4 +509,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    # repo 루트를 sys.path에 추가 (직접 실행 시 sources 패키지 import 보장)
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     main()
