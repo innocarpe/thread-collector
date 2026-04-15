@@ -31,7 +31,9 @@ creators:
     category_hint: [case-study, monetization]
     lang: en
     rate_limit_sec: 2
-    priority: 3
+    priority: 5
+    status: uncollectable
+    uncollectable_reason: indiehackers.com robots.txt blocks all crawlers
 
   - slug: adam-lyttle
     name: Adam Lyttle
@@ -42,7 +44,9 @@ creators:
     category_hint: [case-study, monetization, portfolio-ops]
     lang: en
     rate_limit_sec: 2
-    priority: 3
+    priority: 5
+    status: uncollectable
+    uncollectable_reason: starterstory.com + indiehackers.com both block via robots.txt
 
   - slug: hussein-el-feky
     name: Hussein El Feky
@@ -92,7 +96,9 @@ creators:
     category_hint: [dev-tools, startup-philosophy]
     lang: en
     rate_limit_sec: 1
-    priority: 4
+    priority: 5
+    status: uncollectable
+    uncollectable_reason: joshmanders.com에 RSS/Atom 피드 없음 (표준 경로 전수 404)
 
   - slug: weyoume
     name: WeYouMe
@@ -103,3 +109,44 @@ creators:
     lang: en
     rate_limit_sec: 2
     priority: 4
+
+  # ── 2026-04-15 대체 타겟 3명 (max-artemov / adam-lyttle / josh-manders 대체) ──
+
+  - slug: pete-codes
+    name: Pete Codes (petecodes.io)
+    urls:
+      - https://petecodes.io/
+    feed_hint: https://petecodes.io/feed/
+    adapter: rss
+    category_hint: [startup-philosophy, monetization, product-strategy, career-growth]
+    lang: en
+    rate_limit_sec: 1
+    priority: 3
+    # 검증: feed 200 ✓, robots.txt no-Disallow ✓, 최근 포스트 2026-04-13 ✓
+    # 주제: 인디 개발자로서 사이트 매각·SEO·side-project 수익화 경험 공유
+
+  - slug: craig-hockenberry
+    name: Craig Hockenberry (furbo.org)
+    urls:
+      - https://furbo.org/
+    feed_hint: https://furbo.org/feed/
+    adapter: rss
+    category_hint: [portfolio-ops, product-strategy, dev-tools, aso]
+    lang: en
+    rate_limit_sec: 1
+    priority: 3
+    # 검증: feed 200 ✓, robots.txt GPTBot-only-Disallow ✓, 최근 포스트 2026-03-19 ✓
+    # 주제: 베테랑 인디 iOS/Mac 개발자, Twitterrific 공동창업, 앱스토어 정책·앱 운영 인사이트
+
+  - slug: brent-simmons
+    name: Brent Simmons (inessential.com)
+    urls:
+      - https://inessential.com/
+    feed_hint: https://inessential.com/xml/rss.xml
+    adapter: rss
+    category_hint: [portfolio-ops, product-strategy, startup-philosophy, dev-tools]
+    lang: en
+    rate_limit_sec: 1
+    priority: 3
+    # 검증: feed 200 ✓, robots.txt empty/open ✓, 최근 포스트 2026-03-03 ✓
+    # 주제: NetNewsWire 인디 개발자, 오픈소스 앱 지속 운영·커뮤니티·앱 비즈니스 철학
