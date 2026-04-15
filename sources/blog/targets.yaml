@@ -1,0 +1,105 @@
+# sources/blog/targets.yaml
+# Phase 1 스켈레톤. adapter 필드는 Phase 2 실구현 후 확정.
+
+creators:
+  - slug: programmingzombie
+    name: 프로그래밍좀비 (soulduse)
+    urls:
+      - https://programmingzombie.com/
+      - https://soulduse.tistory.com/
+    adapter: auto           # rss → sitemap → tistory → generic_html
+    category_hint: [dev-tools, portfolio-ops, monetization, aso, case-study]
+    lang: ko
+    rate_limit_sec: 2
+    priority: 1
+
+  - slug: sebastian-rohl
+    name: Sebastian Röhl (HabitKit)
+    urls:
+      - https://sebastianroehl.substack.com/
+    adapter: substack
+    category_hint: [dev-tools, case-study, product-strategy]
+    lang: en
+    rate_limit_sec: 1
+    priority: 2
+
+  - slug: max-artemov
+    name: Max Artemov
+    urls:
+      - https://www.indiehackers.com/product/max-artemov
+    adapter: generic_html
+    category_hint: [case-study, monetization]
+    lang: en
+    rate_limit_sec: 2
+    priority: 3
+
+  - slug: adam-lyttle
+    name: Adam Lyttle
+    urls:
+      - https://www.starterstory.com/adam-lyttle
+      - https://www.indiehackers.com/adamlyttle
+    adapter: generic_html
+    category_hint: [case-study, monetization, portfolio-ops]
+    lang: en
+    rate_limit_sec: 2
+    priority: 3
+
+  - slug: hussein-el-feky
+    name: Hussein El Feky
+    urls:
+      - https://hfeky.medium.com/
+    adapter: medium
+    category_hint: [dev-tools, web-app]
+    lang: en
+    rate_limit_sec: 1
+    priority: 3
+
+  - slug: roman-koch
+    name: Roman Koch
+    urls:
+      - https://medium.com/@romankoch
+    adapter: medium
+    category_hint: [dev-tools, product-strategy]
+    lang: en
+    rate_limit_sec: 1
+    priority: 4
+
+  - slug: yuma-ueno
+    name: Yuma Ueno
+    urls:
+      - https://medium.com/@yumaueno
+    adapter: medium
+    category_hint: [product-strategy, case-study]
+    lang: en
+    rate_limit_sec: 1
+    priority: 4
+
+  - slug: adam-wathan
+    name: Adam Wathan
+    urls:
+      - https://adamwathan.me/
+    adapter: rss
+    category_hint: [dev-tools, product-strategy, monetization]
+    lang: en
+    rate_limit_sec: 1
+    priority: 4
+
+  - slug: josh-manders
+    name: Josh Manders
+    urls:
+      - https://joshmanders.com/
+    adapter: rss
+    category_hint: [dev-tools, startup-philosophy]
+    lang: en
+    rate_limit_sec: 1
+    priority: 4
+
+  - slug: weyoume
+    name: WeYouMe
+    urls:
+      - https://mydevspace.blogspot.com/
+    adapter: generic_html
+    category_hint: [dev-tools, portfolio-ops]
+    lang: en
+    rate_limit_sec: 2
+    priority: 4
