@@ -1,0 +1,56 @@
+=== dual__income collect ===
+ERROR: Unknown type 'tech'. Valid options: tech, product, career.
+COLLECT FAILED: dual__income
+=== dual__income classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: dual__income
+=== dual__income insights ===
+No data for @dual__income at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income
+Run /collect first.
+INSIGHTS FAILED: dual__income
+=== ywkim2026 collect ===
+ERROR: Unknown type 'tech'. Valid options: tech, product, career.
+COLLECT FAILED: ywkim2026
+=== ywkim2026 classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: ywkim2026
+=== ywkim2026 insights ===
+No data for @ywkim2026 at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026
+Run /collect first.
+INSIGHTS FAILED: ywkim2026
+=== mento.developer collect ===
+ERROR: Unknown type 'tech'. Valid options: tech, product, career.
+COLLECT FAILED: mento.developer
+=== mento.developer classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: mento.developer
+=== mento.developer insights ===
+No data for @mento.developer at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer
+Run /collect first.
+INSIGHTS FAILED: mento.developer
+=== worp_cy collect ===
+ERROR: Unknown type 'tech'. Valid options: tech, product, career.
+COLLECT FAILED: worp_cy
+=== worp_cy classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: worp_cy
+=== worp_cy insights ===
+No data for @worp_cy at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy
+Run /collect first.
+INSIGHTS FAILED: worp_cy
+=== alldayadsence collect ===
+ERROR: Unknown type 'tech'. Valid options: tech, product, career.
+COLLECT FAILED: alldayadsence
+=== alldayadsence classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: alldayadsence
+=== alldayadsence insights ===
+No data for @alldayadsence at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence
+Run /collect first.
+INSIGHTS FAILED: alldayadsence
+=== ALL DONE ===

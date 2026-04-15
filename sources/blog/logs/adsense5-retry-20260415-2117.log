@@ -1,0 +1,322 @@
+=== dual__income collect ===
+ThreadCollector — @dual__income
+  Categories : ai-llm, aso, career-growth, case-study, dev-tools, learning-retro, monetization, portfolio-ops, product-strategy, productivity, startup-philosophy, viral-sns, web-app
+  Batch limit: 20
+  Output dir : /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads
+
+[browse] compiled binary unavailable — using bun runtime fallback
+[0/5] Injecting 8 Chrome session cookies ...
+[1/5] Navigating to https://www.threads.net/@dual__income ...
+[1/5] Extracting userID from page scripts ...
+[1/5] userID = 77826030018
+[2/5] Starting collection (max 20 batches) ...
+  Batch 1: no result (fail 1/3)
+  Batch 2: +20 = 20 total
+  No more pages.
+[2/5] Collection done: 20 posts
+[3/5] Merging chains ...
+  20 raw posts → 20 after chain merge (15 chains)
+[4/4] Classifying and saving ...
+    → 레이블: 개발도구
+    → 레이블: 수익화, 인디해킹, 스타트업
+    → 레이블: 수익화
+    → 레이블: AI/LLM, 창업철학
+    → 레이블: AI/LLM, 개발도구, 바이럴/SNS
+    → 레이블: ASO/검색, AI/LLM, 수익화
+    → 레이블: ASO/검색, 수익화, MVP/런칭
+    → 레이블: ASO/검색, 마케팅, 창업철학
+    → 레이블: 바이럴/SNS, ASO/검색, 수익화
+    → 레이블: 창업철학, ASO/검색, AI/LLM
+    → 레이블: 스타트업, 창업철학
+    → 레이블: 제품전략
+    → 레이블: 마케팅, 수익화, 회고/인사이트
+    → 레이블: 개발자커리어, 마케팅, 인디해킹
+    → 레이블: ASO/검색, 바이럴/SNS, 수익화
+    → 레이블: ASO/검색, 수익화, 생산성
+    → 레이블: ASO/검색, 수익화, 창업철학
+    → 레이블: 수익화, 학습/스킬
+
+ThreadCollector complete — @dual__income
+  Collected  : 20 posts
+  After merge: 20 posts (15 chains merged)
+  Categorized: 0 saved, 20 uncategorized
+  → Run /classify @dual__income to AI-classify the uncategorized posts
+
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/ai-llm/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/viral-sns/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/monetization/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/dev-tools/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/product-strategy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/startup-philosophy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/career-growth/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/learning-retro/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/productivity/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/web-app/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/portfolio-ops/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/aso/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/case-study/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/dual__income/uncategorized/  (20 files — pending /classify)
+=== dual__income classify ===
+ClassifyCollector — @dual__income
+  Found 20 uncategorized posts
+
+[1/2] Parsed 20 posts, sending to codex ...
+  Batch 1/1: 20 posts ... 20 classified
+
+[2/2] Applying classifications ...
+
+ClassifyCollector done — @dual__income
+  → viral-sns/  +8
+  → monetization/  +9
+  → learning-retro/  +2
+  → case-study/  +1
+  Skipped (junk/irrelevant): 0
+=== dual__income insights ===
+InsightsCollector — @dual__income
+  Posts: 19 (viral-sns: 8, monetization: 9, learning-retro: 2)
+
+[1/1] Generating insights via codex ...
+      Reading 19 posts — this takes 60-120 seconds.
+
+
+InsightsCollector done — @dual__income
+  insights/key-posts.md  (9,338 bytes)
+  insights/overview.md  (2,571 bytes)
+  insights/patterns.md  (3,649 bytes)
+=== ywkim2026 collect ===
+ThreadCollector — @ywkim2026
+  Categories : ai-llm, aso, career-growth, case-study, dev-tools, learning-retro, monetization, portfolio-ops, product-strategy, productivity, startup-philosophy, viral-sns, web-app
+  Batch limit: 20
+  Output dir : /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads
+
+[browse] compiled binary unavailable — using bun runtime fallback
+[0/5] Injecting 8 Chrome session cookies ...
+[1/5] Navigating to https://www.threads.net/@ywkim2026 ...
+[1/5] Extracting userID from page scripts ...
+[1/5] userID = 50069312278
+[2/5] Starting collection (max 20 batches) ...
+  Batch 1: +10 = 10 total
+  No more pages.
+[2/5] Collection done: 10 posts
+[3/5] Merging chains ...
+  10 raw posts → 10 after chain merge (2 chains)
+[4/4] Classifying and saving ...
+    → 레이블: 마케팅
+    → 레이블: 웹/SaaS, 수익화, 제품전략
+    → 레이블: 수익화
+    → 레이블: 바이럴/SNS
+    → 레이블: 수익화
+    → 레이블: 제품전략
+    → 레이블: ASO/검색, 마케팅, 제품전략
+
+ThreadCollector complete — @ywkim2026
+  Collected  : 10 posts
+  After merge: 10 posts (2 chains merged)
+  Categorized: 0 saved, 10 uncategorized
+  → Run /classify @ywkim2026 to AI-classify the uncategorized posts
+
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/ai-llm/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/viral-sns/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/monetization/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/dev-tools/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/product-strategy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/startup-philosophy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/career-growth/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/learning-retro/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/productivity/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/web-app/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/portfolio-ops/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/aso/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/case-study/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/ywkim2026/uncategorized/  (10 files — pending /classify)
+=== ywkim2026 classify ===
+ClassifyCollector — @ywkim2026
+  Found 10 uncategorized posts
+
+[1/2] Parsed 10 posts, sending to codex ...
+  Batch 1/1: 10 posts ... 10 classified
+
+[2/2] Applying classifications ...
+
+ClassifyCollector done — @ywkim2026
+  → monetization/  +10
+  Skipped (junk/irrelevant): 0
+=== ywkim2026 insights ===
+InsightsCollector — @ywkim2026
+  Posts: 10 (monetization: 10)
+
+[1/1] Generating insights via codex ...
+      Reading 10 posts — this takes 60-120 seconds.
+
+
+InsightsCollector done — @ywkim2026
+  insights/key-posts.md  (5,516 bytes)
+  insights/overview.md  (3,068 bytes)
+  insights/patterns.md  (4,012 bytes)
+=== mento.developer collect ===
+ThreadCollector — @mento.developer
+  Categories : ai-llm, aso, career-growth, case-study, dev-tools, learning-retro, monetization, portfolio-ops, product-strategy, productivity, startup-philosophy, viral-sns, web-app
+  Batch limit: 20
+  Output dir : /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads
+
+[browse] compiled binary unavailable — using bun runtime fallback
+[0/5] Injecting 8 Chrome session cookies ...
+[1/5] Navigating to https://www.threads.net/@mento.developer ...
+[1/5] Extracting userID from page scripts ...
+[1/5] userID = 63148566789
+[2/5] Starting collection (max 20 batches) ...
+  Batch 1: +0 = 0 total
+  No more pages.
+[2/5] Collection done: 0 posts
+WARNING: Only 0 posts collected. The session may need refreshing.
+[3/5] Merging chains ...
+  0 raw posts → 0 after chain merge (0 chains)
+[4/4] Classifying and saving ...
+
+ThreadCollector complete — @mento.developer
+  Collected  : 0 posts
+  After merge: 0 posts (0 chains merged)
+  Categorized: 0 saved, 0 uncategorized
+
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/ai-llm/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/viral-sns/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/monetization/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/dev-tools/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/product-strategy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/startup-philosophy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/career-growth/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/learning-retro/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/productivity/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/web-app/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/portfolio-ops/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/aso/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/case-study/  (0 files)
+=== mento.developer classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: mento.developer
+=== mento.developer insights ===
+No data for @mento.developer at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/mento.developer
+Run /collect first.
+INSIGHTS FAILED: mento.developer
+=== worp_cy collect ===
+ThreadCollector — @worp_cy
+  Categories : ai-llm, aso, career-growth, case-study, dev-tools, learning-retro, monetization, portfolio-ops, product-strategy, productivity, startup-philosophy, viral-sns, web-app
+  Batch limit: 20
+  Output dir : /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads
+
+[browse] compiled binary unavailable — using bun runtime fallback
+[0/5] Injecting 8 Chrome session cookies ...
+[1/5] Navigating to https://www.threads.net/@worp_cy ...
+[1/5] Extracting userID from page scripts ...
+[1/5] userID = 71397957822
+[2/5] Starting collection (max 20 batches) ...
+  Batch 1: +20 = 20 total
+  No more pages.
+[2/5] Collection done: 20 posts
+[3/5] Merging chains ...
+  20 raw posts → 20 after chain merge (0 chains)
+[4/4] Classifying and saving ...
+    → 레이블: 바이럴/SNS
+    → 레이블: AI/LLM, 바이럴/SNS, 수익화
+    → 레이블: 수익화
+    → 레이블: 수익화, 학습/스킬
+    → 레이블: AI/LLM, ASO/검색, 수익화
+    → 레이블: AI/LLM, 수익화, 포트폴리오 운영
+    → 레이블: ASO/검색, 수익화
+    → 레이블: 수익화
+    → 레이블: AI/LLM, 창업철학, 회고/인사이트
+    → 레이블: 수익화, 창업철학, 개발자커리어
+
+ThreadCollector complete — @worp_cy
+  Collected  : 20 posts
+  After merge: 20 posts (0 chains merged)
+  Categorized: 0 saved, 20 uncategorized
+  → Run /classify @worp_cy to AI-classify the uncategorized posts
+
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/ai-llm/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/viral-sns/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/monetization/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/dev-tools/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/product-strategy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/startup-philosophy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/career-growth/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/learning-retro/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/productivity/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/web-app/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/portfolio-ops/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/aso/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/case-study/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/worp_cy/uncategorized/  (20 files — pending /classify)
+=== worp_cy classify ===
+ClassifyCollector — @worp_cy
+  Found 20 uncategorized posts
+
+[1/2] Parsed 20 posts, sending to codex ...
+  Batch 1/1: 20 posts ... 20 classified
+
+[2/2] Applying classifications ...
+
+ClassifyCollector done — @worp_cy
+  → monetization/  +13
+  → productivity/  +3
+  Skipped (junk/irrelevant): 4
+=== worp_cy insights ===
+InsightsCollector — @worp_cy
+  Posts: 16 (monetization: 13, productivity: 3)
+
+[1/1] Generating insights via codex ...
+      Reading 16 posts — this takes 60-120 seconds.
+
+
+InsightsCollector done — @worp_cy
+  insights/key-posts.md  (9,205 bytes)
+  insights/overview.md  (2,578 bytes)
+  insights/patterns.md  (3,986 bytes)
+=== alldayadsence collect ===
+ThreadCollector — @alldayadsence
+  Categories : ai-llm, aso, career-growth, case-study, dev-tools, learning-retro, monetization, portfolio-ops, product-strategy, productivity, startup-philosophy, viral-sns, web-app
+  Batch limit: 20
+  Output dir : /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads
+
+[browse] compiled binary unavailable — using bun runtime fallback
+[0/5] Injecting 8 Chrome session cookies ...
+[1/5] Navigating to https://www.threads.net/@alldayadsence ...
+[1/5] Extracting userID from page scripts ...
+[1/5] userID = 72688311030
+[2/5] Starting collection (max 20 batches) ...
+  Batch 1: +0 = 0 total
+  No more pages.
+[2/5] Collection done: 0 posts
+WARNING: Only 0 posts collected. The session may need refreshing.
+[3/5] Merging chains ...
+  0 raw posts → 0 after chain merge (0 chains)
+[4/4] Classifying and saving ...
+
+ThreadCollector complete — @alldayadsence
+  Collected  : 0 posts
+  After merge: 0 posts (0 chains merged)
+  Categorized: 0 saved, 0 uncategorized
+
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/ai-llm/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/viral-sns/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/monetization/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/dev-tools/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/product-strategy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/startup-philosophy/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/career-growth/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/learning-retro/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/productivity/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/web-app/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/portfolio-ops/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/aso/  (0 files)
+  /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/case-study/  (0 files)
+=== alldayadsence classify ===
+No uncategorized/ folder at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence/uncategorized
+Run /collect first, or there may be nothing to classify.
+CLASSIFY FAILED: alldayadsence
+=== alldayadsence insights ===
+No data for @alldayadsence at /Users/WooseongKim/Projects/Temperstone/thread-collector/Threads/alldayadsence
+Run /collect first.
+INSIGHTS FAILED: alldayadsence
+=== ALL DONE ===
