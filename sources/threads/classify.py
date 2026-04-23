@@ -57,7 +57,7 @@ CATEGORY_DESCRIPTIONS = {
     "case-study": "특정 앱 성공/실패 사례, 수익 인증, 리텐션 실데이터, postmortem, 실패 후기",
 }
 
-CLASSIFY_BATCH_SIZE = 20
+CLASSIFY_BATCH_SIZE = 5
 
 
 def parse_md_post(filepath: Path) -> dict | None:
@@ -177,12 +177,23 @@ def codex_classify(posts: list[dict]) -> dict[str, str]:
         if os.path.isfile(tmp_output):
             try:
                 raw = open(tmp_output, encoding="utf-8").read().strip()
-                m = re.search(r"\[.*?\]", raw, re.DOTALL)
-                if m:
-                    items = json.loads(m.group())
-                    for item in items:
-                        if "pk" in item and "category" in item:
-                            result[str(item["pk"])] = item["category"]
+                if raw:
+                    parsed = None
+                    list_match = re.search(r"\[.*?\]", raw, re.DOTALL)
+                    dict_match = re.search(r"\{.*?\}", raw, re.DOTALL)
+                    if list_match:
+                        parsed = json.loads(list_match.group())
+                    elif dict_match:
+                        parsed = json.loads(dict_match.group())
+
+                    if isinstance(parsed, list):
+                        for item in parsed:
+                            if isinstance(item, dict) and "pk" in item and "category" in item:
+                                result[str(item["pk"])] = item["category"]
+                    elif isinstance(parsed, dict):
+                        for pk, category in parsed.items():
+                            result[str(pk)] = category
+
                     classified_count = sum(1 for p in batch if str(p["pk"]) in result)
             except Exception:
                 pass

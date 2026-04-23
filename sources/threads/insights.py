@@ -33,6 +33,9 @@ CAT_DIRS = [
     "learning-retro",
     "productivity",
     "web-app",
+    "portfolio-ops",
+    "aso",
+    "case-study",
 ]
 
 
