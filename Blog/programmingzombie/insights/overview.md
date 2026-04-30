@@ -23,3 +23,8 @@
 - SQLite의 `datetime('now')`가 UTC 기준이라 9시간 오차를 만들 수 있으므로 `datetime('now','localtime')`를 써야 한다는 실전 팁이 눈에 띈다. 출처: `2016-04-26-34-insight.md`
 - RecyclerView의 체크 상태 유실은 `setOnCheckedChangeListener(null)` 이후 `setChecked()`를 호출하는 순서로 해결할 수 있다고 정리했다. 출처: `2017-05-18-53-insight.md`
 - 기술보다 문제 해결이 개발자의 본질이며, 커리어에서도 약점 보완보다 강점 언어화가 중요하다는 관점을 제시했다. 출처: `2017-05-26-54-insight.md`
+
+## 2026-04-29 Play/web 역추적 업데이트
+- 블로그/Threads 기반 정성 인사이트와 별개로, Google Play 상세 페이지의 **사업자번호·주소 fingerprint**(`765-19-02261`, `2025-경기김포-0251`, `김포한강2로 361`, `707동 2104호`)를 기준으로 앱을 역추적한 결과 **기존 Dave's / Rich Kim 외에 `DeveloperKhy`, `developerdoga` 라벨**이 추가로 드러났다.
+- 이 방식으로 현재 공개 Play에서 **약 50개 Android 앱 노출**을 재확인했다. 최고 공개 설치 버킷은 `100K+`이며, 확인된 상위 앱은 `com.dave.keywordhelper`(스마트스토어 쇼핑몰 키워드 순위 분석), `com.dave.spellchecker`(맞춤법 검사기 / 띄어쓰기), `com.dave.soul.exchange_app`(환율알리미)다.
+- 반대로, **2026-04-29 시점 공개 Play에서는 아직 `1M+` 설치 앱을 확인하지 못했다.** 따라서 이후 조사 원칙은 기존 계정과의 연관성을 먼저 가정하기보다, **`1M+ Android 앱 목록을 먼저 대량 스캔한 뒤 fingerprint로 역추적**하는 방향이 더 적절하다.
